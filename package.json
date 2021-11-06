@@ -1,0 +1,80 @@
+{
+  "name": "w-components",
+  "version": "1.0.0",
+  "description": "React component",
+  "main": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.common.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:khacywin/w-components.git"
+  },
+  "keywords": [
+    "color",
+    "w-components",
+    "wmtime",
+    "selector",
+    "khacy"
+  ],
+  "author": "khacy",
+  "bugs": {
+    "url": "https://github.com/khacywin/w-components/issues"
+  },
+  "homepage": "https://github.com/khacywin/w-components#readme",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0",
+    "react-router-dom": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-external-helpers": "^7.12.1",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.14.4",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/preset-typescript": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "@storybook/addon-actions": "^5.3.21",
+    "@storybook/addon-links": "^5.3.21",
+    "@storybook/addons": "^5.3.21",
+    "@storybook/preset-typescript": "^3.0.0",
+    "@storybook/react": "^5.3.21",
+    "@types/react": "^16.14.2",
+    "@types/react-dom": "^17.0.10",
+    "@types/react-router-dom": "^5.3.2",
+    "@types/styled-components": "^5.1.15",
+    "@types/uglify-js": "^3.13.1",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-styled-components": "^1.13.3",
+    "file-loader": "^6.2.0",
+    "node-sass": "^4.14.1",
+    "typescript": "^3.9.10",
+    "uglify-js": "^3.14.2",
+    "webpack": "^5.57.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-hot-middleware": "^2.25.0"
+  },
+  "resolutions": {
+    "styled-components": "^5.2.1",
+    "dayjs": "^1.10.7",
+    "w-color-selector": "^1.2.24"
+  },
+  "dependencies": {
+    "dayjs": "^1.10.7",
+    "styled-components": "^5.3.3",
+    "w-color-selector": "^1.2.24",
+    "w-date": "^2.0.1"
+  }
+}

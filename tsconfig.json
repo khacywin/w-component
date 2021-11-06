@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    // Ensure that .d.ts files are created by tsc, but not .js files
+    "declaration": true,
+    "declarationDir": "build",
+    "emitDeclarationOnly": true,
+    /*****************/
+    "outDir": "build",
+    "isolatedModules": true,  // Ensure that Babel can safely transpile files in the TypeScript project
+    "module": "ES2015",
+    "target": "ES6",
+    "sourceMap": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src"
+  },
+  "include": [
+    "src/**/*",
+    "src/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "src/**/*.stories.tsx",
+    "src/**/*.test.tsx"
+  ]
+}
