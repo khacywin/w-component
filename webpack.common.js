@@ -1,33 +1,42 @@
 /* eslint-disable */
 const path = require("path");
+const glob = require("glob");
 
 module.exports = {
   mode: "production",
-  entry: {
-    index: path.resolve(__dirname, "src/index.tsx"),
-  },
+  entry: glob.sync("src/components/**/index.tsx").reduce((acc, path) => {
+    const entry = path.replace("/index.tsx", "");
+    acc[entry] = path;
+    return acc;
+  }, {}),
   output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "build"),
+    filename: "./[name]/index.js",
+    path: path.resolve(__dirname),
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".svg"],
     symlinks: true,
+    modules: [__dirname, "node_modules"],
     alias: {
       __interfaces__: path.resolve(__dirname, "src/__interfaces__"),
       assets: path.resolve(__dirname, "src/assets"),
       components: path.resolve(__dirname, "src/components"),
       css: path.resolve(__dirname, "src/css"),
       helps: path.resolve(__dirname, "src/helps"),
-      hooks: path.resolve(__dirname, "src/hooks")
+      hooks: path.resolve(__dirname, "src/hooks"),
     },
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx|tsx|ts)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        use: ["babel-loader"],
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ["ts-loader"],
       },
       {
         test: /\.(png|svg|jpg|gif|jpe?g)$/,

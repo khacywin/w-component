@@ -2,9 +2,13 @@
   "name": "w-components",
   "version": "1.0.0",
   "description": "React component",
-  "main": "build/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "lib/index.d.ts",
   "files": [
-    "build"
+    "dist",
+    "lib",
+    "es"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -60,6 +64,7 @@
     "babel-plugin-styled-components": "^1.13.3",
     "file-loader": "^6.2.0",
     "node-sass": "^4.14.1",
+    "ts-loader": "^9.2.6",
     "typescript": "^3.9.10",
     "uglify-js": "^3.14.2",
     "webpack": "^5.57.0",

@@ -6,7 +6,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { borderRadius, boxShadow, fontSize, space, zIndex } from "css/base";
 
-import Icon from "./Icon";
+import Icon from "../Icon";
 import clock_face from "assets/images/clock-face.svg";
 import generatedId from "helps/generateKey";
 import i_arrow_down from "assets/icon/arrow-down.svg";
