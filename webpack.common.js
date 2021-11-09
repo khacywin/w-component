@@ -4,27 +4,24 @@ const glob = require("glob");
 
 module.exports = {
   mode: "production",
-  entry: glob.sync("src/components/**/index.tsx").reduce((acc, path) => {
-    const entry = path.replace("/index.tsx", "");
+  entry: glob.sync("components/**/**/**.tsx").reduce((acc, path) => {
+    let entry = "index.js";
+
+    if (path.includes("components")) {
+      entry = path.slice(path.lastIndexOf("components/") + 11, -3) + "js";
+    }
+
     acc[entry] = path;
     return acc;
   }, {}),
   output: {
-    filename: "./[name]/index.js",
-    path: path.resolve(__dirname),
+    filename: "[name]",
+    path: path.resolve(__dirname, "es"),
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".svg"],
     symlinks: true,
-    modules: [__dirname, "node_modules"],
-    alias: {
-      __interfaces__: path.resolve(__dirname, "src/__interfaces__"),
-      assets: path.resolve(__dirname, "src/assets"),
-      components: path.resolve(__dirname, "src/components"),
-      css: path.resolve(__dirname, "src/css"),
-      helps: path.resolve(__dirname, "src/helps"),
-      hooks: path.resolve(__dirname, "src/hooks"),
-    },
+    modules: [__dirname, "node_modules"]
   },
   module: {
     rules: [

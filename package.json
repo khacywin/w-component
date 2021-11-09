@@ -2,8 +2,8 @@
   "name": "w-components",
   "version": "1.0.0",
   "description": "React component",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "es/index.js",
+  "modules": "es/index.js",
   "typings": "lib/index.d.ts",
   "files": [
     "dist",
@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.common.js",
+    "build": "tsc && webpack --config webpack.common.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

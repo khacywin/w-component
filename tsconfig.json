@@ -18,18 +18,12 @@
     ],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "baseUrl": "./src"
+    "baseUrl": "."
   },
-  "include": [
-    "src/**/*",
-    "src/*.d.ts"
-  ],
+  "include": [ "components", "components/.d.ts"  ],
   "exclude": [
     "node_modules",
     "lib",
-    "dist",
-    "build",
-    "src/**/*.stories.tsx",
-    "src/**/*.test.tsx"
+    "dist"
   ]
 }
