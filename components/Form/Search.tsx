@@ -3,13 +3,13 @@
  */
 
 import React, { useState } from 'react';
-import { fontSize, opacity, space } from '../util/css/base';
+import { fontSize, opacity, space } from 'components/util/css/base';
 
-import ButtonNoStyle from '../util/css/elements/ButtonNoStyle';
-import Icon from './../Icon';
-import _t from '../util/helps/_t';
+import ButtonNoStyle from 'components/util/css/elements/ButtonNoStyle';
+import Icon from 'components/Icon';
+import _t from 'components/util/helps/_t';
 import styled from 'styled-components';
-import transition from '../util/css/transition';
+import transition from 'components/util/css/transition';
 
 export interface SearchProps {
   fnSearch: (val: string) => void;

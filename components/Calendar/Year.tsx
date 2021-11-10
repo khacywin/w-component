@@ -99,7 +99,7 @@ const Item = styled.li<IPropsItem>`
   text-align: center;
   width: 33.33333%;
 
-  ${({ active, theme }) =>
+  ${({ active }) =>
     active &&
     `
     background-color: var(--primary);

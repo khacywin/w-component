@@ -1,5 +1,5 @@
 import React from 'react';
-import WrapDialog from '../util/css/elements/WrapDialog';
+import WrapDialog from 'components/util/css/elements/WrapDialog';
 import styled from 'styled-components';
 
 export interface LoadingModalProps {

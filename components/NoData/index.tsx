@@ -1,5 +1,5 @@
 import React from 'react';
-import _t from '../util/helps/_t';
+import _t from 'components/util/helps/_t';
 import styled from 'styled-components';
 
 export default function NoData({ children }: { children?: any }) {

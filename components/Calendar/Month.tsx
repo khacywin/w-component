@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import ButtonAction from "components/Button/ButtonAction";
 import Icon from "components/Icon";
-import _t from "../util/helps/_t";
+import _t from "components/util/helps/_t";
 import styled from "styled-components";
 
 export interface MonthPickerProps {

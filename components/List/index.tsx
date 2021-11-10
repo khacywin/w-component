@@ -1,5 +1,5 @@
 import React from 'react';
-import { borderRadius } from '../util/css/base';
+import { borderRadius } from 'components/util/css/base';
 import styled from 'styled-components';
 
 const Wrap = styled.div`

@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { borderRadius, lineOverflow, space } from '../util/css/base';
+import { borderRadius, lineOverflow, space } from 'components/util/css/base';
 
-import ButtonAction from './../Button/ButtonAction';
-import Dropdown from './../Dropdown';
-import Icon from './../Icon';
-import InputStyle from '../util/css/elements/InputStyle';
-import _t from '../util/helps/_t';
-import generatedId from '../util/helps/generateKey';
+import ButtonAction from 'components/Button/ButtonAction';
+import Dropdown from 'components/Dropdown';
+import Icon from 'components/Icon';
+import InputStyle from 'components/util/css/elements/InputStyle';
+import _t from 'components/util/helps/_t';
+import generatedId from 'components/util/helps/generateKey';
 import styled from 'styled-components';
 
 interface IProps {

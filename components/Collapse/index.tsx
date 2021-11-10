@@ -6,11 +6,11 @@
  */
 
 import React, { useState } from 'react';
-import { fontSize, fontWeight, opacity, space } from '../util/css/base';
+import { fontSize, fontWeight, opacity, space } from 'components/util/css/base';
 
-import Icon from './../Icon';
+import Icon from 'components/Icon';
 import styled from 'styled-components';
-import transition from '../util/css/transition';
+import transition from 'components/util/css/transition';
 
 const Collapse = styled.div`
   position: relative;

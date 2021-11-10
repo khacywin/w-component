@@ -12,11 +12,11 @@ import React, {
   useState,
 } from 'react';
 
-import InputStyle from '../util/css/elements/InputStyle';
+import InputStyle from 'components/util/css/elements/InputStyle';
 import WColor from 'w-color-selector';
-import _t from '../util/helps/_t';
-import generatedId from '../util/helps/generateKey';
-import { space } from '../util/css/base';
+import _t from 'components/util/helps/_t';
+import generatedId from 'components/util/helps/generateKey';
+import { space } from 'components/util/css/base';
 import styled from 'styled-components';
 
 /** Interface */

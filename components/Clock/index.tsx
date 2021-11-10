@@ -4,15 +4,15 @@
  */
 
 import React, { useCallback, useEffect, useState } from "react";
-import { borderRadius, boxShadow, fontSize, space, zIndex } from "../util/css/base";
+import { borderRadius, boxShadow, fontSize, space, zIndex } from "components/util/css/base";
 
-import Icon from "../Icon";
-import clock_face from "assets/images/clock-face.svg";
-import generatedId from "../util/helps/generateKey";
-import i_arrow_down from "assets/icon/arrow-down.svg";
-import i_arrow_up from "assets/icon/arrow-up.svg";
+import Icon from "components/Icon";
+import clock_face from "components/util/assets/images/clock-face.svg";
+import generatedId from "components/util/helps/generateKey";
+import i_arrow_down from "components/util/assets/icon/arrow-down.svg";
+import i_arrow_up from "components/util/assets/icon/arrow-up.svg";
 import styled from "styled-components";
-import transition from "../util/css/transition";
+import transition from "components/util/css/transition";
 
 interface ClockProps {
   selected?: string | Date; // 'HH:MM || date'

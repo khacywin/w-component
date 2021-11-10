@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import logoImg from 'assets/images/logo.svg';
-import logoText from 'assets/images/logo-character.png';
+import logoImg from 'components/util/assets/images/logo.svg';
+import logoText from 'components/util/assets/images/logo-character.png';
 import styled from 'styled-components';
 
 const Logo = styled.div`
@@ -16,9 +16,8 @@ const Logo = styled.div`
 
 export interface LogoProps {
   text?: boolean;
-  logo?: boolean;
 }
-export default function ({ text, logo = true }: LogoProps) {
+export default function ({ text }: LogoProps) {
   return (
     <Logo>
       <Link to='/'>

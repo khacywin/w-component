@@ -12,9 +12,9 @@ import React, {
   useState,
 } from 'react';
 
-import ButtonAction from './../Button/ButtonAction';
-import Icon from './../Icon';
-import _t from '../util/helps/_t';
+import ButtonAction from 'components/Button/ButtonAction';
+import Icon from 'components/Icon';
+import _t from 'components/util/helps/_t';
 import wdate from 'w-date';
 
 export interface CalendarProps {

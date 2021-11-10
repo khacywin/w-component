@@ -10,11 +10,11 @@
  */
 
 import React, { useCallback, useEffect, useRef } from "react";
-import { borderRadius, boxShadow, fontSize, space } from "../util/css/base";
+import { borderRadius, boxShadow, fontSize, space } from "components/util/css/base";
 
 import styled from "styled-components";
-import useHandleDisplay from "../util/hooks/useHandleDisplay";
-import usePositionDropdown from "../util/hooks/usePositionDropdown";
+import useHandleDisplay from "components/util/hooks/useHandleDisplay";
+import usePositionDropdown from "components/util/hooks/usePositionDropdown";
 
 export interface DropdownProps {
   dropdown?: JSX.Element | string;

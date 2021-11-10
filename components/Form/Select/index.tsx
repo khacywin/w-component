@@ -10,10 +10,10 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 
-import FormGroup from './../_FormGroup';
+import FormGroup from '../_FormGroup';
 import SelectListOption from './Select.SelectListOption';
-import _t from '../util/helps/_t';
-import generatedId from '../util/helps/generateKey';
+import _t from 'components/util/helps/_t';
+import generatedId from 'components/util/helps/generateKey';
 
 export interface SelectProps {
   label?: string;

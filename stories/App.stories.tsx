@@ -1,19 +1,19 @@
-import DialogItem, { TRefDialog } from "../src/components/Dialog";
+import DialogItem, { TRefDialog } from "components/src/components/Dialog";
 import React, { useRef } from "react";
 
-import AvatarItem from "../src/components/Avatar";
-import ButtonAction from "../src/components/Button/ButtonAction";
-import ButtonItem from "../src/components/Button";
-import ButtonLoadMore from "../src/components/Button/ButtonLoadMore";
-import CalendarItem from "../src/components/Calendar";
-import ChatProcessItem from "../src/components/ChartProcess";
-import ClockItem from "../src/components/Clock";
-import CollapseItem from "../src/components/Collapse";
-import DropdownItem from "../src/components/Dropdown";
-import IconItem from "../src/components/Icon";
-import ListItem from "../src/components/List";
-import MonthItem from "../src/components/Calendar/Month";
-import YearItem from "../src/components/Calendar/Year";
+import AvatarItem from "components/src/components/Avatar";
+import ButtonAction from "components/src/components/Button/ButtonAction";
+import ButtonItem from "components/src/components/Button";
+import ButtonLoadMore from "components/src/components/Button/ButtonLoadMore";
+import CalendarItem from "components/src/components/Calendar";
+import ChatProcessItem from "components/src/components/ChartProcess";
+import ClockItem from "components/src/components/Clock";
+import CollapseItem from "components/src/components/Collapse";
+import DropdownItem from "components/src/components/Dropdown";
+import IconItem from "components/src/components/Icon";
+import ListItem from "components/src/components/List";
+import MonthItem from "components/src/components/Calendar/Month";
+import YearItem from "components/src/components/Calendar/Year";
 import styled from "styled-components";
 
 if (document) {

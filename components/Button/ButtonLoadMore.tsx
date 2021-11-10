@@ -1,6 +1,6 @@
-import ButtonNoStyle from '../util/css/elements/ButtonNoStyle';
+import ButtonNoStyle from 'components/util/css/elements/ButtonNoStyle';
 import React from 'react';
-import _t from '../util/helps/_t';
+import _t from 'components/util/helps/_t';
 import styled from 'styled-components';
 
 export interface ButtonLoadMoreProps {

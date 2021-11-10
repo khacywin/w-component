@@ -9,10 +9,10 @@
 import React, { ChangeEvent, useCallback, useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import colorSVG from 'helps/colorSVG';
-import generatedId from '../util/helps/generateKey';
+import colorSVG from 'components/util/helps/colorSVG';
+import generatedId from 'components/util/helps/generateKey';
 import { rgba } from 'polished';
-import { zIndex } from '../util/css/base';
+import { zIndex } from 'components/util/css/base';
 
 export interface CheckboxProps {
   color?: string;

@@ -12,12 +12,12 @@ import {
   fontSize,
   fontWeight,
   space,
-} from '../util/css/base';
+} from 'components/util/css/base';
 import styled, { css, keyframes } from 'styled-components';
 
-import Button from './../Button';
-import ButtonAction from './../Button/ButtonAction';
-import Icon from './../Icon';
+import Button from 'components/Button';
+import ButtonAction from 'components/Button/ButtonAction';
+import Icon from 'components/Icon';
 import { createPortal } from 'react-dom';
 
 interface PropsModalStyled {

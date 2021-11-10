@@ -6,12 +6,12 @@
  */
 
 import React, { ReactElement, useRef } from "react";
-import { borderRadius, boxShadow, fontSize, opacity, space } from "../util/css/base";
+import { borderRadius, boxShadow, fontSize, opacity, space } from "components/util/css/base";
 
 import styled from "styled-components";
-import transition from "../util/css/transition";
-import useHandleDisplay from "../util/hooks/useHandleDisplay";
-import usePositionDialog from "../util/hooks/usePositionDialog";
+import transition from "components/util/css/transition";
+import useHandleDisplay from "components/util/hooks/useHandleDisplay";
+import usePositionDialog from "components/util/hooks/usePositionDialog";
 
 const WrapPopover = styled.div`
   display: block;

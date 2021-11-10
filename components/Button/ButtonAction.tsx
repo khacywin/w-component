@@ -1,9 +1,9 @@
 import React, { RefObject, useCallback, useRef } from "react";
 
-import { space } from "../util/css/base";
+import { space } from "components/util/css/base";
 import styled from "styled-components";
-import transition from "../util/css/transition";
-import useHandleDisplay from "../util/hooks/useHandleDisplay";
+import transition from "components/util/css/transition";
+import useHandleDisplay from "components/util/hooks/useHandleDisplay";
 
 type TypeButton = "submit" | "button";
 

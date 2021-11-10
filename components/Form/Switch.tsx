@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { borderRadius, fontSize, fontWeight } from "../util/css/base";
+import { borderRadius, fontSize, fontWeight } from "components/util/css/base";
 
-import generatedId from "../util/helps/generateKey";
+import generatedId from "components/util/helps/generateKey";
 import styled from "styled-components";
 
 export interface SwitchProps {

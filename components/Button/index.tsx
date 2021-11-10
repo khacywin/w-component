@@ -1,8 +1,7 @@
-import { borderRadius, opacity } from "../util/css/base";
+import { borderRadius, opacity } from "components/util/css/base";
 import styled, { css } from "styled-components";
 
 import React from "react";
-import { rgba } from "polished";
 
 interface PropsStyled {
   dark?: boolean;

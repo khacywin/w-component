@@ -1,7 +1,6 @@
 import styled, { keyframes } from "styled-components";
 
 import React from "react";
-import { rgba } from "polished";
 
 export interface LoadingListProps {
   height: string;

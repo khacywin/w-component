@@ -2,7 +2,7 @@ import { LabelCss, cssFocus } from './_FormGroup';
 import React, { useCallback, useMemo } from 'react';
 
 import DatePicker from './DatePicker';
-import Icon from '../Icon';
+import Icon from 'components/Icon';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 

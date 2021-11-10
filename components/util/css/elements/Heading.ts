@@ -1,5 +1,4 @@
 import { css } from 'styled-components';
-import { rgba } from 'polished';
 
 export const Heading2 = css`
   font-weight: 800;

@@ -8,8 +8,8 @@ import React, {
 
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import useHandleDisplay from '../util/hooks/useHandleDisplay';
-import usePositionDialog from '../util/hooks/usePositionDialog';
+import useHandleDisplay from 'components/util/hooks/useHandleDisplay';
+import usePositionDialog from 'components/util/hooks/usePositionDialog';
 
 export type TRefDialog = {
   show: () => void;

@@ -4,7 +4,7 @@ const glob = require("glob");
 
 module.exports = {
   mode: "production",
-  entry: glob.sync("components/**/**/**.tsx").reduce((acc, path) => {
+  entry: glob.sync("components/**/**.tsx").reduce((acc, path) => {
     let entry = "index.js";
 
     if (path.includes("components")) {
@@ -20,20 +20,15 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".svg"],
+    modules: ['node_modules'],
     symlinks: true,
-    modules: [__dirname, "node_modules"]
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: ["babel-loader"],
-      },
-      {
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        use: ["ts-loader"],
       },
       {
         test: /\.(png|svg|jpg|gif|jpe?g)$/,
