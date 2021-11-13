@@ -13,6 +13,7 @@ import React, {
 } from 'react';
 
 import InputStyle from 'components/util/css/elements/InputStyle';
+import { TInput } from 'components/util/type';
 import WColor from 'w-color-selector';
 import _t from 'components/util/helps/_t';
 import generatedId from 'components/util/helps/generateKey';

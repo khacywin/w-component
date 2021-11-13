@@ -5,6 +5,7 @@ import ButtonAction from 'components/Button/ButtonAction';
 import Dropdown from 'components/Dropdown';
 import Icon from 'components/Icon';
 import InputStyle from 'components/util/css/elements/InputStyle';
+import { TSelectOption } from 'components/util/type';
 import _t from 'components/util/helps/_t';
 import generatedId from 'components/util/helps/generateKey';
 import styled from 'styled-components';

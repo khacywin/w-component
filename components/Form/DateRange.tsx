@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import DatePicker from './DatePicker';
 import Icon from 'components/Icon';
+import { WDate } from 'components/util/type';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 

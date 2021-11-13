@@ -1,6 +1,7 @@
 /* eslint-disable */
 const path = require("path");
 const glob = require("glob");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -16,12 +17,21 @@ module.exports = {
   }, {}),
   output: {
     filename: "[name]",
-    path: path.resolve(__dirname, "es"),
+    path: path.resolve(__dirname, "lib"),
+    library: {
+      type: "module",
+    },
+  },
+  experiments: {
+    outputModule: true,
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".svg"],
-    modules: ['node_modules'],
+    modules: ["node_modules"],
     symlinks: true,
+    alias: {
+      components: path.resolve(__dirname, "components"),
+    },
   },
   module: {
     rules: [
@@ -35,11 +45,18 @@ module.exports = {
         loader: "file-loader",
         options: {
           name: "[name].[ext]",
-          outputPath: "images",
+          outputPath: "image",
           emitFile: true,
           esModule: false,
         },
       },
     ],
   },
+  plugins: [
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        path.resolve(__dirname, "lib"),
+      ],
+    }),
+  ],
 };

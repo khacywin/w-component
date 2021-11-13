@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react';
 
+import { TPosition } from 'components/util/type';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import useHandleDisplay from 'components/util/hooks/useHandleDisplay';

@@ -12,6 +12,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import FormGroup from '../_FormGroup';
 import SelectListOption from './Select.SelectListOption';
+import { TSelectOption } from 'components/util/type';
 import _t from 'components/util/helps/_t';
 import generatedId from 'components/util/helps/generateKey';
 

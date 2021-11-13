@@ -1,5 +1,7 @@
 import { RefObject, useCallback, useMemo } from 'react';
 
+import { TPosition } from '../type';
+
 interface IOptions {
   add?: {
     height?: number

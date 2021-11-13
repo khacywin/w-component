@@ -1,6 +1,7 @@
 import DateTime from './DateTime';
 import Other from './Other';
 import React from 'react';
+import { WDate } from 'components/util/type';
 
 export interface DatePickerProps {
   fnChange?: (val: string) => void;

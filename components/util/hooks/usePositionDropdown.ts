@@ -1,5 +1,7 @@
 import { RefObject, useCallback, useMemo } from 'react';
 
+import { TPosition } from '../type';
+
 function usePositionDropdown<T extends HTMLBaseElement>(ref: RefObject<T>, options: {
   add?: {
     width?: number,

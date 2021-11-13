@@ -17,6 +17,7 @@ import styled, { css, keyframes } from 'styled-components';
 
 import Button from 'components/Button';
 import ButtonAction from 'components/Button/ButtonAction';
+import { IObject } from 'components/util/type';
 import Icon from 'components/Icon';
 import { createPortal } from 'react-dom';
 

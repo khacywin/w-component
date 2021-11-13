@@ -1,5 +1,6 @@
 import React, { RefObject, useCallback, useRef } from "react";
 
+import { TPositionLabel } from "components/util/type";
 import { space } from "components/util/css/base";
 import styled from "styled-components";
 import transition from "components/util/css/transition";

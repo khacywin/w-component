@@ -12,6 +12,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { borderRadius, boxShadow, fontSize, space } from "components/util/css/base";
 
+import { TPosition } from "components/util/type";
 import styled from "styled-components";
 import useHandleDisplay from "components/util/hooks/useHandleDisplay";
 import usePositionDropdown from "components/util/hooks/usePositionDropdown";

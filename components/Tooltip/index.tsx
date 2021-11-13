@@ -1,4 +1,5 @@
 import React from "react";
+import { TPosition } from "components/util/type";
 import { borderRadius } from "components/util/css/base";
 import styled from "styled-components";
 

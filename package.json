@@ -2,9 +2,7 @@
   "name": "w-components",
   "version": "1.0.0",
   "description": "React component",
-  "main": "es/index.js",
-  "modules": "es/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "lib/index.js",
   "files": [
     "dist",
     "lib",
@@ -12,7 +10,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.common.js",
+    "build": "webpack --config webpack.common.js && tsc",
     "tsc": "tsc",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -35,9 +33,8 @@
   "homepage": "https://github.com/khacywin/w-components#readme",
   "license": "ISC",
   "peerDependencies": {
-    "react": ">=16.0.0",
-    "react-dom": ">=16.0.0",
-    "react-router-dom": ">=5.0.0"
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -54,8 +51,8 @@
     "@storybook/addons": "^5.3.21",
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^5.3.21",
-    "@types/react": "^16.14.2",
-    "@types/react-dom": "^17.0.10",
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.2",
     "@types/styled-components": "^5.1.15",
     "@types/uglify-js": "^3.13.1",
@@ -63,8 +60,12 @@
     "@typescript-eslint/parser": "^5.3.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-styled-components": "^1.13.3",
+    "clean-webpack-plugin": "^4.0.0",
     "file-loader": "^6.2.0",
     "node-sass": "^4.14.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.0.2",
     "typescript": "^3.9.10",
     "uglify-js": "^3.14.2",
     "webpack": "^5.57.0",
@@ -78,10 +79,8 @@
   },
   "dependencies": {
     "dayjs": "^1.10.7",
-    "styled-components": "^5.3.3",
+    "styled-components": "^5.2.1",
     "w-color-selector": "^1.2.24",
     "w-date": "^2.0.1"
   }
 }
-
-

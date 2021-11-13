@@ -1,5 +1,7 @@
 import React, { HTMLAttributes, useCallback, useEffect, useRef } from "react";
 
+import { IObject } from "components/util/type";
+
 /**
  * HOOK FORM
  */
