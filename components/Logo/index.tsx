@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 
@@ -17,9 +16,5 @@ export interface LogoProps {
   img?: string;
 }
 export default function ({ text, img }: LogoProps) {
-  return (
-    <Logo>
-      <Link to="/">{text || <img src={img} alt="logo" /> || ""}</Link>
-    </Logo>
-  );
+  return <Logo>{text || <img src={img} alt="logo" /> || ""}</Logo>;
 }
