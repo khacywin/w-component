@@ -8,7 +8,6 @@ import React, {
 
 import { TPosition } from 'components/util/type';
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
 import useHandleDisplay from 'components/util/hooks/useHandleDisplay';
 import usePositionDialog from 'components/util/hooks/usePositionDialog';
 
@@ -84,9 +83,9 @@ function DialogWrap({
   return (
     isDisplay &&
     createPortal(
-      <Wrap className='dialog-mark'>
-        <WrapContent ref={refContent}>{children}</WrapContent>
-      </Wrap>,
+      <div className='w-dialog dialog-mark'>
+        <div className='w-dialog-content' ref={refContent}>{children}</div>
+      </div>,
       document.getElementById('modal-root')
     )
   );
@@ -107,16 +106,3 @@ export default React.forwardRef((props: DialogProps, ref: any) => {
 
   return isShowed && <DialogWrap setIsShowed={setIsShowed} {...props} />;
 });
-
-const Wrap = styled.div`
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-`;
-
-const WrapContent = styled.div`
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  left: 0;
-`;
