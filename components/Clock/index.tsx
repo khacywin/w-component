@@ -4,15 +4,11 @@
  */
 
 import React, { useCallback, useEffect, useState } from "react";
-import { borderRadius, boxShadow, fontSize, space, zIndex } from "components/util/css/base";
 
 import Icon from "components/Icon";
-import clock_face from "components/util/assets/images/clock-face.svg";
 import generatedId from "components/util/helps/generateKey";
 import i_arrow_down from "components/util/assets/icon/arrow-down.svg";
 import i_arrow_up from "components/util/assets/icon/arrow-up.svg";
-import styled from "styled-components";
-import transition from "components/util/css/transition";
 
 interface ClockProps {
   selected?: string | Date; // 'HH:MM || date'
@@ -90,9 +86,9 @@ export default React.memo(({ selected, fnSelected }: ClockProps) => {
       for (let index = start; index <= _max; index++) {
         if (index === val)
           arr.push(
-            <ClockTimeListsValue key={`${id}-${index}`}>
+            <div className="w-clock-time-list-value" key={`${id}-${index}`}>
               {index < 10 ? `0${index}` : index}
-            </ClockTimeListsValue>
+            </div>
           );
         else
           arr.push(
@@ -118,7 +114,7 @@ export default React.memo(({ selected, fnSelected }: ClockProps) => {
        * Add arrow change list
        */
       arr.unshift(
-        <div key={`${id}-up`} onClick={() => setValue(val - 1, max)}> 
+        <div key={`${id}-up`} onClick={() => setValue(val - 1, max)}>
           <Icon src={i_arrow_up} small />
         </div>
       );
@@ -150,153 +146,34 @@ export default React.memo(({ selected, fnSelected }: ClockProps) => {
   }, [selected]);
 
   return (
-    <ClockWrap>
+    <div className="w-clock">
       <input type="hidden" />
-      <ClockAnalog minutes={minute} hours={hour % 12}>
+      <div
+        className="w-clock-analog"
+        data-minutes={minute}
+        data-hours={hour % 12}
+      >
         <div></div>
         <div></div>
         <div></div>
-      </ClockAnalog>
-      <ClockTime>
-        <ClockTimeItem>
-          <ClockTimeValue>{hour < 10 ? `0${hour}` : hour}</ClockTimeValue>
-          <ClockTimeLists>{lists(hour, 23)}</ClockTimeLists>
-        </ClockTimeItem>
+      </div>
+      <div className="w-clock-time">
+        <div className="w-clock-time-wrap">
+          <div className="w-clock-time-value">
+            {hour < 10 ? `0${hour}` : hour}
+          </div>
+          <div className="w-clock-time-list">{lists(hour, 23)}</div>
+        </div>
         <span> : </span>
-        <ClockTimeItem>
-          <ClockTimeValue>{minute < 10 ? `0${minute}` : minute}</ClockTimeValue>
-          <ClockTimeLists>{lists(minute, 59)}</ClockTimeLists>
-        </ClockTimeItem>
-      </ClockTime>
-    </ClockWrap>
+        <div className="w-clock-time-wrap">
+          <div className="w-clock-time-value">
+            {minute < 10 ? `0${minute}` : minute}
+          </div>
+          <div className="w-clock-time-list">{lists(minute, 59)}</div>
+        </div>
+      </div>
+    </div>
   );
 });
-
-const ClockWrap = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-interface Time {
-  hours: number;
-  minutes: number;
-}
-const ClockAnalog = styled.div<Time>`
-  background-image: url(${clock_face});
-  background-size: cover;
-  border-radius: 50%;
-  height: 200px;
-  position: relative;
-  width: 200px;
-
-  div:first-of-type {
-    background-color: var(--dark);
-    height: 20%;
-    left: calc(50% - 1px);
-    position: absolute;
-    top: 30%;
-    transform-origin: calc(100% - 1px) calc(100% - 1px);
-    transform: ${(props) =>
-      `rotate(${props.hours * 30 + props.minutes * 0.5}deg)`};
-    width: 2px;
-  }
-
-  div:last-of-type {
-    background-color: var(--dark);
-    height: 30%;
-    left: calc(50% - 0.5px);
-    position: absolute;
-    top: 20%;
-    transform-origin: calc(100% - 0.5px) calc(100% - 0.5px);
-    transform: ${(props) => `rotate(${props.minutes * 6}deg)`};
-    width: 1px;
-  }
-
-  div:nth-of-type(2) {
-    background-color: var(--dark);
-    border-radius: 50%;
-    height: 5px;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 5px;
-  }
-`;
-
-const ClockTimeItem = styled.div`
-  position: relative;
-`;
-
-const ClockTimeValue = styled.div`
-  ${fontSize.big};
-  ${space.P4.x};
-  ${space.P2.y};
-  cursor: pointer;
-`;
-
-const ClockTimeLists = styled.ul`
-  background-color: var(--backgroundContent);
-  height: auto;
-  left: 0;
-  position: absolute;
-  text-align: center;
-  top: -337%;
-  transform: scaleY(0);
-  transition-property: transform;
-  width: 100%;
-  ${transition.linear};
-  ${borderRadius.normal};
-  ${space.P1.a};
-  ${zIndex.front_5};
-  ${boxShadow.normal};
-
-  & > li {
-    cursor: pointer;
-    display: flex;
-    height: 100%;
-    justify-content: space-around;
-    list-style: none;
-    user-select: none;
-    width: 100%;
-    ${borderRadius.normal};
-    ${space.P2.y};
-    ${space.M1.y};
-    &:hover {
-      background-color: var(--backgroundOpacity);
-    }
-  }
-
-  & > div {
-    cursor: pointer;
-  }
-`;
-
-const ClockTimeListsValue = styled.div`
-  background-color: var(--borderInput);
-  cursor: pointer;
-  height: 30px;
-  left: 50%;
-  line-height: 30px;
-  position: relative;
-  transform: translate(-50%, 0);
-  width: 150%;
-  ${borderRadius.normal};
-`;
-
-const ClockTime = styled.div`
-  align-items: center;
-  display: flex;
-  ${space.M3.t};
-
-  span {
-    ${space.M2.x};
-  }
-
-  &:hover ${ClockTimeLists} {
-    transform: scaleY(1);
-  }
-`;
 
 type MaxTime = 23 | 59;

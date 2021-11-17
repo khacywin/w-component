@@ -1,0 +1,125 @@
+.w-clock {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  &-analog {
+    background-image: url("./../../util/assets/images/clock-face.svg");
+    background-size: cover;
+    border-radius: 50%;
+    height: 200px;
+    position: relative;
+    width: 200px;
+
+    div:first-of-type {
+      background-color: var(--dark);
+      height: 20%;
+      left: calc(50% - 1px);
+      position: absolute;
+      top: 30%;
+      transform-origin: calc(100% - 1px) calc(100% - 1px);
+      transform: rotate(
+        calc(attr(data-hour number) * 30deg + attr(data-minute number) * 0.5deg)
+      );
+      width: 2px;
+    }
+
+    div:last-of-type {
+      background-color: var(--dark);
+      height: 30%;
+      left: calc(50% - 0.5px);
+      position: absolute;
+      top: 20%;
+      transform-origin: calc(100% - 0.5px) calc(100% - 0.5px);
+      transform: rotate(calc(attr(data-minute number) * 6deg));
+      width: 1px;
+    }
+
+    div:nth-of-type(2) {
+      background-color: var(--dark);
+      border-radius: 50%;
+      height: 5px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 5px;
+    }
+  }
+
+  &-time {
+    @include align("margin", "t", 3);
+    align-items: center;
+    display: flex;
+
+    span {
+      @include align("margin", "x", 2);
+    }
+
+    &-wrap {
+      position: relative;
+    }
+
+    &-value {
+      @include fontSize("big");
+      @include align("padding", "x", 4);
+      @include align("padding", "y", 2);
+
+      cursor: pointer;
+    }
+
+    &-list {
+      @include transition("linear");
+      @include borderRadius("normal");
+      @include align("padding", "a", 1);
+      @include zIndex(5);
+      @include boxShadow("normal");
+
+      background-color: var(--backgroundContent);
+      height: auto;
+      left: 0;
+      position: absolute;
+      text-align: center;
+      top: -337%;
+      transform: scaleY(0);
+      transition-property: transform;
+      width: 100%;
+
+      & > li {
+        @include borderRadius("normal");
+        @include align("padding", "y", 2);
+        @include align("margin", "y", 1);
+
+        cursor: pointer;
+        display: flex;
+        height: 100%;
+        justify-content: space-around;
+        list-style: none;
+        user-select: none;
+        width: 100%;
+        &:hover {
+          background-color: var(--backgroundOpacity);
+        }
+      }
+
+      & > div {
+        cursor: pointer;
+      }
+
+      &-value {
+        @include borderRadius("normal");
+        cursor: pointer;
+        height: 30px;
+        left: 50%;
+        line-height: 30px;
+        position: relative;
+        transform: translate(-50%, 0);
+        width: 150%;
+      }
+    }
+
+    &:hover .w-clock-time-list {
+      transform: scaleY(1);
+    }
+  }
+}
