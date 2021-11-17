@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import ButtonAction from "components/Button/ButtonAction";
 import Icon from "components/Icon";
-import styled from "styled-components";
 
 export interface YearPickerProps {
   selected?: string;
@@ -48,77 +47,29 @@ export default function ({
   }, [selected]);
 
   return (
-    <Wrap>
+    <div className="w-calendar-year">
       <ButtonAction action={_setPreviousListYear}>
         <Icon icon="i-arrow-up" />
       </ButtonAction>
 
-      <List>
+      <div className="w-calendar-year-list">
         {list.map((year, idx) => (
-          <Item
-            active={year === +selected}
+          <li
+            className={`w-calendar-year-item
+              ${year === +selected ? "active" : ""}
+              ${disableItem?.(year.toString()) ? "disable" : ""}
+            `}
             key={idx}
             onClick={_onSelected(year)}
-            disable={disableItem?.(year.toString())}
           >
             {year}
-          </Item>
+          </li>
         ))}
-      </List>
+      </div>
 
       <ButtonAction action={_setNextListYear}>
         <Icon icon="i-arrow-down" />
       </ButtonAction>
-    </Wrap>
+    </div>
   );
 }
-
-const Wrap = styled.div`
-  width: 150px;
-
-  & > button {
-    width: 100%;
-  }
-`;
-
-const List = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-interface IPropsItem {
-  active: boolean;
-  disable: boolean;
-}
-const Item = styled.li<IPropsItem>`
-  border-radius: 9999px;
-  cursor: pointer;
-  list-style-type: none;
-  padding: 5px;
-  text-align: center;
-  width: 33.33333%;
-
-  ${({ active }) =>
-    active &&
-    `
-    background-color: var(--primary);
-    color: #fff;
-  `}
-
-  &:last-of-type, &:first-of-type {
-    opacity: 0.6;
-  }
-
-  &:hover {
-    background-color: var(--backgroundOpacity);
-  }
-
-  ${({ disable }) =>
-    disable &&
-    `
-    opacity: 0.2 !important;
-    user-select: none;
-    pointer-events: none;
-  `}
-`;

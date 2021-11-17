@@ -1,9 +1,6 @@
 import React, { RefObject, useCallback, useRef } from "react";
 
 import { TPositionLabel } from "components/util/type";
-import { space } from "components/util/css/base";
-import styled from "styled-components";
-import transition from "components/util/css/transition";
 import useHandleDisplay from "components/util/hooks/useHandleDisplay";
 
 type TypeButton = "submit" | "button";
@@ -53,10 +50,13 @@ export default React.forwardRef(
     );
 
     return (
-      <WrapButtonAction
+      <button
         ref={ref || refButton}
-        className={"button-action " + (props.className || "")}
-        active={props.isActive || isActive}
+        className={`w-button 
+                    w-button-action 
+                    ${props.className || ""} 
+                    ${props.isActive || isActive ? "w-button-action-active" : ""}`
+                  }
         type={props.type || "button"}
         aria-label={props.label}
         data-label-position={props.positionLabel}
@@ -64,50 +64,7 @@ export default React.forwardRef(
         onClick={_preventDefault}
       >
         {props.children}
-      </WrapButtonAction>
+      </button>
     );
   }
 );
-
-interface PropsStyled {
-  active: boolean;
-}
-const WrapButtonAction = styled.button<PropsStyled>`
-  ${space.P2.a};
-  background-color: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 50%;
-  position: relative;
-  z-index: 1;
-
-  & > * {
-    user-select: none;
-  }
-
-  &:focus {
-    outline: 0;
-  }
-
-  &::before {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    background-color: var(--backgroundOpacity);
-    top: 0;
-    border-radius: 9999px;
-    z-index: -1;
-    transform: ${(props) => (props.active ? `scale(1)` : `scale(0)`)};
-    ${transition.def};
-  }
-
-  &:hover {
-    &::before {
-      transform: scale(1);
-    }
-  }
-`;

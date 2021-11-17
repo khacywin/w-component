@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import ButtonAction from "components/Button/ButtonAction";
 import Icon from "components/Icon";
 import _t from "components/util/helps/_t";
-import styled from "styled-components";
 
 export interface MonthPickerProps {
   selected?: Date;
@@ -92,86 +91,37 @@ export default function ({
   }, [selected]);
 
   return (
-    <Wrap>
-      <WrapHead>
+    <div className="w-calendar-month">
+      <div className="w-calendar-month-head">
         <div>{year}</div>
-        <ButtonSection>
+        <div className="w-calendar-month-button-section">
           <ButtonAction action={previousYear}>
             <Icon icon="i-arrow-left" />
           </ButtonAction>
           <ButtonAction action={nextYear}>
             <Icon icon="i-arrow-right" />
           </ButtonAction>
-        </ButtonSection>
-      </WrapHead>
-      <List>
+        </div>
+      </div>
+      <div className="w-calendar-month-list">
         {list.map((month) => (
-          <Item
-            active={
+          <li
+            className={`w-calendar-month-item 
+            ${
               month.value === selected.getMonth() &&
               year === selected.getFullYear()
+                ? "active"
+                : ""
             }
+            ${disableItem?.(`${year}-${month.value + 1}`) ? "disable" : ""}
+            `}
             key={month.value}
             onClick={onSelected(month.value)}
-            disable={disableItem?.(`${year}-${month.value + 1}`)}
           >
             {month.label}
-          </Item>
+          </li>
         ))}
-      </List>
-    </Wrap>
+      </div>
+    </div>
   );
 }
-
-const Wrap = styled.div`
-  width: 150px;
-`;
-
-const WrapHead = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const ButtonSection = styled.div`
-  display: flex;
-`;
-
-const List = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-interface IPropsItem {
-  active: boolean;
-  disable: boolean;
-}
-const Item = styled.li<IPropsItem>`
-  border-radius: 9999px;
-  cursor: pointer;
-  list-style-type: none;
-  padding: 5px;
-  text-align: center;
-  width: 33.33333%;
-
-  ${({ active }) =>
-    active &&
-    `
-    background-color: var(--primary);
-    color: #fff;
-  `}
-
-  &:hover {
-    background-color: var(--backgroundOpacity);
-  }
-
-  ${({ disable }) =>
-    disable &&
-    `
-    opacity: 0.5;
-    user-select: none;
-    pointer-events: none;
-  `}
-`;

@@ -50,6 +50,17 @@ module.exports = {
           esModule: false,
         },
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
+        ],
+      },
+
     ],
   },
   plugins: [

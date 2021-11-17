@@ -1,0 +1,124 @@
+.w-button {
+  border: none;
+  cursor: pointer;
+  color: var(--white);
+  padding: 7px 12px;
+  border-radius: 7px;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  /* Props set style */
+  &-primary {
+    background-color: var(--primary);
+
+    &:active {
+      background-color: rgba(var(--primary), 0.5);
+    }
+  }
+  &-success {
+    background-color: var(--success);
+
+    &:active {
+      background-color: rgba(var(--success), 0.5);
+    }
+  }
+  &-error {
+    background-color: var(--error);
+
+    &:active {
+      background-color: rgba(var(--error), 0.5);
+    }
+  }
+  &-warning {
+    background-color: var(--warning);
+
+    &:active {
+      background-color: rgba(var(--warning), 0.5);
+    }
+  }
+  &-dark {
+    background-color: var(--dark);
+
+    &:active {
+      background-color: rgba(var(--dark), 0.5);
+    }
+  }
+  &-normal {
+    background-color: transparent;
+  }
+
+  // BUTTON LOAD MORE
+  &-load-more {
+    border: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 10px;
+    margin: 0 auto;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  // BUTTON ACTION
+  &-action {
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    transition-duration: 0.1s;
+    transition-property: all;
+    transition-timing-function: linear;
+
+    & > * {
+      user-select: none;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: var(--backgroundOpacity);
+      top: 0;
+      border-radius: 9999px;
+      z-index: -1;
+      transform: scale(0);
+    }
+
+    &:hover {
+      &::before {
+        transform: scale(1);
+      }
+    }
+
+    &-active::before {
+      transform: scale(1);
+    }
+  }
+}
