@@ -5,20 +5,9 @@
  * @prop {boolean} in - is show default
  */
 
-import React, { useState } from 'react';
-import { fontSize, fontWeight, opacity, space } from 'components/util/css/base';
+import React, { useState } from "react";
 
-import Icon from 'components/Icon';
-import styled from 'styled-components';
-import transition from 'components/util/css/transition';
-
-const Collapse = styled.div`
-  position: relative;
-`;
-
-interface PropsCollapse {
-  show: boolean;
-}
+import Icon from "components/Icon";
 
 export interface CollapseProps {
   heading: string;
@@ -31,77 +20,24 @@ export default React.memo((props: CollapseProps) => {
   const [show, setShow] = useState(!!props.in);
 
   return (
-    <Collapse>
-      <CollapseHeading
-        show={props.noCollapse || show}
+    <div className="w-collapse">
+      <div
+        className={`w-collapse-heading ${
+          props.noCollapse || show ? "show" : ""
+        }`}
         onClick={() => setShow(!show)}
       >
-        {props.noCollapse || <Icon icon='i-arrow-down' small />}
+        {props.noCollapse || <Icon icon="i-arrow-down" small />}
         <span>{props.heading}</span>
-        <CollapseHeadingDash />
-      </CollapseHeading>
-      <CollapseContent show={props.noCollapse || show}>
+        <div className="w-collapse-heading-dash" />
+      </div>
+      <div
+        className={`w-collapse-content ${
+          props.noCollapse || show ? "show" : ""
+        }`}
+      >
         {props.children}
-      </CollapseContent>
-    </Collapse>
+      </div>
+    </div>
   );
 });
-
-
-const CollapseHeadingDash = styled.div`
-  align-self: flex-end;
-  transition: all 0.2s linear;
-  flex: 1 1 auto;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    height: 1px;
-    background-color: var(--border);
-    right: 0;
-    bottom: 0;
-    transition-property: width;
-    width: 0;
-    ${transition.easeIn};
-  }
-`;
-
-const CollapseHeading = styled.div<PropsCollapse>`
-  display: flex;
-  align-items: center;
-  ${fontWeight.semiBold};
-  ${fontSize.small};
-  ${opacity.SemiTransparent};
-  cursor: pointer;
-  user-select: none;
-
-  span {
-    width: max-content;
-  }
-
-  ${CollapseHeadingDash} {
-    &::after {
-      ${(props) => (props.show ? 'width:98%' : '')};
-    }
-  }
-
-  /* Icon */
-  div:first-of-type {
-    transition: all 0.2s linear;
-    ${(props) => (props.show ? '' : 'transform: rotate(180deg)')};
-    ${space.M2.r};
-  }
-`;
-
-const CollapseContent = styled.div<PropsCollapse>`
-  width: 100%;
-  transform: scaleY(0);
-  transform-origin: top;
-  transition-property: height;
-  transition-duration: 0.2s;
-  ${transition.linear};
-  ${space.M5.y};
-  ${space.M0.x};
-  ${(props) => (props.show ? 'transform: scaleY(1)' : '')};
-`;
