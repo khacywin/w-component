@@ -1,0 +1,36 @@
+.w-icon {
+  display: inline-block;
+  text-align: center;
+  
+  i{
+    font-size: 1.5rem;
+  }
+
+  i:before {
+    color: attr(data-color);
+  }
+
+  &.bigger {
+    i {
+      font-size: 2.4rem;
+    }
+  }
+
+  &.biggest {
+    i {
+      font-size: 3.2rem;
+    }
+  }
+
+  &.small {
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  &.big {
+    i {
+      font-size: 2rem;
+    }
+  }
+}

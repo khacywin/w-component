@@ -1,17 +1,9 @@
-import { fontSize, fontWeight } from 'components/util/css/base';
-
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
 
 interface TitleProps {
   children: any;
 }
 
-const Title = styled.div`
-  ${fontSize.big};
-  ${fontWeight.bold};
-`;
-
 export default function (props: TitleProps) {
-  return <Title>{props.children} </Title>;
+  return <div className="w-title">{props.children} </div>;
 }

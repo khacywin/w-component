@@ -5,25 +5,13 @@
  * @prop {boolean} show
  */
 
-import React, { useEffect, useImperativeHandle, useState } from 'react';
-import {
-  borderRadius,
-  boxShadow,
-  fontSize,
-  fontWeight,
-  space,
-} from 'components/util/css/base';
-import styled, { css, keyframes } from 'styled-components';
+import React, { useEffect, useImperativeHandle, useState } from "react";
 
-import Button from 'components/Button';
-import ButtonAction from 'components/Button/ButtonAction';
-import { IObject } from 'components/util/type';
-import Icon from 'components/Icon';
-import { createPortal } from 'react-dom';
-
-interface PropsModalStyled {
-  show: boolean;
-}
+import Button from "components/Button";
+import ButtonAction from "components/Button/ButtonAction";
+import { IObject } from "components/util/type";
+import Icon from "components/Icon";
+import { createPortal } from "react-dom";
 
 export interface ModalProps {
   heading?: string;
@@ -83,124 +71,32 @@ export default React.forwardRef(
 
     return isShow
       ? createPortal(
-          <WrapModal>
-            <ModalDialog style={styled} className='w-modal-wrap' show={isShow}>
-              <ModalHeading>
+          <div className="w-modal">
+            <div
+              className={`w-modal-dialog ${show ? "show" : ""}`}
+              style={styled}
+            >
+              <div className="w-modal-heading">
                 {heading && <span>{heading}</span>}
                 <ButtonAction action={() => hide()}>
-                  <Icon icon='i-close' />
+                  <Icon icon="i-close" />
                 </ButtonAction>
-              </ModalHeading>
+              </div>
 
-              <ModalContainer>{content || children}</ModalContainer>
+              <div className="w-modal-content">{content || children}</div>
               {!noFooter && (
-                <ModalFooter>
+                <div className="w-modal-footer">
                   {footer ? (
                     footer
                   ) : (
                     <Button fnClick={() => hide()}> OK </Button>
                   )}
-                </ModalFooter>
+                </div>
               )}
-            </ModalDialog>
-          </WrapModal>,
-          document.getElementById('modal-root')
+            </div>
+          </div>,
+          document.getElementById("modal-root")
         )
       : null;
   }
 );
-
-const WrapModal = styled.div`
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100%;
-  min-height: 100vh;
-  overflow-x: auto;
-  background-color: rgba(0, 0, 0, 0.1);
-
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
-`;
-
-const animationShow = keyframes`
-  0%{
-    transform: scale(0);
-  }
-  100%{
-    transform: scale(1);
-  }
-`;
-
-const cssShow = css`
-  animation: ${animationShow} 0.2s linear;
-`;
-const ModalDialog = styled.div<PropsModalStyled>`
-  min-width: 400px;
-  max-width: 600px;
-  height: auto;
-  background-color: var(--backgroundContent);
-
-  margin: 6vh auto;
-
-  ${borderRadius.normal};
-  ${boxShadow.menu};
-  ${({ show }) => (show ? cssShow : '')};
-`;
-
-const ModalHeading = styled.div`
-  ${space.P3.a};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  ${fontSize.small};
-  ${fontWeight.semiBold};
-  user-select: none;
-
-  span {
-    position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      width: 70%;
-      height: 0.5px;
-      background-color: var(--border);
-      bottom: 0;
-      left: 0;
-    }
-  }
-
-  button {
-    margin-right: 0;
-    margin-left: auto;
-  }
-`;
-
-const ModalContainer = styled.div`
-  ${space.P5.x};
-`;
-
-const ModalFooter = styled.div`
-  ${space.P3.a};
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    width: 70%;
-    height: 0.5px;
-    background-color: var(--border);
-    top: 0;
-    right: 0;
-  }
-
-  button {
-    ${space.M1.l};
-  }
-`;

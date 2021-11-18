@@ -81,3 +81,46 @@
     transform: scaleX(1);
   }
 }
+
+.line-overflow {
+  &-1 {
+    width: 100%;
+    display: block;
+    display: -webkit-box;
+    line-height: initial;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+  }
+  &-2 {
+    width: 100%;
+    display: block;
+    display: -webkit-box;
+    line-height: initial;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+  }
+  &-3 {
+    width: 100%;
+    display: block;
+    display: -webkit-box;
+    line-height: initial;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+  }
+  &-4 {
+    width: 100%;
+    display: block;
+    display: -webkit-box;
+    line-height: initial;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+  }
+}

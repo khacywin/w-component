@@ -1,0 +1,4 @@
+.w-title{
+  @include fontSize('big');
+  @include fontWeight('bold');
+}

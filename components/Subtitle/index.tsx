@@ -6,13 +6,10 @@
  * @prop {Direction} direction: row | column | row-reserve | column-reserve
  */
 
-import { fontSize, fontWeight, lineOverflow, space } from 'components/util/css/base';
+import Icon from "components/Icon";
+import React from "react";
 
-import Icon from 'components/Icon';
-import React from 'react';
-import styled from 'styled-components';
-
-type Direction = 'row' | 'column' | 'row-reverse' | 'column-revere';
+type Direction = "row" | "column" | "row-reverse" | "column-revere";
 
 export interface SubtitleProps {
   icon?: any;
@@ -23,33 +20,17 @@ export interface SubtitleProps {
 }
 export default function (props: SubtitleProps) {
   return (
-    <WrapSubtitle direction={props.direction || 'row'} color={props.color || '#999999'}>
-      <Subtitle>{props.children || props.title}</Subtitle>
-      {props.icon ? <Icon icon={props.icon} color={props.color || '#999999'} /> : ''}
-    </WrapSubtitle>
+    <div
+      className="w-subtitle"
+      data-direction={props.direction || "row"}
+      data-color={props.color || "#999999"}
+    >
+      <div className='w-subtitle-text line-overflow-1'>{props.children || props.title}</div>
+      {props.icon ? (
+        <Icon icon={props.icon} color={props.color || "#999999"} />
+      ) : (
+        ""
+      )}
+    </div>
   );
 }
-
-interface PropsWrap {
-  direction: Direction;
-  color: string;
-}
-const WrapSubtitle = styled.div<PropsWrap>`
-  display: inline-flex;
-  align-items: center;
-  flex-direction: ${(props) => props.direction};
-  color: ${(props) => props.color};
-
-  .icon{
-    transform: translateY(2px);
-  }
-`;
-
-const Subtitle = styled.div`
-  ${fontSize.small};
-  ${fontWeight.light};
-  ${space.P2.x};
-  ${lineOverflow.one};
-  max-width: 200px;
-  width: 100%;
-`;

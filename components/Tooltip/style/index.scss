@@ -1,0 +1,38 @@
+.w-tooltip {
+  position: relative;
+
+  &-children {
+    cursor: pointer;
+  }
+
+  &-container {
+    @include borderRadius("normal");
+
+    position: absolute;
+    display: none;
+    background-color: var(--backgroundContent);
+    color: var(--text);
+    padding: 8px 12px;
+    box-shadow: 0 2px 2px var(--boxShadow);
+
+    &.left {
+      right: calc(100% + 5px);
+    }
+
+    &.right {
+      left: calc(100% + 5px);
+    }
+
+    &.top {
+      bottom: calc(100% + 5px);
+    }
+
+    &.bottom {
+      top: calc(100% + 5px);
+    }
+  }
+
+  &:hover .w-tooltip-container {
+    display: block;
+  }
+}
