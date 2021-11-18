@@ -1,0 +1,117 @@
+.w-form-group {
+  position: relative;
+  border-bottom: 1px solid var(--border);
+
+  &.error {
+    border-color: var(--error);
+  }
+
+  &.is-label {
+    margin-top: 15px;
+  }
+
+  .focus-show {
+    display: none;
+  }
+
+  & > label {
+    @include transition("linear");
+    position: absolute;
+    left: 10px;
+    width: 100%;
+    bottom: 4px;
+
+    &.is-title {
+      @include fontSize("bigger");
+      @include fontWeight("semiBold");
+    }
+
+    &.focus,
+    &.label-focus {
+      @include opacity("semiFully");
+      @include fontSize("smaller");
+      left: 0;
+      bottom: 100%;
+    }
+  }
+
+  &.is-title {
+    & > input {
+      @include fontSize("bigger");
+    }
+  }
+
+  &.inline {
+    display: flex;
+    align-items: center;
+    border: none;
+
+    & > label {
+      order: 0;
+      position: initial;
+      font-size: initial;
+      display: initial;
+      width: auto;
+      margin-right: 10px;
+    }
+
+    div {
+      order: 1;
+    }
+  }
+
+  .w-select {
+    border-color: transparent;
+
+    &:hover,
+    &:focus {
+      border-color: var(--border);
+    }
+
+    &.is-error {
+      border-color: var(--error);
+    }
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus,
+  input:valid,
+  select:valid,
+  textarea:valid {
+    & ~ label {
+      @include opacity("semiFully");
+      @include fontSize("smaller");
+      left: 0;
+      bottom: 100%;
+    }
+
+    & ~ .focus-show {
+      display: block;
+    }
+  }
+}
+
+.w-form-error-message {
+  color: var(--error);
+}
+
+.w-form-focus {
+  @include opacity('semiFully');
+  @include fontSize('smaller');
+
+  left: 0;
+  bottom: 100%;
+
+  &.is-title {
+    display: none;
+  }
+}
+
+.w-form-label {
+  @include transition('linear');
+  position: absolute;
+  left: 10px;
+  width: 100%;
+  bottom: 4px;
+}

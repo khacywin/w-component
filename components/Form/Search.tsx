@@ -2,14 +2,10 @@
  * @prop {(val: string) => void} fnSearch
  */
 
-import React, { useState } from 'react';
-import { fontSize, opacity, space } from 'components/util/css/base';
+import React, { useState } from "react";
 
-import ButtonNoStyle from 'components/util/css/elements/ButtonNoStyle';
-import Icon from 'components/Icon';
-import _t from 'components/util/helps/_t';
-import styled from 'styled-components';
-import transition from 'components/util/css/transition';
+import Icon from "components/Icon";
+import _t from "components/util/helps/_t";
 
 export interface SearchProps {
   fnSearch: (val: string) => void;
@@ -21,7 +17,7 @@ export interface SearchProps {
 }
 export default React.memo((props: SearchProps) => {
   const [isFocus, setIsFocus] = useState(false);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   function focus() {
     setIsFocus(true);
@@ -45,72 +41,35 @@ export default React.memo((props: SearchProps) => {
   }
 
   return (
-    <Search
-      dark={props.dark}
-      focus={isFocus}
+    <div
       onSubmit={submit}
-      className='w-search'
+      className={`w-search 
+        ${isFocus ? "focus" : ""}
+        ${props.dark ? "dark" : ""}
+      `}
     >
-      <button type='submit'>
-        <Icon color={props.dark ? '#fff' : '#1a1a1a'} icon='i-search' />
+      <button className="w-button-no-style" type="submit">
+        <Icon color={props.dark ? "#fff" : "#1a1a1a"} icon="i-search" />
       </button>
       {props.value !== undefined && props.onChange ? (
-        <Input
+        <input
+          className="w-search-input"
           value={props.value}
           onChange={props.onChange}
-          placeholder={`${props.placeholder || _t('Search')}...`}
+          placeholder={`${props.placeholder || _t("Search")}...`}
           onFocus={() => focus()}
           onBlur={(e: any) => blur(e)}
         />
       ) : (
-        <Input
+        <input
+          className="w-search-input"
           value={value}
           onChange={(e: any) => setValue(e.target.value)}
-          placeholder={`${props.placeholder || _t('Search')}...`}
+          placeholder={`${props.placeholder || _t("Search")}...`}
           onFocus={() => focus()}
           onBlur={(e: any) => blur(e)}
         />
       )}
-    </Search>
+    </div>
   );
 });
-
-interface PropsWrap {
-  focus: boolean;
-  dark: boolean;
-}
-const Search = styled.form<PropsWrap>`
-  display: inline-flex;
-  align-items: center;
-  border-bottom: 1px solid ${({ dark }) => (dark ? '#fff' : '#c7c7c7')};
-  width: 200px;
-  input {
-    color: ${({ dark }) => (dark ? '#fff' : 'initial')};
-  }
-
-  ${space.P2.y};
-  ${space.P3.x};
-  ${transition.easeIn};
-  ${opacity.SemiTransparent};
-  ${(props) =>
-    props.focus &&
-    `
-    opacity: 1;
-    max-width: 300px;
-    width: 100%;
-  `};
-  button {
-    ${ButtonNoStyle};
-  }
-`;
-
-const Input = styled.input`
-  margin-left: 5px;
-  background-color: transparent;
-  border: none;
-  ${fontSize.normal};
-
-  &:focus {
-    outline: 0;
-  }
-`;

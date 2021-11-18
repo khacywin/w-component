@@ -5,20 +5,16 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { boxShadow, space } from "components/util/css/base";
 
 import Calendar from "components/Calendar";
 import Clock from "components/Clock";
 import { DatePickerProps } from ".";
 import FormGroup from "../_FormGroup";
 import Icon from "components/Icon";
-import InputStyle from "components/util/css/elements/InputStyle";
 import Month from "components/Calendar/Month";
 import Year from "components/Calendar/Year";
 import dayjs from "dayjs";
 import generatedId from "components/util/helps/generateKey";
-import styled from "styled-components";
-import transition from "components/util/css/transition";
 import useHandleDisplay from "components/util/hooks/useHandleDisplay";
 import usePositionDropdown from "components/util/hooks/usePositionDropdown";
 
@@ -157,39 +153,39 @@ export default function Other({
       new Map()
         .set(
           "date",
-          <InputDateSelectorContainer show>
+          <div className="w-date-picker-selector-container show">
             <Calendar
               selected={val}
               disableItem={disableItem}
               fnSelected={onChange("date")}
             />
-          </InputDateSelectorContainer>
+          </div>
         )
         .set(
           "time",
-          <InputDateSelectorContainer show>
+          <div className="w-date-picker-selector-container show">
             <Clock selected={time} fnSelected={onChange("time")} />
-          </InputDateSelectorContainer>
+          </div>
         )
         .set(
           "year",
-          <InputDateSelectorContainer show>
+          <div className="w-date-picker-selector-container show">
             <Year
               selected={val}
               disableItem={disableItem}
               fnSelected={onChange("year")}
             />
-          </InputDateSelectorContainer>
+          </div>
         )
         .set(
           "month",
-          <InputDateSelectorContainer show>
+          <div className="w-date-picker-selector-container show">
             <Month
               selected={new Date(date)}
               disableItem={disableItem}
               fnSelected={onChange("month")}
             />
-          </InputDateSelectorContainer>
+          </div>
         ),
     [val, disableItem, onChange, time, date]
   );
@@ -229,13 +225,14 @@ export default function Other({
   }, [val]);
 
   return (
-    <Wrap ref={refDropdown}>
+    <div className="w-date-picker" ref={refDropdown}>
       <FormGroup style={style || {}} isFocus label={label} id={id}>
-        <InputSection>
+        <div className="w-date-picker-section">
           {(picker === "date" || picker === "month") && (
             <input type="hidden" name={name} defaultValue={date} />
           )}
-          <InputControl
+          <input
+            className="w-input"
             autoComplete="off"
             id={id + "-calendar"}
             name={picker !== "month" ? name : ""}
@@ -244,81 +241,25 @@ export default function Other({
             onBlur={onBlurDate}
             ref={ref}
           />
-        </InputSection>
+        </div>
         {isRemove && (
-          <ButtonClose onClick={onRemove} type="button">
+          <button
+            className="w-date-picker-close"
+            onClick={onRemove}
+            type="button"
+          >
             <Icon small icon="i-close" />
-          </ButtonClose>
+          </button>
         )}
-        <DropdownMenu ref={refMenuDropdown} show={isDisplay}>
-          <InputDataSelector>{containers.get(container)}</InputDataSelector>
-        </DropdownMenu>
+        <div
+          className={`w-date-picker-dropdown ${isDisplay ? "show" : ""}`}
+          ref={refMenuDropdown}
+        >
+          <div className="w-date-picker-selector">
+            {containers.get(container)}
+          </div>
+        </div>
       </FormGroup>
-    </Wrap>
+    </div>
   );
 }
-
-const ButtonClose = styled.button`
-  background-color: var(--backgroundContent);
-  border: none;
-  cursor: pointer;
-  display: none;
-  outline: 0;
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-
-  &:focus {
-    outline: 0;
-  }
-`;
-
-const Wrap = styled.div`
-  &:hover {
-    ${ButtonClose} {
-      display: block;
-    }
-  }
-`;
-
-const InputControl = styled.input`
-  ${InputStyle};
-`;
-
-type DropdownMenuType = {
-  show: boolean;
-};
-const DropdownMenu = styled.div<DropdownMenuType>`
-  background-color: var(--backgroundContent);
-  display: none;
-  padding: 15px;
-  position: absolute;
-  z-index: -1;
-
-  ${({ show }) =>
-    show &&
-    `
-    display: block;
-    z-index: 300;
-  `};
-  ${boxShadow.normal};
-  ${transition.popup};
-`;
-
-const InputDataSelector = styled.div`
-  ${space.P2.a};
-`;
-
-interface PropsInputDataSelector {
-  show: boolean;
-}
-const InputDateSelectorContainer = styled.div<PropsInputDataSelector>`
-  ${transition.popup};
-  ${(props) =>
-    props.show ? transition.slideUpLeft : transition.slideDownLeft};
-`;
-
-const InputSection = styled.div`
-  display: flex;
-`;

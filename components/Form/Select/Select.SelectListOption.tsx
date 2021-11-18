@@ -1,14 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { borderRadius, lineOverflow, space } from 'components/util/css/base';
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import ButtonAction from 'components/Button/ButtonAction';
-import Dropdown from 'components/Dropdown';
-import Icon from 'components/Icon';
-import InputStyle from 'components/util/css/elements/InputStyle';
-import { TSelectOption } from 'components/util/type';
-import _t from 'components/util/helps/_t';
-import generatedId from 'components/util/helps/generateKey';
-import styled from 'styled-components';
+import ButtonAction from "components/Button/ButtonAction";
+import Dropdown from "components/Dropdown";
+import Icon from "components/Icon";
+import { TSelectOption } from "components/util/type";
+import _t from "components/util/helps/_t";
+import generatedId from "components/util/helps/generateKey";
 
 interface IProps {
   list: TSelectOption[];
@@ -53,7 +50,7 @@ export default React.memo((props: IProps) => {
         return val.map(
           (item: any, key: number) =>
             item && (
-              <Item key={key}>
+              <li className="w-select-item" key={key}>
                 <span
                   onClick={(e: React.MouseEvent) => {
                     e.stopPropagation();
@@ -72,12 +69,12 @@ export default React.memo((props: IProps) => {
                     handleRemove(item);
                   }}
                 >
-                  <Icon small icon='i-close' />
+                  <Icon small icon="i-close" />
                 </ButtonAction>
-              </Item>
+              </li>
             )
         );
-      } else if (typeof val === 'string') {
+      } else if (typeof val === "string") {
         return (
           originList.find((option: TSelectOption) => option.value === val)
             ?.label || originList[0]?.label
@@ -102,14 +99,14 @@ export default React.memo((props: IProps) => {
        * Only when props.isSearch is true
        */
       if (props.isSearch && !props.isMultiple) {
-        refFormSearch.current.value = '';
+        refFormSearch.current.value = "";
         setList(originList);
       }
 
       if (props.isMultiple && Array.isArray(props.value)) {
         const _preVal: string[] = !props.value ? [] : [...props.value];
 
-        if (!_preVal.some((item: string) => item === val) && val !== '') {
+        if (!_preVal.some((item: string) => item === val) && val !== "") {
           _value = [..._preVal, val];
         } else {
           _value = props.value;
@@ -140,21 +137,21 @@ export default React.memo((props: IProps) => {
 
   const renderOptions = useCallback(
     (listOptions: TSelectOption[]) => {
-      const _id = generatedId('select-list');
+      const _id = generatedId("select-list");
       return listOptions.map((option: TSelectOption, index: any) => {
         if (option.group) {
           return (
-            <SelectGroup key={index} className='select-group'>
+            <div key={index} className="w-select-group">
               <div>
                 <strong>{option.group.label}</strong>
               </div>
               <ul>{renderOptions(option.group.options)}</ul>
-            </SelectGroup>
+            </div>
           );
         } else
           return (
             <li
-              className='select-option-item'
+              className="select-option-item"
               onClick={() => select(option.value)}
               key={_id + index}
             >
@@ -170,131 +167,38 @@ export default React.memo((props: IProps) => {
     <Dropdown
       full
       clickOut={!props.isMultiple}
-      className='w-select-wrap'
+      className="w-select-wrap"
       dropdown_menu={
-        <SelectLists className='select-options'>
+        <div className="w-select-selection select-options">
           {props.isSearch && (
-            <SelectListSearch className='w-select-options-search'>
-              <Icon icon='i-search' />
+            <div className="w-select-search">
+              <Icon icon="i-search" />
               <input
+                className="w-input"
                 ref={refFormSearch}
-                placeholder={_t('Search ...')}
-                type='text'
+                placeholder={_t("Search ...")}
+                type="text"
                 autoFocus={true}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   search(e.target.value)
                 }
               />
-            </SelectListSearch>
+            </div>
           )}
           <ul>{renderOptions(list)}</ul>
-        </SelectLists>
+        </div>
       }
     >
-      <SelectListValue
-        minHeight={props.isMultiple && 39}
-        className='w-select-value'
+      <div
+        className="w-select-value line-overflow-1"
       >
         {props.value && props.value.length > 0 ? (
           renderLabel(props.value)
         ) : (
-          <PlaceHolder>{_t('Select')}</PlaceHolder>
+          <div className="w-select-placeholder">{_t("Select")}</div>
         )}
-        <i className='i-arrow-down ' />
-      </SelectListValue>
+        <i className="i-arrow-down " />
+      </div>
     </Dropdown>
   );
 });
-
-const SelectListSearch = styled.div`
-  ${space.P2.a};
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-  input {
-    ${InputStyle};
-  }
-`;
-
-const SelectListValue = styled.div<{ minHeight: number }>`
-  cursor: pointer;
-  user-select: none;
-  line-height: 20px;
-  position: relative;
-  ${({ minHeight }) => minHeight && `min-height: ${minHeight}px;`};
-  ${space.P2.a};
-  ${lineOverflow.one};
-
-  & > i {
-    position: absolute;
-    right: 5px;
-    bottom: 7px;
-  }
-`;
-
-const SelectLists = styled.div`
-  background-color: var(--backgroundContent);
-  width: 100%;
-  overflow-y: hidden;
-  ul {
-    overflow-x: hidden;
-    overflow-y: auto;
-    max-height: 400px;
-    ::-webkit-scrollbar {
-      width: 2px;
-    }
-
-    li {
-      width: 100%;
-      list-style: none;
-      cursor: pointer;
-      ${space.P3.a};
-      ${borderRadius.normal};
-
-      &:hover {
-        background-color: var(--backgroundOpacity);
-      }
-    }
-  }
-`;
-
-const SelectGroup = styled.div`
-  margin-top: 5px;
-
-  strong {
-    user-select: none;
-    padding-left: 8px;
-  }
-
-  ul {
-    padding-left: 7px;
-  }
-`;
-
-const Item = styled.li`
-  display: inline-flex;
-  background-color: var(--backgroundOpacity);
-  border-radius: 5px;
-  margin-right: 5px;
-  padding: 5px 10px;
-  align-items: center;
-
-  button {
-    opacity: 0;
-    width: 0;
-    padding: 3px 0;
-  }
-
-  &:hover button {
-    opacity: 1;
-    width: initial;
-    margin-left: 2px;
-    padding: 3px;
-  }
-`;
-
-const PlaceHolder = styled.div`
-  display: inline-flex;
-  align-items: center;
-  opacity: 0.6;
-`;

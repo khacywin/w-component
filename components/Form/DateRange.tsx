@@ -1,11 +1,9 @@
-import { LabelCss, cssFocus } from './_FormGroup';
 import React, { useCallback, useMemo } from 'react';
 
 import DatePicker from './DatePicker';
 import Icon from 'components/Icon';
 import { WDate } from 'components/util/type';
 import dayjs from 'dayjs';
-import styled from 'styled-components';
 
 export interface DateRangeProps {
   fnChange?: (val: any) => void;
@@ -88,8 +86,8 @@ export default function DateRange({
   };
 
   return (
-    <Wrap className='date-range'>
-      <Label>{label}</Label>
+    <div className='w-date-range'>
+      <div className='w-form-focus w-form-label'>{label}</div>
       <DatePicker
         picker={picker}
         value={value.from}
@@ -111,28 +109,6 @@ export default function DateRange({
         isRemove={false}
         disableItem={disablePrevious}
       />
-    </Wrap>
+    </div>
   );
 }
-
-
-const Wrap = styled.div`
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-  position: relative;
-
-  & > div {
-    width: calc(50% - 20px);
-  }
-
-  .form-group {
-    margin-top: 0;
-  }
-`;
-
-const Label = styled.div`
-  ${LabelCss};
-  ${cssFocus};
-`;

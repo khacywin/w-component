@@ -12,13 +12,10 @@ import React, {
   useState,
 } from 'react';
 
-import InputStyle from 'components/util/css/elements/InputStyle';
 import { TInput } from 'components/util/type';
 import WColor from 'w-color-selector';
 import _t from 'components/util/helps/_t';
 import generatedId from 'components/util/helps/generateKey';
-import { space } from 'components/util/css/base';
-import styled from 'styled-components';
 
 /** Interface */
 export interface InputProps {
@@ -89,7 +86,7 @@ export default React.memo(
     const inputs = new Map()
       .set(
         'textarea',
-        <TextareaControl
+        <textarea
           className='w-textarea'
           name={name}
           placeholder={placeholder}
@@ -103,7 +100,7 @@ export default React.memo(
       )
       .set(
         'text',
-        <InputControl
+        <input
           name={name}
           className='w-input'
           type='text'
@@ -119,7 +116,7 @@ export default React.memo(
       )
       .set(
         'password',
-        <InputControl
+        <input
           name={name}
           className='w-input'
           type='password'
@@ -135,7 +132,7 @@ export default React.memo(
       )
       .set(
         'email',
-        <InputControl
+        <input
           name={name}
           className='w-input'
           type='email'
@@ -151,7 +148,7 @@ export default React.memo(
       )
       .set(
         'number',
-        <InputControl
+        <input
           name={name}
           className='w-input'
           type='number'
@@ -197,14 +194,3 @@ export default React.memo(
     );
   }
 );
-
-/** Style */
-const InputControl = styled.input`
-  ${InputStyle};
-`;
-
-const TextareaControl = styled.textarea`
-  ${InputStyle};
-  ${space.P2.a};
-  resize: none;
-`;

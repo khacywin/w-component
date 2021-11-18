@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { borderRadius, fontSize, fontWeight } from "components/util/css/base";
 
 import generatedId from "components/util/helps/generateKey";
-import styled from "styled-components";
 
 export interface SwitchProps {
   label?: string | JSX.Element;
@@ -24,83 +22,22 @@ export default React.memo((props: SwitchProps) => {
     }
 
     setValue(!value);
-  }, [value]);
+  }, [props, value]);
 
   useEffect(() => {
     props.value && setValue(props.value);
   }, [props.value]);
 
   return (
-    <SwitchWrap>
+    <div className="w-switch">
       <div>
         <h5>{props.label}</h5>
         {props.labelSub ? <h6>{props.labelSub}</h6> : ""}
       </div>
       <input id={id} type="checkbox" checked={value} onChange={_onChange} />
-      <SwitchBox active={value} htmlFor={id}>
-        <SwitchButton htmlFor={id} />
-      </SwitchBox>
-    </SwitchWrap>
+      <label className={`w-switch-box ${value ? "active" : ""}`} htmlFor={id}>
+        <label className="w-switch-box-button" htmlFor={id} />
+      </label>
+    </div>
   );
 });
-
-const SwitchWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  user-select: none;
-
-  h5 {
-    ${fontSize.normal};
-    ${fontWeight.normal};
-  }
-  h6 {
-    opacity: 0.8;
-    ${fontWeight.normal};
-    ${fontSize.small};
-  }
-
-  input {
-    width: 0;
-    height: 0;
-    display: none;
-  }
-`;
-
-interface PropsSwitch {
-  active: boolean;
-}
-const SwitchButton = styled.label`
-  position: absolute;
-  display: block;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  top: 1px;
-  left: 2px;
-  cursor: pointer;
-  background-color: var(--backgroundContent);
-  transition: transform 0.2s linear;
-`;
-
-const SwitchBox = styled.label<PropsSwitch>`
-  display: block;
-  position: relative;
-  width: 40px;
-  height: 20px;
-  cursor: pointer;
-  margin-left: 10px;
-  background-color: ${(props) =>
-    props.active ? "var(--primary)" : "var(--shadow)"};
-  ${borderRadius.around};
-  ${(props) =>
-    props.active
-      ? `
-    ${SwitchButton}{
-      transform: translate(100%,0);
-    }
-  `
-      : `
-  ${SwitchButton}{
-      transform: translate(0,0);
-    }`}
-`;

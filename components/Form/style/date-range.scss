@@ -1,0 +1,15 @@
+.w-date-range {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  position: relative;
+
+  & > div {
+    width: calc(50% - 20px);
+  }
+
+  .form-group {
+    margin-top: 0;
+  }
+}

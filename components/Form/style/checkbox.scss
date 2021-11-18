@@ -1,0 +1,82 @@
+.w-checkbox {
+  display: flex;
+  align-items: flex-start;
+
+  input {
+    width: 0;
+    height: 0;
+  }
+
+  label {
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+  }
+
+  & > label:first-of-type {
+    display: block;
+    flex: 0 0 15px;
+    width: 15px;
+    height: 15px;
+    position: relative;
+    top: -1px;
+    border: 1px solid;
+    border-color: attr("data-color");
+    border-radius: 5px;
+
+    &::after {
+      @include zIndex(1);
+      position: absolute;
+      content: "";
+      width: 102%;
+      height: 100%;
+      top: -6%;
+      left: 15%;
+      display: none;
+      animation: aniScale 0.1s linear;
+    }
+
+    i {
+      @include zIndex(1);
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      top: 1px;
+      right: 50%;
+      display: none;
+      background-color: inherit;
+      color: attr("data-color");
+    }
+
+    &:hover {
+      background-color: rgba("#bdc3c7", 0.1);
+      
+      &::before {
+        background-color: rgba("#bdc3c7", 0.1);
+      }
+    }
+  }
+
+  & > label:last-of-type {
+    margin-left: 5px;
+  }
+
+  input:checked ~ label::after,
+  input:checked ~ label i {
+    display: block;
+  }
+
+  input:checked ~ label {
+    border-right: none;
+    border-top: none;
+  }
+}
+
+@keyframes aniScale {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
