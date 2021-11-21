@@ -1,3 +1,5 @@
+@import './../../__css__/mixin.scss';
+
 .w-form-group {
   position: relative;
   border-bottom: 1px solid var(--border);
@@ -97,8 +99,8 @@
 }
 
 .w-form-focus {
-  @include opacity('semiFully');
-  @include fontSize('smaller');
+  @include opacity("semiFully");
+  @include fontSize("smaller");
 
   left: 0;
   bottom: 100%;
@@ -109,9 +111,17 @@
 }
 
 .w-form-label {
-  @include transition('linear');
+  @include transition("linear");
   position: absolute;
   left: 10px;
   width: 100%;
   bottom: 4px;
 }
+
+@import "./checkbox.scss";
+@import "./date-picker.scss";
+@import "./date-range.scss";
+@import "./input.scss";
+@import "./search.scss";
+@import "./select.scss";
+@import "./switch.scss";

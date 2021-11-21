@@ -16,7 +16,7 @@ export interface ButtonProps extends PropsStyled {
   fnClick?: () => void;
 }
 
-export default function ({
+export default ({
   children,
   className,
   error,
@@ -26,7 +26,7 @@ export default function ({
   success,
   type,
   warning,
-}: ButtonProps) {
+}: ButtonProps) => {
   return (
     <button
       type={type || "button"}
@@ -48,7 +48,7 @@ export default function ({
       {children}
     </button>
   );
-}
+};
 
 export { default as ButtonAction } from "./ButtonAction";
 export { default as ButtonLoadMore } from "./ButtonLoadMore";

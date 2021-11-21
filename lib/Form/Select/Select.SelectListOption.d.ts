@@ -1,5 +1,5 @@
-import React from 'react';
-import { TSelectOption } from 'components/util/type';
+import React from "react";
+import { TSelectOption } from "components/util/type";
 interface IProps {
     list: TSelectOption[];
     value: string | string[];

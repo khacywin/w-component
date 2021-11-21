@@ -1,7 +1,7 @@
 /**
  * @prop {(val: string) => void} fnSearch
  */
-import React from 'react';
+import React from "react";
 export interface SearchProps {
     fnSearch: (val: string) => void;
     defaultValue?: string;

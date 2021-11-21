@@ -5,7 +5,7 @@
  * @props fnChanged: function
  * @props labelChecked
  */
-import React from 'react';
+import React from "react";
 export interface CheckboxProps {
     color?: string;
     labelChecked?: string[];

@@ -1,3 +1,5 @@
+import './__css__/index.scss';
+import './index-style-only';
 export { default as Button } from "./Button";
 export { default as ButtonAction } from "./Button/ButtonAction";
 export { default as ButtonLoadMore } from "./Button/ButtonLoadMore";
@@ -32,8 +34,6 @@ export { default as Popover } from "./Popover";
 export * from "./Popover";
 export { default as Subtitle } from "./Subtitle";
 export * from "./Subtitle";
-export { default as Text } from "./Text";
-export * from "./Text";
 export { default as Title } from "./Title";
 export * from "./Title";
 export { default as Tooltip } from "./Tooltip";
@@ -60,5 +60,5 @@ export * from "./Form/DatePicker";
 /**
  * Util
  */
-export * from "./util/Loading";
-export { default as Notification } from "./util/Notification";
+export * from "./Loading";
+export { default as Notification } from "./Notification";

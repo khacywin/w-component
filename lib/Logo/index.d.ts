@@ -1,5 +1,4 @@
 /// <reference types="react" />
-import './index.scss';
 export interface LogoProps {
     text?: boolean;
     img?: string;

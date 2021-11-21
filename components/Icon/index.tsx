@@ -10,6 +10,7 @@ interface IconProps {
   bigger?: boolean;
   color?: string;
   icon?: string;
+  src?: any;
 }
 
 export default React.memo((props: IconProps) => {
@@ -26,6 +27,7 @@ export default React.memo((props: IconProps) => {
       data-color={props.color}
     >
       {props.icon && <i className={props.icon} />}
+      {props.src && <img src={props.src} />}
     </div>
   );
 });

@@ -1,3 +1,5 @@
+@import './../../__css__/mixin.scss';
+
 @mixin amount-tag {
   @include align("padding", "a", 2);
   @include borderRadius("normal");

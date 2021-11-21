@@ -1,5 +1,3 @@
-import './index.scss'
-
 import React from "react";
 
 export interface LogoProps {

@@ -6,7 +6,7 @@
  * @prop {Direction} direction: row | column | row-reserve | column-reserve
  */
 /// <reference types="react" />
-declare type Direction = 'row' | 'column' | 'row-reverse' | 'column-revere';
+declare type Direction = "row" | "column" | "row-reverse" | "column-revere";
 export interface SubtitleProps {
     icon?: any;
     title?: string;

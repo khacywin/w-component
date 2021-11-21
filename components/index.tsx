@@ -1,5 +1,8 @@
+import "./__css__/index.scss";
+import "./index-style-only";
+
 if (document) {
-  let root = document.documentElement;
+  const root = document.documentElement;
 
   root.style.setProperty("--primary", "#22402F");
   root.style.setProperty("--secondary", "#5A8C70");
@@ -84,10 +87,6 @@ export * from "./Popover";
 export { default as Subtitle } from "./Subtitle";
 export * from "./Subtitle";
 
-// Text
-export { default as Text } from "./Text";
-export * from "./Text";
-
 // Title
 export { default as Title } from "./Title";
 export * from "./Title";
@@ -127,6 +126,6 @@ export * from "./Form/DatePicker";
  * Util
  */
 
-export * from "./util/Loading";
+export { default as Loading } from "./Loading";
 
-export { default as Notification } from "./util/Notification";
+export { default as Notification } from "./Notification";

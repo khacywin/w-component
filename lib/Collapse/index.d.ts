@@ -4,7 +4,7 @@
  * @prop {JSX.Element[]} content - component
  * @prop {boolean} in - is show default
  */
-import React from 'react';
+import React from "react";
 export interface CollapseProps {
     heading: string;
     children: JSX.Element | string;

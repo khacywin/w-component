@@ -16,4 +16,3 @@ export interface ButtonProps extends PropsStyled {
 export default function ({ children, className, error, fnClick, normal, primary, success, type, warning, }: ButtonProps): JSX.Element;
 export { default as ButtonAction } from "./ButtonAction";
 export { default as ButtonLoadMore } from "./ButtonLoadMore";
-export declare const cssButton: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<PropsStyled, any>>;
