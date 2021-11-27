@@ -1,7 +1,7 @@
+import { s as small, l as light, P as P2, p as one } from './_lineOverflow-40abb42a.js';
+import { I as Icon } from './Icon-69b9e7b0.js';
 import React from 'react';
 import styled from 'styled-components';
-import Icon from 'components/atoms/Icon';
-import { h as small, p as light, a as P2, q as one } from './_lineOverflow-0f5e92ab.js';
 
 /**
  * Subtitle

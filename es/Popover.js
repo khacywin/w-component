@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { d as normal, n as normal$1, a as P2, o as P0, I as ImageTransparent, k as normal$2, l as P3, b as big } from './_lineOverflow-0f5e92ab.js';
+import { d as normal, n as normal$1, P as P2, k as P0, I as ImageTransparent, m as normal$2, o as P3, b as big } from './_lineOverflow-40abb42a.js';
 import styled from 'styled-components';
 import { t as transition } from './index-8505406e.js';
 import { u as useHandleDisplay } from './useHandleDisplay-fdfdebb5.js';
-import useHandlePositionPortal from 'hooks/useHandlePositionPortal';
+import { u as usePositionPortal } from './usePositionDialog-50994a2f.js';
 
 /**
  * Dropdown menu
@@ -20,7 +20,7 @@ var Popover = React.memo((props) => {
     const refMenu = useRef();
     const ref = useRef();
     const { isDisplay, onToggleDisplay } = useHandleDisplay(refMenu);
-    useHandlePositionPortal(refMenu, ref);
+    usePositionPortal(refMenu, ref);
     return (React.createElement(WrapPopover, null,
         React.createElement(Dropdown, { ref: ref, onClick: onToggleDisplay }, props.children),
         React.createElement(Popover$1, { ref: refMenu, full: !!props.full, position: props.position || "left", show: isDisplay },

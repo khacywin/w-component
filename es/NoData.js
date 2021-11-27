@@ -1,9 +1,8 @@
 import React from 'react';
-import _t from 'helps/language/_t';
 import styled from 'styled-components';
 
 function NoData({ children }) {
-    return React.createElement(Wrap, { className: 'no-data' }, children || _t('No data'));
+    return React.createElement(Wrap, { className: 'no-data' }, children || 'No data');
 }
 const Wrap = styled.div `
   text-align: center;

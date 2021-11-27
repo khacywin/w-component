@@ -1,4 +1,4 @@
-import { x as SemiFully, z as smaller, A as bigger, s as semiBold } from '../_lineOverflow-0f5e92ab.js';
+import { w as SemiFully, z as smaller, A as bigger, h as semiBold } from '../_lineOverflow-40abb42a.js';
 import styled, { css } from 'styled-components';
 import React from 'react';
 import { t as transition } from '../index-8505406e.js';

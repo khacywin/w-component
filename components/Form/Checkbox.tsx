@@ -9,8 +9,8 @@
 import React, { ChangeEvent, useCallback, useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import colorSVG from 'helps/colorSVG';
-import generatedId from 'helps/generatedId';
+import colorSVG from 'util/colorSVG';
+import generatedId from 'util/generatedId';
 import { rgba } from 'polished';
 import { zIndex } from 'css/base';
 

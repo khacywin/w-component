@@ -1,14 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import FormGroup from 'components/atoms/Form/_FormGroup';
-import { S as SelectListOption } from '../../Select.SelectListOption-ddf275b8.js';
-import generatedId from 'helps/generatedId';
-import '../../_lineOverflow-0f5e92ab.js';
+import { F as FormGroup } from '../../_FormGroup-a38ef777.js';
+import { S as SelectListOption } from '../../Select.SelectListOption-644eea6d.js';
+import { g as generatedId } from '../../generatedId-52e731a2.js';
+import '../../_lineOverflow-40abb42a.js';
 import 'styled-components';
-import 'components/atoms/Button/ButtonAction';
-import 'components/atoms/Dropdown';
-import 'components/atoms/Icon';
-import '../../InputStyle-cbf70b53.js';
-import 'helps/language/_t';
+import '../../index-8505406e.js';
+import '../../ButtonAction-3cf1adce.js';
+import '../../useHandleDisplay-fdfdebb5.js';
+import '../../index-85a40777.js';
+import '../../usePositionDropdown-f9b23788.js';
+import '../../Icon-69b9e7b0.js';
+import '../../InputStyle-d0c9db0e.js';
 
 /**
  *
@@ -20,7 +22,7 @@ import 'helps/language/_t';
  * @prop {boolean} isSearch
  */
 var index = React.memo((props) => {
-    const id = generatedId('input');
+    const id = generatedId("input");
     const [list, setList] = useState([]);
     const [valState, setValState] = useState();
     // Convert list options from children
@@ -28,13 +30,13 @@ var index = React.memo((props) => {
         const arrOptions = [];
         children === null || children === void 0 ? void 0 : children.forEach((item) => {
             if (item.length !== 0) {
-                if (item.type === 'option') {
+                if (item.type === "option") {
                     arrOptions.push({
                         value: item.props.value,
                         label: item.props.children,
                     });
                 }
-                else if (item.type === 'optgroup') {
+                else if (item.type === "optgroup") {
                     arrOptions.push({
                         group: {
                             label: item.props.label,
@@ -66,8 +68,8 @@ var index = React.memo((props) => {
         if (!arrOptions.length && !props.isMultiple)
             arrOptions = [
                 {
-                    value: '',
-                    label: '-- Select item',
+                    value: "",
+                    label: "-- Select item",
                 },
             ];
         setList(arrOptions);
@@ -78,7 +80,7 @@ var index = React.memo((props) => {
     useEffect(() => {
         props.defaultValue && setValState(props.defaultValue);
     }, [props.defaultValue]);
-    return (React.createElement(FormGroup, { style: props.style || {}, labelFocus: true, isFocus: true, label: props.label, id: id, className: 'w-select' + (props.isMultiple ? ' w-select-multiple' : '') },
+    return (React.createElement(FormGroup, { style: props.style || {}, labelFocus: true, isFocus: true, label: props.label, id: id, className: "w-select" + (props.isMultiple ? " w-select-multiple" : "") },
         React.createElement(SelectListOption, { isSearch: props.isSearch, list: [...list], isMultiple: props.isMultiple, fnSelect: handleSelect, value: valState })));
 });
 

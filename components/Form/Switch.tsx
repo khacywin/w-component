@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { borderRadius, fontSize, fontWeight } from "css/base";
 
-import generatedId from "helps/generatedId";
+import generatedId from "util/generatedId";
 import styled from "styled-components";
 
 const SwitchWrap = styled.div`

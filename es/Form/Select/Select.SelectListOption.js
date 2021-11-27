@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { a as P2, q as one, l as P3, n as normal } from '../../_lineOverflow-0f5e92ab.js';
-import ButtonAction from 'components/atoms/Button/ButtonAction';
-import Dropdown from 'components/atoms/Dropdown';
-import Icon from 'components/atoms/Icon';
-import { I as InputStyle } from '../../InputStyle-cbf70b53.js';
-import _t from 'helps/language/_t';
-import generatedId from 'helps/generatedId';
+import { P as P2, p as one, o as P3, n as normal } from '../../_lineOverflow-40abb42a.js';
+import { B as ButtonAction } from '../../ButtonAction-3cf1adce.js';
+import { D as Dropdown } from '../../index-85a40777.js';
+import { I as Icon } from '../../Icon-69b9e7b0.js';
+import { I as InputStyle } from '../../InputStyle-d0c9db0e.js';
+import { g as generatedId } from '../../generatedId-52e731a2.js';
 import styled from 'styled-components';
+import '../../index-8505406e.js';
+import '../../useHandleDisplay-fdfdebb5.js';
+import '../../usePositionDropdown-f9b23788.js';
 
 var Select_SelectListOption = React.memo((props) => {
     const [originList, setOriginList] = useState([]);
@@ -107,10 +109,10 @@ var Select_SelectListOption = React.memo((props) => {
     return (React.createElement(Dropdown, { full: true, clickOut: !props.isMultiple, className: "w-select-wrap", dropdown_menu: React.createElement(SelectLists, { className: "select-options" },
             props.isSearch && (React.createElement(SelectListSearch, { className: "w-select-options-search" },
                 React.createElement(Icon, { icon: "i-search" }),
-                React.createElement("input", { ref: refFormSearch, placeholder: _t("Search ..."), type: "text", autoFocus: true, onChange: (e) => search(e.target.value) }))),
+                React.createElement("input", { ref: refFormSearch, placeholder: "Search ...", type: "text", autoFocus: true, onChange: (e) => search(e.target.value) }))),
             React.createElement("ul", null, renderOptions(list))) },
         React.createElement(SelectListValue, { minHeight: props.isMultiple && 39, className: "w-select-value" },
-            props.value && props.value.length > 0 ? (renderLabel(props.value)) : (React.createElement(PlaceHolder, null, _t("Select"))),
+            props.value && props.value.length > 0 ? (renderLabel(props.value)) : (React.createElement(PlaceHolder, null, "Select")),
             React.createElement("i", { className: "i-arrow-down " }))));
 });
 const SelectListSearch = styled.div `

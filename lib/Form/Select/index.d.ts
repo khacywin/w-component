@@ -7,7 +7,7 @@
  * @prop {JSX.Element[]} children
  * @prop {boolean} isSearch
  */
-import React from 'react';
+import React from "react";
 interface Props {
     label?: string;
     name?: string;

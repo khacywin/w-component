@@ -1,4 +1,4 @@
-import { space, borderRadius, fontSize, fontWeight } from 'app/css/base';
+import { P as P2, n as normal, s as small, l as light } from './_lineOverflow-40abb42a.js';
 import styled, { css, keyframes } from 'styled-components';
 import React from 'react';
 
@@ -12,9 +12,9 @@ function ChartProcess (props) {
 const AmountTag = css `
   position: absolute;
   top: -30px;
-  ${space.P2.a};
-  ${borderRadius.normal};
-  ${fontSize.small};
+  ${P2.a};
+  ${normal};
+  ${small};
   right: 0;
   transform: translate(50%, 0);
 `;
@@ -35,7 +35,7 @@ const WrapChartProcess = styled.div `
   position: relative;
   background-color: var(--secondary);
   margin-top: 30px;
-  ${borderRadius.normal};
+  ${normal};
 
   &::before {
     ${AmountTag};
@@ -64,7 +64,7 @@ const ChartProcess$1 = styled.div `
   top: 0;
   height: 5px;
   width: ${(props) => props.percent}%;
-  ${borderRadius.normal};
+  ${normal};
   background-color: var(--success);
   animation: ${(props) => aniProcess(props.percent)} 1s linear;
 
@@ -82,8 +82,8 @@ const ChartProcess$1 = styled.div `
   }
 `;
 const ChartProcessTitle = styled.div `
-  ${fontWeight.light};
-  ${fontSize.small};
+  ${light};
+  ${small};
   text-align: center;
   user-select: none;
 `;

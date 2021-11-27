@@ -11,7 +11,7 @@ import { borderRadius, boxShadow, fontSize, opacity, space } from "css/base";
 import styled from "styled-components";
 import transition from "css/transition";
 import useHandleDisplay from "hooks/useHandleDisplay";
-import useHandlePositionPortal from "hooks/useHandlePositionPortal";
+import usePositionDialog from "hooks/usePositionDialog";
 
 const WrapPopover = styled.div`
   display: block;
@@ -37,7 +37,7 @@ export default React.memo((props: Props) => {
   const refMenu: any = useRef();
   const ref = useRef();
   const { isDisplay, onToggleDisplay } = useHandleDisplay(refMenu);
-  useHandlePositionPortal(refMenu, ref);
+  usePositionDialog(refMenu, ref);
 
   return (
     <WrapPopover>

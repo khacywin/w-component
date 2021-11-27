@@ -1,5 +1,5 @@
 import React, { useRef, useCallback } from 'react';
-import { a as P2, c as P1 } from '../_lineOverflow-0f5e92ab.js';
+import { P as P2, c as P1 } from '../_lineOverflow-40abb42a.js';
 import styled from 'styled-components';
 import { t as transition } from '../index-8505406e.js';
 import { u as useHandleDisplay } from '../useHandleDisplay-fdfdebb5.js';

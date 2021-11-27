@@ -18,7 +18,8 @@
       "css/*": ["./components/css/*"],
       "hooks/*": ["./components/_util/hooks/*"],
       "util/*": ["./components/_util/*"]
-    }
+    },
+    "allowJs": true
   },
   "include": [
     "components/**/*",

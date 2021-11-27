@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { a as P2, l as P3, S as SemiTransparent, k as normal } from '../_lineOverflow-0f5e92ab.js';
+import { P as P2, o as P3, S as SemiTransparent, m as normal } from '../_lineOverflow-40abb42a.js';
 import { B as ButtonNoStyle } from '../ButtonNoStyle-03feb3c9.js';
-import Icon from 'components/atoms/Icon';
-import _t from 'helps/language/_t';
+import { I as Icon } from '../Icon-69b9e7b0.js';
 import styled from 'styled-components';
 import { t as transition } from '../index-8505406e.js';
 
@@ -11,7 +10,7 @@ import { t as transition } from '../index-8505406e.js';
  */
 var Search = React.memo((props) => {
     const [isFocus, setIsFocus] = useState(false);
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState("");
     function focus() {
         setIsFocus(true);
     }
@@ -30,18 +29,18 @@ var Search = React.memo((props) => {
         e.preventDefault();
         props.fnSearch(value);
     }
-    return (React.createElement(Search$1, { dark: props.dark, focus: isFocus, onSubmit: submit, className: 'w-search' },
-        React.createElement("button", { type: 'submit' },
-            React.createElement(Icon, { color: props.dark ? '#fff' : '#1a1a1a', icon: 'i-search' })),
-        props.value !== undefined && props.onChange ? (React.createElement(Input, { value: props.value, onChange: props.onChange, placeholder: `${props.placeholder || _t('Search')}...`, onFocus: () => focus(), onBlur: (e) => blur(e) })) : (React.createElement(Input, { value: value, onChange: (e) => setValue(e.target.value), placeholder: `${props.placeholder || _t('Search')}...`, onFocus: () => focus(), onBlur: (e) => blur(e) }))));
+    return (React.createElement(Search$1, { dark: props.dark, focus: isFocus, onSubmit: submit, className: "w-search" },
+        React.createElement("button", { type: "submit" },
+            React.createElement(Icon, { color: props.dark ? "#fff" : "#1a1a1a", icon: "i-search" })),
+        props.value !== undefined && props.onChange ? (React.createElement(Input, { value: props.value, onChange: props.onChange, placeholder: `${props.placeholder || "Search..."}`, onFocus: () => focus(), onBlur: (e) => blur(e) })) : (React.createElement(Input, { value: value, onChange: (e) => setValue(e.target.value), placeholder: `${props.placeholder || "Search..."}`, onFocus: () => focus(), onBlur: (e) => blur(e) }))));
 });
 const Search$1 = styled.form `
   display: inline-flex;
   align-items: center;
-  border-bottom: 1px solid ${({ dark }) => (dark ? '#fff' : '#c7c7c7')};
+  border-bottom: 1px solid ${({ dark }) => (dark ? "#fff" : "#c7c7c7")};
   width: 200px;
   input {
-    color: ${({ dark }) => (dark ? '#fff' : 'initial')};
+    color: ${({ dark }) => (dark ? "#fff" : "initial")};
   }
 
   ${P2.y};

@@ -1,12 +1,12 @@
 import { _ as __rest } from '../tslib.es6-8e295639.js';
 import React, { useState, useCallback, useEffect } from 'react';
-import FormGroup from 'components/atoms/Form/_FormGroup';
-import { I as InputStyle } from '../InputStyle-cbf70b53.js';
+import { F as FormGroup } from '../_FormGroup-a38ef777.js';
+import { I as InputStyle } from '../InputStyle-d0c9db0e.js';
 import { A as App } from '../index.es-0abe6bb3.js';
-import _t from 'helps/language/_t';
-import generatedId from 'helps/generatedId';
-import { a as P2 } from '../_lineOverflow-0f5e92ab.js';
+import { g as generatedId } from '../generatedId-52e731a2.js';
+import { P as P2 } from '../_lineOverflow-40abb42a.js';
 import styled from 'styled-components';
+import '../index-8505406e.js';
 
 /**
  * @prop {string} label
@@ -24,7 +24,7 @@ var Input = React.memo((_a) => {
         e.persist();
         setError({
             type: 'manual',
-            message: e.currentTarget.required ? _t('Field is required !!') : '',
+            message: e.currentTarget.required ? 'Field is required !!' : '',
         });
     }, []);
     const onChange = useCallback((e) => {

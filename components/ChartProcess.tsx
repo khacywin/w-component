@@ -1,4 +1,4 @@
-import { borderRadius, fontSize, fontWeight, space } from "app/css/base";
+import { borderRadius, fontSize, fontWeight, space } from "css/base";
 import styled, { css, keyframes } from "styled-components";
 
 import React from "react";
