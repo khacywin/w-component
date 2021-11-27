@@ -1,15 +1,10 @@
 {
-  "name": "w-components",
+  "name": "w-component",
   "version": "1.0.0",
   "description": "React component",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "files": [
-    "dist",
-    "lib",
-    "es"
-  ],
-  "scripts": {
+   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
     "tsc": "tsc",
@@ -18,20 +13,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+git@github.com:khacywin/w-components.git"
+    "url": "git+git@github.com:khacywin/w-component.git"
   },
   "keywords": [
-    "color",
     "w-components",
     "wmtime",
-    "selector",
+    "library-ui",
+    "react",
     "khacy"
   ],
   "author": "khacy",
   "bugs": {
-    "url": "https://github.com/khacywin/w-components/issues"
+    "url": "https://github.com/khacywin/w-component/issues"
   },
-  "homepage": "https://github.com/khacywin/w-components#readme",
+  "homepage": "https://github.com/khacywin/w-component#readme",
   "license": "ISC",
   "peerDependencies": {
     "react": ">=17.0.0",
@@ -81,11 +76,11 @@
     "rollup-plugin-scss": "^2.6.1",
     "rollup-plugin-svg": "^2.0.0",
     "rollup-plugin-typescript2": "^0.27.3",
+    "styled-components": "^5.3.3",
     "ts-jest": "^27.0.5",
     "typescript": "^3.9.7",
     "w-color-selector": "^1.2.24",
-    "w-date": "^2.0.0",
-    "styled-components": "^5.3.3"
+    "w-date": "^2.0.0"
   },
   "resolutions": {
     "dayjs": "^1.10.7",
