@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React from "react";
 import logoImg from "assets/images/logo.svg";
 import logoText from "assets/images/logo-character.png";
@@ -21,13 +20,11 @@ interface Props {
 export default function ({ text }: Props) {
   return (
     <Logo>
-      <Link to="/">
-        {text ? (
-          <img src={logoText} alt="logo" />
-        ) : (
-          <img src={logoImg} alt="logo" />
-        )}
-      </Link>
+      {text ? (
+        <img src={logoText} alt="logo" />
+      ) : (
+        <img src={logoImg} alt="logo" />
+      )}
     </Logo>
   );
 }
