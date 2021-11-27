@@ -1,13 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { borderRadius, lineOverflow, space } from "css/base";
 
-import ButtonAction from "components/atoms/Button/ButtonAction";
-import Dropdown from "components/atoms/Dropdown";
-import Icon from "components/atoms/Icon";
+import ButtonAction from "components/Button/ButtonAction";
+import Dropdown from "components/Dropdown";
+import Icon from "components/Icon";
 import InputStyle from "css/elements/InputStyle";
 import { TSelectOption } from "util/type";
-import _t from "helps/language/_t";
-import generatedId from "helps/generatedId";
+import generatedId from "util/generatedId";
 import styled from "styled-components";
 
 interface IProps {
@@ -178,7 +177,7 @@ export default React.memo((props: IProps) => {
               <Icon icon="i-search" />
               <input
                 ref={refFormSearch}
-                placeholder={_t("Search ...")}
+                placeholder="Search ..."
                 type="text"
                 autoFocus={true}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -198,7 +197,7 @@ export default React.memo((props: IProps) => {
         {props.value && props.value.length > 0 ? (
           renderLabel(props.value)
         ) : (
-          <PlaceHolder>{_t("Select")}</PlaceHolder>
+          <PlaceHolder>Select</PlaceHolder>
         )}
         <i className="i-arrow-down " />
       </SelectListValue>

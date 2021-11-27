@@ -9,9 +9,9 @@ import React, { useEffect, useImperativeHandle, useState } from "react";
 import { borderRadius, boxShadow, fontSize, fontWeight, space } from "css/base";
 import styled, { css, keyframes } from "styled-components";
 
-import Button from "components/atoms/Button";
-import ButtonAction from "components/atoms/Button/ButtonAction";
-import Icon from "components/atoms/Icon";
+import Button from "components/Button";
+import ButtonAction from "components/Button/ButtonAction";
+import Icon from "components/Icon";
 import { createPortal } from "react-dom";
 
 interface PropsModalStyled {

@@ -11,12 +11,11 @@ import React, {
   useState,
 } from 'react';
 
-import FormGroup from 'components/atoms/Form/_FormGroup';
+import FormGroup from 'components/Form/_FormGroup';
 import InputStyle from 'css/elements/InputStyle';
 import { TInput } from 'util/type';
 import WColor from 'w-color-selector';
-import _t from 'helps/language/_t';
-import generatedId from 'helps/generatedId';
+import generatedId from 'util/generatedId';
 import { space } from 'css/base';
 import styled from 'styled-components';
 
@@ -59,7 +58,7 @@ export default React.memo(
 
         setError({
           type: 'manual',
-          message: e.currentTarget.required ? _t('Field is required !!') : '',
+          message: e.currentTarget.required ? 'Field is required !!' : '',
         });
       },
       []

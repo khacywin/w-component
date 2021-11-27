@@ -7,16 +7,16 @@ import React, {
 } from 'react';
 import { boxShadow, space } from 'css/base';
 
-import Calendar from 'components/atoms/Calendar';
-import Clock from 'components/atoms/Clock';
-import FormGroup from 'components/atoms/Form/_FormGroup';
+import Calendar from 'components/Calendar';
+import Clock from 'components/Clock';
+import FormGroup from 'components/Form/_FormGroup';
 import { IDatePickerProps } from '.';
-import Icon from 'components/atoms/Icon';
+import Icon from 'components/Icon';
 import InputStyle from 'css/elements/InputStyle';
-import Month from 'components/atoms/Calendar/Month';
-import Year from 'components/atoms/Calendar/Year';
+import Month from 'components/Calendar/Month';
+import Year from 'components/Calendar/Year';
 import dayjs from 'dayjs';
-import generatedId from 'helps/generatedId';
+import generatedId from 'util/generatedId';
 import styled from 'styled-components';
 import transition from 'css/transition';
 import useHandleDisplay from 'hooks/useHandleDisplay';

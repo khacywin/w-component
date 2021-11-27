@@ -2,14 +2,13 @@
  * @prop {(val: string) => void} fnSearch
  */
 
-import React, { useState } from 'react';
-import { fontSize, opacity, space } from 'css/base';
+import React, { useState } from "react";
+import { fontSize, opacity, space } from "css/base";
 
-import ButtonNoStyle from 'css/elements/ButtonNoStyle';
-import Icon from 'components/atoms/Icon';
-import _t from 'helps/language/_t';
-import styled from 'styled-components';
-import transition from 'css/transition';
+import ButtonNoStyle from "css/elements/ButtonNoStyle";
+import Icon from "components/Icon";
+import styled from "styled-components";
+import transition from "css/transition";
 
 interface Props {
   fnSearch: (val: string) => void;
@@ -21,7 +20,7 @@ interface Props {
 }
 export default React.memo((props: Props) => {
   const [isFocus, setIsFocus] = useState(false);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   function focus() {
     setIsFocus(true);
@@ -49,16 +48,16 @@ export default React.memo((props: Props) => {
       dark={props.dark}
       focus={isFocus}
       onSubmit={submit}
-      className='w-search'
+      className="w-search"
     >
-      <button type='submit'>
-        <Icon color={props.dark ? '#fff' : '#1a1a1a'} icon='i-search' />
+      <button type="submit">
+        <Icon color={props.dark ? "#fff" : "#1a1a1a"} icon="i-search" />
       </button>
       {props.value !== undefined && props.onChange ? (
         <Input
           value={props.value}
           onChange={props.onChange}
-          placeholder={`${props.placeholder || _t('Search')}...`}
+          placeholder={`${props.placeholder || "Search..."}`}
           onFocus={() => focus()}
           onBlur={(e: any) => blur(e)}
         />
@@ -66,7 +65,7 @@ export default React.memo((props: Props) => {
         <Input
           value={value}
           onChange={(e: any) => setValue(e.target.value)}
-          placeholder={`${props.placeholder || _t('Search')}...`}
+          placeholder={`${props.placeholder || "Search..."}`}
           onFocus={() => focus()}
           onBlur={(e: any) => blur(e)}
         />
@@ -82,10 +81,10 @@ interface PropsWrap {
 const Search = styled.form<PropsWrap>`
   display: inline-flex;
   align-items: center;
-  border-bottom: 1px solid ${({ dark }) => (dark ? '#fff' : '#c7c7c7')};
+  border-bottom: 1px solid ${({ dark }) => (dark ? "#fff" : "#c7c7c7")};
   width: 200px;
   input {
-    color: ${({ dark }) => (dark ? '#fff' : 'initial')};
+    color: ${({ dark }) => (dark ? "#fff" : "initial")};
   }
 
   ${space.P2.y};

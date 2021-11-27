@@ -8,12 +8,12 @@
  * @prop {boolean} isSearch
  */
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from "react";
 
-import FormGroup from 'components/atoms/Form/_FormGroup';
-import SelectListOption from './Select.SelectListOption';
-import { TSelectOption } from 'util/type';
-import generatedId from 'helps/generatedId';
+import FormGroup from "components/Form/_FormGroup";
+import SelectListOption from "./Select.SelectListOption";
+import { TSelectOption } from "util/type";
+import generatedId from "util/generatedId";
 
 interface Props {
   label?: string;
@@ -29,7 +29,7 @@ interface Props {
 }
 
 export default React.memo((props: Props) => {
-  const id = generatedId('input');
+  const id = generatedId("input");
   const [list, setList] = useState<TSelectOption[]>([]);
   const [valState, setValState] = useState<any>();
 
@@ -38,12 +38,12 @@ export default React.memo((props: Props) => {
     const arrOptions: TSelectOption[] = [];
     children?.forEach((item: any) => {
       if (item.length !== 0) {
-        if (item.type === 'option') {
+        if (item.type === "option") {
           arrOptions.push({
             value: item.props.value,
             label: item.props.children,
           });
-        } else if (item.type === 'optgroup') {
+        } else if (item.type === "optgroup") {
           arrOptions.push({
             group: {
               label: item.props.label,
@@ -84,8 +84,8 @@ export default React.memo((props: Props) => {
     if (!arrOptions.length && !props.isMultiple)
       arrOptions = [
         {
-          value: '',
-          label: '-- Select item',
+          value: "",
+          label: "-- Select item",
         },
       ];
     setList(arrOptions);
@@ -106,7 +106,7 @@ export default React.memo((props: Props) => {
       isFocus={true}
       label={props.label}
       id={id}
-      className={'w-select' + (props.isMultiple ? ' w-select-multiple' : '')}
+      className={"w-select" + (props.isMultiple ? " w-select-multiple" : "")}
     >
       <SelectListOption
         isSearch={props.isSearch}

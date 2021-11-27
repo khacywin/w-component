@@ -5,10 +5,12 @@
  * @prop {string} color
  * @prop {Direction} direction: row | column | row-reserve | column-reserve
  */
+
+import { fontSize, fontWeight, lineOverflow, space } from 'css/base';
+
+import Icon from 'components/Icon';
 import React from 'react';
 import styled from 'styled-components';
-import Icon from 'components/atoms/Icon';
-import { fontSize, fontWeight, space, lineOverflow } from 'css/base';
 
 type Direction = 'row' | 'column' | 'row-reverse' | 'column-revere';
 
