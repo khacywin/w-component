@@ -1,17 +1,17 @@
 import React, { HTMLAttributes, useCallback, useEffect, useRef } from "react";
 
-import { IObject } from "components/util/type";
+import { IObject } from "util/type";
 
 /**
  * HOOK FORM
  */
-export interface UserForm {
+export interface IUserForm {
   ref: React.MutableRefObject<IObject>;
   // setValues?: (value: IObject) => void,
   // setValue?: (key: string, value: any) => void,
   getValues?: () => IObject;
 }
-export function useForm(): UserForm {
+export function useForm(): IUserForm {
   const ref = useRef<IObject>({});
 
   const getValues = useCallback(() => {
@@ -34,9 +34,9 @@ export function useForm(): UserForm {
 /**
  * COMPONENT FORM
  */
-export interface FormRefProps extends HTMLAttributes<HTMLFormElement> {
+export interface IFormRefProps extends HTMLAttributes<HTMLFormElement> {
   children: JSX.Element[];
-  form: UserForm;
+  form: IUserForm;
   onFinish?: (data: IObject) => void;
 }
 export default function Form({
@@ -45,7 +45,7 @@ export default function Form({
   onChange,
   onFinish,
   ...props
-}: FormRefProps) {
+}: IFormRefProps) {
   // Change form
   const handleChangeForm = (name?: string) => (e: any) => {
     const _name = name || e.target.name;

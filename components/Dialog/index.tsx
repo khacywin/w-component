@@ -4,19 +4,20 @@ import React, {
   useImperativeHandle,
   useRef,
   useState,
-} from 'react';
+} from "react";
 
-import { TPosition } from 'components/util/type';
-import { createPortal } from 'react-dom';
-import useHandleDisplay from 'components/util/hooks/useHandleDisplay';
-import usePositionDialog from 'components/util/hooks/usePositionDialog';
+import { TPosition } from "util/type";
+import { createPortal } from "react-dom";
+import styled from "styled-components";
+import useHandleDisplay from "hooks/useHandleDisplay";
+import usePositionDialog from "hooks/usePositionDialog";
 
 export type TRefDialog = {
   show: () => void;
   hide: () => void;
 } & HTMLBaseElement;
 
-export interface DialogProps {
+interface IProps {
   children: JSX.Element;
   clickOut?: boolean;
   position?: TPosition[];
@@ -31,19 +32,26 @@ function DialogWrap({
   setIsShow,
   refParent,
   setIsShowed,
-}: DialogProps & { setIsShowed: (...arg: any) => void }) {
+}: IProps & { setIsShowed: (...arg: any) => void }) {
   const refContent = useRef<HTMLDivElement>(null);
   const refIsShowed = useRef(false);
-  const { isDisplay, show, hide } = useHandleDisplay<HTMLDivElement>(refContent, clickOut);
+  const { isDisplay, show, hide } = useHandleDisplay<HTMLDivElement>(
+    refContent,
+    clickOut
+  );
 
-  const { handlePosition } = usePositionDialog<HTMLDivElement>(refContent, refParent, {
-    position: position || [],
-  });
+  const { handlePosition } = usePositionDialog<HTMLDivElement>(
+    refContent,
+    refParent,
+    {
+      position: position || [],
+    }
+  );
 
   useEffect(() => {
     let _hide: any;
 
-    /** 
+    /**
      * Make animation when dialog hide
      */
     if (!isDisplay) {
@@ -62,7 +70,7 @@ function DialogWrap({
 
       // Set timeout waiting handle position, to show dialog
       setTimeout(() => {
-        refContent.current.style.opacity = '1';
+        refContent.current.style.opacity = "1";
       }, 10);
     }
   }, [handlePosition, isDisplay]);
@@ -83,15 +91,15 @@ function DialogWrap({
   return (
     isDisplay &&
     createPortal(
-      <div className='w-dialog dialog-mark'>
-        <div className='w-dialog-content' ref={refContent}>{children}</div>
-      </div>,
-      document.getElementById('modal-root')
+      <Wrap className="dialog-mark">
+        <WrapContent ref={refContent}>{children}</WrapContent>
+      </Wrap>,
+      document.getElementById("modal-root")
     )
   );
 }
 
-export default React.forwardRef((props: DialogProps, ref: any) => {
+export default React.forwardRef((props: IProps, ref: any) => {
   const [isShowed, setIsShowed] = useState(false);
 
   useImperativeHandle(ref, () => ({
@@ -106,3 +114,16 @@ export default React.forwardRef((props: DialogProps, ref: any) => {
 
   return isShowed && <DialogWrap setIsShowed={setIsShowed} {...props} />;
 });
+
+const Wrap = styled.div`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+`;
+
+const WrapContent = styled.div`
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+`;

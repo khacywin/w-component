@@ -1,6 +1,3 @@
-import "./__css__/index.scss";
-import "./index-style-only";
-
 if (document) {
   const root = document.documentElement;
 
@@ -38,10 +35,6 @@ export * from "./Collapse";
 // Dialog
 export { default as Dialog } from "./Dialog";
 export * from "./Dialog";
-
-// Drag
-export { default as Drag } from "./Drag";
-export * from "./Drag";
 
 // Dropdown
 export { default as Dropdown } from "./Dropdown";
@@ -126,6 +119,6 @@ export * from "./Form/DatePicker";
  * Util
  */
 
-export { default as Loading } from "./Loading";
+export * from "./Loading";
 
-export { default as Notification } from "./Notification";
+export * from "./Notification";

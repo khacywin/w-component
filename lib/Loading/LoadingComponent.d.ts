@@ -1,6 +1,7 @@
 /// <reference types="react" />
-export interface LoadingComponentProps {
+interface Props {
     width?: string;
     height: string;
 }
-export default function LoadingComponent({ width, height, }: LoadingComponentProps): JSX.Element;
+export default function LoadingComponent({ width, height }: Props): JSX.Element;
+export {};

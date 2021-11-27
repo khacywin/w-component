@@ -8,7 +8,7 @@
  * @prop {boolean} isSearch
  */
 import React from 'react';
-export interface SelectProps {
+interface Props {
     label?: string;
     name?: string;
     request?: boolean;
@@ -20,5 +20,5 @@ export interface SelectProps {
     value?: any;
     fnChange?: (val: any) => void;
 }
-declare const _default: React.MemoExoticComponent<(props: SelectProps) => JSX.Element>;
+declare const _default: React.MemoExoticComponent<(props: Props) => JSX.Element>;
 export default _default;

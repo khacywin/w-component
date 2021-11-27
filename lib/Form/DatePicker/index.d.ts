@@ -1,8 +1,9 @@
 import React from 'react';
-import { WDate } from 'components/util/type';
-export interface DatePickerProps {
+import { WDate } from 'util/type';
+import wdate from 'w-date';
+export interface IDatePickerProps {
     fnChange?: (val: string) => void;
-    format?: string;
+    format?: wdate.formatDate;
     label?: string;
     name?: string;
     picker?: 'year' | 'month' | 'week' | 'date' | 'time' | 'date-time';
@@ -13,4 +14,4 @@ export interface DatePickerProps {
     defaultValue?: any;
     disableItem?: (date: any) => boolean;
 }
-export default function (props: DatePickerProps): JSX.Element;
+export default function (props: IDatePickerProps): JSX.Element;

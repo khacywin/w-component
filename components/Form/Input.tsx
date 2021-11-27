@@ -3,7 +3,6 @@
  * @prop {'text' | 'number' | 'email' | 'password'} type
  */
 
-import FormGroup, { ErrorFormGroup } from './_FormGroup';
 import React, {
   ChangeEvent,
   SyntheticEvent,
@@ -12,13 +11,17 @@ import React, {
   useState,
 } from 'react';
 
-import { TInput } from 'components/util/type';
+import FormGroup from 'components/atoms/Form/_FormGroup';
+import InputStyle from 'css/elements/InputStyle';
+import { TInput } from 'util/type';
 import WColor from 'w-color-selector';
-import _t from 'components/util/helps/_t';
-import generatedId from 'components/util/helps/generateKey';
+import _t from 'helps/language/_t';
+import generatedId from 'helps/generatedId';
+import { space } from 'css/base';
+import styled from 'styled-components';
 
 /** Interface */
-export interface InputProps {
+export interface Props {
   defaultValue?: string | number;
   disabled?: boolean;
   fnChange?: (val: any) => void;
@@ -43,9 +46,9 @@ export default React.memo(
     type = 'text',
     value = '',
     ...props
-  }: InputProps) => {
+  }: Props) => {
     const id = generatedId('input');
-    const [error, setError] = useState<ErrorFormGroup | undefined>();
+    const [error, setError] = useState<any>();
     const [color, setColor] = useState('');
     const [valState, setValState] = useState('');
 
@@ -86,7 +89,7 @@ export default React.memo(
     const inputs = new Map()
       .set(
         'textarea',
-        <textarea
+        <TextareaControl
           className='w-textarea'
           name={name}
           placeholder={placeholder}
@@ -100,7 +103,7 @@ export default React.memo(
       )
       .set(
         'text',
-        <input
+        <InputControl
           name={name}
           className='w-input'
           type='text'
@@ -116,7 +119,7 @@ export default React.memo(
       )
       .set(
         'password',
-        <input
+        <InputControl
           name={name}
           className='w-input'
           type='password'
@@ -132,7 +135,7 @@ export default React.memo(
       )
       .set(
         'email',
-        <input
+        <InputControl
           name={name}
           className='w-input'
           type='email'
@@ -148,7 +151,7 @@ export default React.memo(
       )
       .set(
         'number',
-        <input
+        <InputControl
           name={name}
           className='w-input'
           type='number'
@@ -194,3 +197,14 @@ export default React.memo(
     );
   }
 );
+
+/** Style */
+const InputControl = styled.input`
+  ${InputStyle};
+`;
+
+const TextareaControl = styled.textarea`
+  ${InputStyle};
+  ${space.P2.a};
+  resize: none;
+`;

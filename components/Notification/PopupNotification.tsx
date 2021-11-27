@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from "react";
 
 import Button from "components/Button";
 import Modal from "components/Modal";
+import styled from "styled-components";
 
 interface IProps {
   id: number;
@@ -31,28 +32,20 @@ export default React.memo(
         new Map()
           .set(
             "normal",
-            <div
-              className={`w-notification-direction ${
-                isLoading ? "disable" : ""
-              }`}
-            >
+            <WrapButton disable={isLoading}>
               <Button fnClick={_handleCloseNotification(fnOk)}>OK</Button>
-            </div>
+            </WrapButton>
           )
           .set(
             "yes/no",
-            <div
-              className={`w-notification-direction ${
-                isLoading ? "disable" : ""
-              }`}
-            >
+            <WrapButton disable={isLoading}>
               <Button error fnClick={_handleCloseNotification(fnYes)}>
                 Yes
               </Button>
               <Button normal fnClick={_handleCloseNotification(fnNo)}>
                 No
               </Button>
-            </div>
+            </WrapButton>
           ),
       [_handleCloseNotification, fnNo, fnOk, fnYes, isLoading]
     );
@@ -65,11 +58,36 @@ export default React.memo(
         noFooter
         heading={title}
       >
-        <div className="w-notification-popup">
+        <Wrap>
           <p>{message}</p>
           {buttonType.get(type)}
-        </div>
+        </Wrap>
       </Modal>
     );
   }
 );
+
+const Wrap = styled.div`
+  padding-bottom: 20px;
+
+  p {
+    margin: 0 auto 12px;
+    max-width: 300px;
+    text-align: center;
+  }
+`;
+
+const WrapButton = styled.div<{ disable: boolean }>`
+  display: flex;
+  justify-content: center;
+
+  ${({ disable }) =>
+    disable &&
+    `
+    button: {
+      user-select: none;
+      pointer-events: none;
+      opacity: .5;
+    }
+  `};
+`;

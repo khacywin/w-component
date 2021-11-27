@@ -1,22 +1,22 @@
 import React, { HTMLAttributes } from "react";
-import { IObject } from "components/util/type";
+import { IObject } from "util/type";
 /**
  * HOOK FORM
  */
-export interface UserForm {
+export interface IUserForm {
     ref: React.MutableRefObject<IObject>;
     getValues?: () => IObject;
 }
-export declare function useForm(): UserForm;
+export declare function useForm(): IUserForm;
 /**
  * COMPONENT FORM
  */
-export interface FormRefProps extends HTMLAttributes<HTMLFormElement> {
+export interface IFormRefProps extends HTMLAttributes<HTMLFormElement> {
     children: JSX.Element[];
-    form: UserForm;
+    form: IUserForm;
     onFinish?: (data: IObject) => void;
 }
-export default function Form({ children, form: formRef, onChange, onFinish, ...props }: FormRefProps): JSX.Element;
+export default function Form({ children, form: formRef, onChange, onFinish, ...props }: IFormRefProps): JSX.Element;
 /**
  * COMPONENT FORM CONTROL
  */

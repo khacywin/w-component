@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { borderRadius, lineOverflow, space } from "css/base";
 
-import ButtonAction from "components/Button/ButtonAction";
-import Dropdown from "components/Dropdown";
-import Icon from "components/Icon";
-import { TSelectOption } from "components/util/type";
-import _t from "components/util/helps/_t";
-import generatedId from "components/util/helps/generateKey";
+import ButtonAction from "components/atoms/Button/ButtonAction";
+import Dropdown from "components/atoms/Dropdown";
+import Icon from "components/atoms/Icon";
+import InputStyle from "css/elements/InputStyle";
+import { TSelectOption } from "util/type";
+import _t from "helps/language/_t";
+import generatedId from "helps/generatedId";
+import styled from "styled-components";
 
 interface IProps {
   list: TSelectOption[];
@@ -50,7 +53,7 @@ export default React.memo((props: IProps) => {
         return val.map(
           (item: any, key: number) =>
             item && (
-              <li className="w-select-item" key={key}>
+              <Item key={key}>
                 <span
                   onClick={(e: React.MouseEvent) => {
                     e.stopPropagation();
@@ -71,7 +74,7 @@ export default React.memo((props: IProps) => {
                 >
                   <Icon small icon="i-close" />
                 </ButtonAction>
-              </li>
+              </Item>
             )
         );
       } else if (typeof val === "string") {
@@ -141,12 +144,12 @@ export default React.memo((props: IProps) => {
       return listOptions.map((option: TSelectOption, index: any) => {
         if (option.group) {
           return (
-            <div key={index} className="w-select-group">
+            <SelectGroup key={index} className="select-group">
               <div>
                 <strong>{option.group.label}</strong>
               </div>
               <ul>{renderOptions(option.group.options)}</ul>
-            </div>
+            </SelectGroup>
           );
         } else
           return (
@@ -169,12 +172,11 @@ export default React.memo((props: IProps) => {
       clickOut={!props.isMultiple}
       className="w-select-wrap"
       dropdown_menu={
-        <div className="w-select-selection select-options">
+        <SelectLists className="select-options">
           {props.isSearch && (
-            <div className="w-select-search">
+            <SelectListSearch className="w-select-options-search">
               <Icon icon="i-search" />
               <input
-                className="w-input"
                 ref={refFormSearch}
                 placeholder={_t("Search ...")}
                 type="text"
@@ -183,22 +185,116 @@ export default React.memo((props: IProps) => {
                   search(e.target.value)
                 }
               />
-            </div>
+            </SelectListSearch>
           )}
           <ul>{renderOptions(list)}</ul>
-        </div>
+        </SelectLists>
       }
     >
-      <div
-        className="w-select-value line-overflow-1"
+      <SelectListValue
+        minHeight={props.isMultiple && 39}
+        className="w-select-value"
       >
         {props.value && props.value.length > 0 ? (
           renderLabel(props.value)
         ) : (
-          <div className="w-select-placeholder">{_t("Select")}</div>
+          <PlaceHolder>{_t("Select")}</PlaceHolder>
         )}
         <i className="i-arrow-down " />
-      </div>
+      </SelectListValue>
     </Dropdown>
   );
 });
+
+const SelectListSearch = styled.div`
+  ${space.P2.a};
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  input {
+    ${InputStyle};
+  }
+`;
+
+const SelectListValue = styled.div<{ minHeight: number }>`
+  cursor: pointer;
+  user-select: none;
+  line-height: 20px;
+  position: relative;
+  ${({ minHeight }) => minHeight && `min-height: ${minHeight}px;`};
+  ${space.P2.a};
+  ${lineOverflow.one};
+
+  & > i {
+    position: absolute;
+    right: 5px;
+    bottom: 7px;
+  }
+`;
+
+const SelectLists = styled.div`
+  background-color: var(--backgroundContent);
+  width: 100%;
+  overflow-y: hidden;
+  ul {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 400px;
+    ::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    li {
+      width: 100%;
+      list-style: none;
+      cursor: pointer;
+      ${space.P3.a};
+      ${borderRadius.normal};
+
+      &:hover {
+        background-color: var(--backgroundOpacity);
+      }
+    }
+  }
+`;
+
+const SelectGroup = styled.div`
+  margin-top: 5px;
+
+  strong {
+    user-select: none;
+    padding-left: 8px;
+  }
+
+  ul {
+    padding-left: 7px;
+  }
+`;
+
+const Item = styled.li`
+  display: inline-flex;
+  background-color: var(--backgroundOpacity);
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  align-items: center;
+
+  button {
+    opacity: 0;
+    width: 0;
+    padding: 3px 0;
+  }
+
+  &:hover button {
+    opacity: 1;
+    width: initial;
+    margin-left: 2px;
+    padding: 3px;
+  }
+`;
+
+const PlaceHolder = styled.div`
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.6;
+`;

@@ -10,13 +10,12 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 
-import FormGroup from '../_FormGroup';
+import FormGroup from 'components/atoms/Form/_FormGroup';
 import SelectListOption from './Select.SelectListOption';
-import { TSelectOption } from 'components/util/type';
-import _t from 'components/util/helps/_t';
-import generatedId from 'components/util/helps/generateKey';
+import { TSelectOption } from 'util/type';
+import generatedId from 'helps/generatedId';
 
-export interface SelectProps {
+interface Props {
   label?: string;
   name?: string;
   request?: boolean;
@@ -29,7 +28,7 @@ export interface SelectProps {
   fnChange?: (val: any) => void;
 }
 
-export default React.memo((props: SelectProps) => {
+export default React.memo((props: Props) => {
   const id = generatedId('input');
   const [list, setList] = useState<TSelectOption[]>([]);
   const [valState, setValState] = useState<any>();
@@ -86,7 +85,7 @@ export default React.memo((props: SelectProps) => {
       arrOptions = [
         {
           value: '',
-          label: _t('-- Select item'),
+          label: '-- Select item',
         },
       ];
     setList(arrOptions);

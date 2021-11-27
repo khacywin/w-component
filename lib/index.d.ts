@@ -1,5 +1,3 @@
-import './__css__/index.scss';
-import './index-style-only';
 export { default as Button } from "./Button";
 export { default as ButtonAction } from "./Button/ButtonAction";
 export { default as ButtonLoadMore } from "./Button/ButtonLoadMore";
@@ -10,8 +8,6 @@ export { default as Collapse } from "./Collapse";
 export * from "./Collapse";
 export { default as Dialog } from "./Dialog";
 export * from "./Dialog";
-export { default as Drag } from "./Drag";
-export * from "./Drag";
 export { default as Dropdown } from "./Dropdown";
 export * from "./Dropdown";
 export { default as Avatar } from "./Avatar";
@@ -61,4 +57,4 @@ export * from "./Form/DatePicker";
  * Util
  */
 export * from "./Loading";
-export { default as Notification } from "./Notification";
+export * from "./Notification";

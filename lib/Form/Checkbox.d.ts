@@ -5,8 +5,8 @@
  * @props fnChanged: function
  * @props labelChecked
  */
-import React from "react";
-export interface CheckboxProps {
+import React from 'react';
+interface Props {
     color?: string;
     labelChecked?: string[];
     label?: string | JSX.Element;
@@ -16,5 +16,5 @@ export interface CheckboxProps {
     className?: string;
     fnChange?: (checked: boolean) => void;
 }
-declare const _default: React.MemoExoticComponent<(props: CheckboxProps) => JSX.Element>;
+declare const _default: React.MemoExoticComponent<(props: Props) => JSX.Element>;
 export default _default;

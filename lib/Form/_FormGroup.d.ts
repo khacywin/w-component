@@ -17,3 +17,7 @@ interface Props {
 }
 declare const _default: React.MemoExoticComponent<(props: Props) => JSX.Element>;
 export default _default;
+export declare const cssFocus: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<{
+    isInputTitle?: boolean;
+}, any>>;
+export declare const LabelCss: import("styled-components").FlattenSimpleInterpolation;

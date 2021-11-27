@@ -1,7 +1,7 @@
 import React from "react";
-import { TPositionLabel } from "components/util/type";
+import { TPositionLabel } from "util/type";
 declare type TypeButton = "submit" | "button";
-export interface ButtonActionProps {
+interface Props {
     children: any;
     label?: string;
     isLabel?: "on" | "off";
@@ -16,7 +16,7 @@ export interface ButtonActionProps {
     type?: TypeButton;
     className?: string;
 }
-declare const _default: React.ForwardRefExoticComponent<ButtonActionProps & React.RefAttributes<HTMLButtonElement>>;
+declare const _default: React.ForwardRefExoticComponent<Props & React.RefAttributes<HTMLButtonElement>>;
 /**
  * ButtonAction
  * @property {any} children

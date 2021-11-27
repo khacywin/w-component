@@ -1,7 +1,7 @@
 /// <reference types="react" />
-export interface YearPickerProps {
+export interface IYearPickerProps {
     selected?: string;
     fnSelected?: (year: string) => void;
     disableItem?: (date: any) => boolean;
 }
-export default function ({ selected, fnSelected, disableItem, }: YearPickerProps): JSX.Element;
+export default function ({ selected, fnSelected, disableItem, }: IYearPickerProps): JSX.Element;

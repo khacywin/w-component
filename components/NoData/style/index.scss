@@ -1,8 +1,0 @@
-@import './../../__css__/mixin.scss';
-
-.w-no-data {
-  @include align("padding", "a", 5);
-  @include opacity("normal");
-  text-align: center;
-  user-select: none;
-}

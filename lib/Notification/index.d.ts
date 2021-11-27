@@ -19,4 +19,3 @@ interface PropsComponent extends PropsWrp {
 }
 declare const _default: React.MemoExoticComponent<(props: PropsComponent) => JSX.Element>;
 export default _default;
-export { default as PopupNotification } from "./PopupNotification";

@@ -1,15 +1,17 @@
-import React, { useCallback, useMemo } from 'react';
+import { LabelCss, cssFocus } from "./_FormGroup";
+import React, { useCallback, useMemo } from "react";
 
-import DatePicker from './DatePicker';
-import Icon from 'components/Icon';
-import { WDate } from 'components/util/type';
-import dayjs from 'dayjs';
+import DatePicker from "./DatePicker";
+import Icon from "../Icon";
+import { WDate } from "util/type";
+import dayjs from "dayjs";
+import styled from "styled-components";
 
-export interface DateRangeProps {
+export interface IDateRangeProps {
   fnChange?: (val: any) => void;
   label?: string;
   name?: string;
-  picker?: 'year' | 'month' | 'date';
+  picker?: "year" | "month" | "date";
   defaultValue?: {
     from?: WDate;
     to?: WDate;
@@ -23,53 +25,59 @@ export interface DateRangeProps {
 export default function DateRange({
   fnChange,
   label,
-  picker = 'date',
+  picker = "date",
   value = {},
   defaultValue = {},
-}: DateRangeProps) {
+}: IDateRangeProps) {
   const format: any = useMemo(() => {
     switch (picker) {
-      case 'date':
-        return 'DD MMM, YYYY';
+      case "date":
+        return "DD MMM, YYYY";
 
-      case 'month':
-        return 'MMM, YYYY';
+      case "month":
+        return "MMM, YYYY";
 
-      case 'year':
-        return 'YYYY';
+      case "year":
+        return "YYYY";
 
       default:
         break;
     }
 
-    return 'DD MMM, YYYY';
+    return "DD MMM, YYYY";
   }, [picker]);
 
-  const disablePrevious = useCallback((date: string | Date) => {
-    const _date = dayjs(date);
+  const disablePrevious = useCallback(
+    (date: string | Date) => {
+      const _date = dayjs(date);
 
-    return value.from ?
-      _date.isBefore(dayjs(value.from)) :
-      defaultValue.from ?
-        _date.isBefore(dayjs(defaultValue.from))
-        : false
-  }, [defaultValue.from, value.from]);
+      return value.from
+        ? _date.isBefore(dayjs(value.from))
+        : defaultValue.from
+        ? _date.isBefore(dayjs(defaultValue.from))
+        : false;
+    },
+    [defaultValue.from, value.from]
+  );
 
-  const disableNext = useCallback((date: string | Date) => {
-    const _date = dayjs(date);
+  const disableNext = useCallback(
+    (date: string | Date) => {
+      const _date = dayjs(date);
 
-    return value.to ?
-      _date.isAfter(dayjs(value.to)) :
-      defaultValue.to ?
-        _date.isAfter(dayjs(defaultValue.to))
-        : false
-  }, [defaultValue.to, value.to]);
+      return value.to
+        ? _date.isAfter(dayjs(value.to))
+        : defaultValue.to
+        ? _date.isAfter(dayjs(defaultValue.to))
+        : false;
+    },
+    [defaultValue.to, value.to]
+  );
 
   const onChangeFrom = (_val: string) => {
     let valTemp: any = _val;
     if (disableNext(_val)) valTemp = value.to;
 
-    fnChange?.({
+    fnChange({
       from: valTemp,
       to: value.to,
     });
@@ -79,15 +87,15 @@ export default function DateRange({
     let valTemp: any = _val;
     if (disablePrevious(_val)) valTemp = value.from;
 
-    fnChange?.({
+    fnChange({
       from: value.from,
       to: valTemp,
     });
   };
 
   return (
-    <div className='w-date-range'>
-      <div className='w-form-focus w-form-label'>{label}</div>
+    <Wrap className="date-range">
+      <Label>{label}</Label>
       <DatePicker
         picker={picker}
         value={value.from}
@@ -98,7 +106,7 @@ export default function DateRange({
         disableItem={disableNext}
       />
       <span>
-        <Icon icon='i-transfer' />
+        <Icon icon="i-transfer" />
       </span>
       <DatePicker
         picker={picker}
@@ -109,6 +117,27 @@ export default function DateRange({
         isRemove={false}
         disableItem={disablePrevious}
       />
-    </div>
+    </Wrap>
   );
 }
+
+const Wrap = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  position: relative;
+
+  & > div {
+    width: calc(50% - 20px);
+  }
+
+  .form-group {
+    margin-top: 0;
+  }
+`;
+
+const Label = styled.div`
+  ${LabelCss};
+  ${cssFocus};
+`;

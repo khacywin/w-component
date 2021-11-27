@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-import ButtonAction from "components/Button/ButtonAction";
-import Icon from "components/Icon";
+import ButtonAction from "../Button/ButtonAction";
+import Icon from "../Icon";
+import styled from "styled-components";
 
-export interface YearPickerProps {
+export interface IYearPickerProps {
   selected?: string;
   fnSelected?: (year: string) => void;
   disableItem?: (date: any) => boolean;
@@ -13,7 +14,7 @@ export default function ({
   selected,
   fnSelected,
   disableItem,
-}: YearPickerProps) {
+}: IYearPickerProps) {
   const [list, setList] = useState<number[]>([]);
 
   const _onSelected = useCallback(
@@ -47,29 +48,77 @@ export default function ({
   }, [selected]);
 
   return (
-    <div className="w-calendar-year">
+    <Wrap>
       <ButtonAction action={_setPreviousListYear}>
         <Icon icon="i-arrow-up" />
       </ButtonAction>
 
-      <div className="w-calendar-year-list">
+      <List>
         {list.map((year, idx) => (
-          <li
-            className={`w-calendar-year-item
-              ${year === +selected ? "active" : ""}
-              ${disableItem?.(year.toString()) ? "disable" : ""}
-            `}
+          <Item
+            active={year === +selected}
             key={idx}
             onClick={_onSelected(year)}
+            disable={disableItem?.(year.toString())}
           >
             {year}
-          </li>
+          </Item>
         ))}
-      </div>
+      </List>
 
       <ButtonAction action={_setNextListYear}>
         <Icon icon="i-arrow-down" />
       </ButtonAction>
-    </div>
+    </Wrap>
   );
 }
+
+const Wrap = styled.div`
+  width: 150px;
+
+  & > button {
+    width: 100%;
+  }
+`;
+
+const List = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+interface IPropsItem {
+  active: boolean;
+  disable: boolean;
+}
+const Item = styled.li<IPropsItem>`
+  border-radius: 9999px;
+  cursor: pointer;
+  list-style-type: none;
+  padding: 5px;
+  text-align: center;
+  width: 33.33333%;
+
+  ${({ active }) =>
+    active &&
+    `
+    background-color: var(--primary);
+    color: #fff;
+  `}
+
+  &:last-of-type, &:first-of-type {
+    opacity: 0.6;
+  }
+
+  &:hover {
+    background-color: var(--backgroundOpacity);
+  }
+
+  ${({ disable }) =>
+    disable &&
+    `
+    opacity: 0.2 !important;
+    user-select: none;
+    pointer-events: none;
+  `}
+`;

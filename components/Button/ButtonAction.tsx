@@ -1,11 +1,15 @@
-import React, { RefObject, useCallback, useRef } from "react";
+import React, { RefObject, useCallback } from "react";
 
-import { TPositionLabel } from "components/util/type";
-import useHandleDisplay from "components/util/hooks/useHandleDisplay";
+import { TPositionLabel } from "util/type";
+import { space } from "css/base";
+import styled from "styled-components";
+import transition from "css/transition";
+import useHandleDisplay from "hooks/useHandleDisplay";
+import { useRef } from "react";
 
 type TypeButton = "submit" | "button";
 
-export interface ButtonActionProps {
+interface Props {
   children: any;
   label?: string;
   isLabel?: "on" | "off";
@@ -31,7 +35,7 @@ export interface ButtonActionProps {
  * @property {void} onClick - optional
  */
 export default React.forwardRef(
-  (props: ButtonActionProps, ref: RefObject<HTMLButtonElement>) => {
+  (props: Props, ref: RefObject<HTMLButtonElement>) => {
     const refButton = useRef<HTMLButtonElement>(null);
 
     const { isDisplay: isActive, show } = useHandleDisplay(
@@ -50,13 +54,10 @@ export default React.forwardRef(
     );
 
     return (
-      <button
+      <WrapButtonAction
         ref={ref || refButton}
-        className={`w-button 
-                    w-button-action 
-                    ${props.className || ""} 
-                    ${props.isActive || isActive ? "w-button-action-active" : ""}`
-                  }
+        className={"button-action " + (props.className || "")}
+        active={props.isActive || isActive}
         type={props.type || "button"}
         aria-label={props.label}
         data-label-position={props.positionLabel}
@@ -64,7 +65,52 @@ export default React.forwardRef(
         onClick={_preventDefault}
       >
         {props.children}
-      </button>
+      </WrapButtonAction>
     );
   }
 );
+
+interface PropsStyled {
+  active: boolean;
+}
+const WrapButtonAction = styled.button<PropsStyled>`
+  ${space.P2.a};
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+
+  & > * {
+    /* ${space.P1.x}; */
+    user-select: none;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: var(--backgroundOpacity);
+    top: 0;
+    left: 0;
+    border-radius: 9999px;
+    z-index: -1;
+    transform: ${(props) => (props.active ? `scale(1)` : `scale(0)`)};
+    ${transition.def};
+  }
+
+  &:hover {
+    &::before {
+      transform: scale(1);
+    }
+  }
+`;

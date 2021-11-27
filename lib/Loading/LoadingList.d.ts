@@ -1,5 +1,6 @@
 /// <reference types="react" />
-export interface LoadingListProps {
+interface Props {
     height: string;
 }
-export default function (props: LoadingListProps): JSX.Element;
+export default function (props: Props): JSX.Element;
+export {};

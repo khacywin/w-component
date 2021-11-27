@@ -3,9 +3,9 @@
  * @prop {'text' | 'number' | 'email' | 'password'} type
  */
 import React from 'react';
-import { TInput } from 'components/util/type';
+import { TInput } from 'util/type';
 /** Interface */
-export interface InputProps {
+export interface Props {
     defaultValue?: string | number;
     disabled?: boolean;
     fnChange?: (val: any) => void;
@@ -17,6 +17,6 @@ export interface InputProps {
     type: TInput;
     value?: any;
 }
-declare const _default: React.MemoExoticComponent<({ fnChange, isInputTitle, label, name, placeholder, style, type, value, ...props }: InputProps) => JSX.Element>;
+declare const _default: React.MemoExoticComponent<({ fnChange, isInputTitle, label, name, placeholder, style, type, value, ...props }: Props) => JSX.Element>;
 /** Component */
 export default _default;

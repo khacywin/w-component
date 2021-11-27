@@ -4,6 +4,7 @@
  */
 
 import React, { useCallback, useEffect, useState } from "react";
+import styled, { keyframes } from "styled-components";
 
 interface Props {
   default?: boolean;
@@ -48,32 +49,91 @@ export default React.memo((props: PropsComponent) => {
   }, [props]);
 
   return (
-    <div
-      className={`w-notification 
-      ${isOpen ? "open" : ""}
-      ${props.white ? "white" : ""}
-      ${props.success ? "success" : ""}
-      ${props.error ? "error" : ""}
-    `}
+    <NotificationWrap
+      open={isOpen}
+      white={!!props.white}
+      success={!!props.success}
+      error={!!props.error}
     >
       {typeof props.message === "string" ? (
-        <div
-          className="w-notification-message"
-          dangerouslySetInnerHTML={{ __html: props.message }}
-        />
+        <Message dangerouslySetInnerHTML={{ __html: props.message }} />
       ) : (
-        <div className="w-notification-message">{props.message}</div>
+        <Message>{props.message}</Message>
       )}
-      <button
-        className={`w-notification-close ${props.white ? "white" : ""}`}
-        type="button"
-        onClick={handleClose}
-      >
+      <ButtonClose white={!!props.white} type="button" onClick={handleClose}>
         <i className="i-close" />
-      </button>
-    </div>
+      </ButtonClose>
+    </NotificationWrap>
   );
 });
 
-// Popup notification
-export { default as PopupNotification } from "./PopupNotification";
+const slideRight = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const slideRightOut = keyframes`
+ 100% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const NotificationWrap = styled.div<PropsWrp>`
+  padding: 8px 10px;
+  color: ${(props) =>
+    props.white ? "var(--text)" : "var(--backgroundContent)"};
+  background-color: ${(props) =>
+    props.error
+      ? "var(--error)"
+      : props.success
+      ? "var(--success)"
+      : props.white
+      ? "var(--backgroundContent)"
+      : "var(--dark)"};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-shadow: 0 1px 3px var(--boxShadow);
+  animation: ${(props) => (props.open ? slideRight : slideRightOut)} 0.5s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+`;
+
+const Message = styled.div`
+  position: relative;
+  top: -1px;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const ButtonClose = styled.button<Props>`
+  border: none;
+  background-color: transparent;
+  margin-left: 15px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+
+  i {
+    color: ${({ white }) => (white ? "initial" : "var(--backgroundContent)")};
+  }
+
+  &:focus {
+    border: none;
+    outline: 0;
+  }
+`;
