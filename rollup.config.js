@@ -10,7 +10,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import typescript from "rollup-plugin-typescript2";
 
 export default {
-  input: ["components/**/*.(tsx)|(ts)"],
+  input: ["components/**/*.(tsx|ts)"],
   output: [
     {
       dir: "lib",

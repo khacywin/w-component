@@ -119,9 +119,9 @@ export * from "./Form/DatePicker";
  * Util
  */
 
-export * from "./Loading";
+export * as Loading from "./Loading";
 
-export * from "./Notification";
+export * as notification from "./Notification";
 
 // CSS
-export * from "./css";
+export * as css from "./css";

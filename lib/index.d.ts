@@ -56,6 +56,6 @@ export * from "./Form/DatePicker";
 /**
  * Util
  */
-export * from "./Loading";
-export * from "./Notification";
-export * from "./css";
+export * as Loading from "./Loading";
+export * as notification from "./Notification";
+export * as css from "./css";
