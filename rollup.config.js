@@ -29,7 +29,11 @@ export default {
         let entry = "index.js";
 
         if (input.includes("components")) {
-          entry = input.slice(input.lastIndexOf("components/") + 11, -3) + "js";
+          entry =
+            input.slice(
+              input.lastIndexOf("components/") + 11,
+              input.includes("tsx") ? -3 : -2
+            ) + "js";
         }
 
         return entry;
@@ -43,8 +47,8 @@ export default {
     image({
       output: `lib/assets/images`, // default the root
       extensions: /\.(png|jpg|jpeg|gif|svg)$/, // support png|jpg|jpeg|gif|svg, and it's alse the default value
-      exclude: 'node_modules/**'
-    })
+      exclude: "node_modules/**",
+    }),
   ],
   external: ["fast-glob", "path", "styled-components"],
 };
