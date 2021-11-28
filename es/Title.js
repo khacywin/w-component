@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { b as big, q as bold } from './_lineOverflow-40abb42a.js';
+import { b as big, y as bold } from './_lineOverflow-fd1b0d7f.js';
 
 const Title = styled.div `
   ${big};

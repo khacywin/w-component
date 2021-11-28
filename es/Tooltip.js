@@ -1,5 +1,5 @@
 import React from 'react';
-import { n as normal } from './_lineOverflow-40abb42a.js';
+import { n as normal } from './_lineOverflow-fd1b0d7f.js';
 import styled from 'styled-components';
 
 function Tooltip({ children, title, position = "bottom", }) {

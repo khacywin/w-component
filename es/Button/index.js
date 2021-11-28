@@ -1,4 +1,4 @@
-import { n as normal, w as SemiFully, F as Fully } from '../_lineOverflow-40abb42a.js';
+import { n as normal, D as SemiFully, F as Fully } from '../_lineOverflow-fd1b0d7f.js';
 import styled, { css } from 'styled-components';
 import React from 'react';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { B as fontWeight, C as fontSize } from './_lineOverflow-40abb42a.js';
+import { h as fontWeight, i as fontSize } from './_lineOverflow-fd1b0d7f.js';
 
 const Text = styled.span `
   ${(props) => fontWeight[props.fontWeight]};

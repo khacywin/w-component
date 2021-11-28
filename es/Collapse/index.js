@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { h as semiBold, s as small, S as SemiTransparent, g as M2, i as M5, j as M0 } from '../_lineOverflow-40abb42a.js';
+import { q as semiBold, s as small, S as SemiTransparent, g as M2, r as M5, t as M0 } from '../_lineOverflow-fd1b0d7f.js';
 import { I as Icon } from '../Icon-69b9e7b0.js';
 import styled from 'styled-components';
-import { t as transition } from '../index-8505406e.js';
+import { t as transition } from '../index-6556b1ec.js';
 
 /**
  * Collapse for work

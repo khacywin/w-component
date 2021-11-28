@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { c as colorSVG, r as rgba } from '../polished.esm-28b531f0.js';
 import { g as generatedId } from '../generatedId-52e731a2.js';
-import { r as front_1, t as front } from '../_lineOverflow-40abb42a.js';
+import { z as front_1, A as front } from '../_lineOverflow-fd1b0d7f.js';
 
 /**
  * Checkbox component
