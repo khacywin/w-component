@@ -7,8 +7,6 @@ import json from "@rollup/plugin-json";
 import multiInput from "rollup-plugin-multi-input";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
-import scss from "rollup-plugin-scss";
-import svg from "rollup-plugin-svg";
 import typescript from "rollup-plugin-typescript2";
 
 export default {
@@ -19,11 +17,11 @@ export default {
       format: "cjs",
       sourcemap: false,
     },
-    {
-      dir: "es",
-      format: "esm",
-      sourcemap: true,
-    },
+    // {
+    //   dir: "es",
+    //   format: "esm",
+    //   sourcemap: true,
+    // },
   ],
   plugins: [
     multiInput({
@@ -42,11 +40,11 @@ export default {
     commonjs(),
     json(),
     typescript({ useTsconfigDeclarationDir: true }),
-    image(),
-    scss({
-      output: "lib/bundle.css"
-    }),
-    svg(),
+    image({
+      output: `lib/assets/images`, // default the root
+      extensions: /\.(png|jpg|jpeg|gif|svg)$/, // support png|jpg|jpeg|gif|svg, and it's alse the default value
+      exclude: 'node_modules/**'
+    })
   ],
   external: ["fast-glob", "path", "styled-components"],
 };

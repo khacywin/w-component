@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 import React from "react";
-import logoImg from "util/assets/images/logo.svg";
+import logoImg from "./../_util/assets/images/logo.svg";
 
 /**
  * Loading

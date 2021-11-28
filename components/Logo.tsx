@@ -1,17 +1,7 @@
 import React from "react";
-import logoImg from "assets/images/logo.svg";
-import logoText from "assets/images/logo-character.png";
+import logoImg from "./_util/assets/images/logo.svg";
+import logoText from "./_util/assets/images/logo-character.png";
 import styled from "styled-components";
-
-const Logo = styled.div`
-  min-width: 40px;
-  height: 28px;
-
-  img {
-    height: 100%;
-    width: auto;
-  }
-`;
 
 interface Props {
   text?: boolean;
@@ -28,3 +18,13 @@ export default function ({ text }: Props) {
     </Logo>
   );
 }
+
+const Logo = styled.div`
+  min-width: 40px;
+  height: 28px;
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+`;

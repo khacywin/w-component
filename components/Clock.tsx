@@ -7,7 +7,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { borderRadius, boxShadow, fontSize, space, zIndex } from "css/base";
 
 import Icon from "components/Icon";
-import clock_face from "assets/images/clock-face.svg";
+import clock_face from "./_util/assets/images/clock-face.svg";
 import generatedId from "util/generatedId";
 import styled from "styled-components";
 import transition from "css/transition";
