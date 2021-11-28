@@ -1,7 +1,6 @@
 /**
  * Basic CSS for element
  */
-import { css } from 'styled-components';
 import * as space from './_space';
 import * as fontWeight from './_fontWeight';
 import * as fontSize from './_fontSize';
