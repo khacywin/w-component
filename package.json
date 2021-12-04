@@ -1,6 +1,6 @@
 {
   "name": "w-ui-components",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "React component",
   "main": "lib/index.js",
   "module": "es/index.js",
