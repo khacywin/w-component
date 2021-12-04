@@ -74,6 +74,19 @@ export default React.forwardRef(
       setShow(show);
     }, [show]);
 
+    
+  // Check id container to add
+  useEffect(() => {
+    const ele = document.getElementById("modal-root");
+
+    if (!ele){
+      const modalRootEle = document.createElement("div");
+      modalRootEle.id = "modal-root";
+      
+      document.querySelector('body').appendChild(modalRootEle);
+    }
+  }, []);
+
     return isShow
       ? createPortal(
           <WrapModal>
