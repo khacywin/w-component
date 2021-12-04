@@ -189,7 +189,7 @@ const LoadingSomeoneTypingWrap = styled.div`
     width: 4px;
     height: 4px;
     opacity: 0.2;
-    background-color: ${({ theme }) => theme.palette.text};
+    background-color: var(--text);
   }
 
   div:nth-of-type(1) {

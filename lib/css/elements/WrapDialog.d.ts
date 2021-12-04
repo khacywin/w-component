@@ -1,2 +1,2 @@
-declare const _default: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
+declare const _default: import("styled-components").FlattenSimpleInterpolation;
 export default _default;
