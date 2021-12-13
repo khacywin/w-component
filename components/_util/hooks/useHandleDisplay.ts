@@ -60,12 +60,6 @@ function useHandleDisplay<T extends HTMLElement>(ref: RefObject<T>, clickOut = t
       if (ref.current?.parentElement.classList.contains('dialog-mark')) {
         ref.current.parentElement.onmouseup = handleClickOutside;
       } else {
-        const iframeEle = document.getElementsByTagName('iframe');
-
-        for (const iframe of iframeEle) {
-          iframe.contentWindow.document.addEventListener('mouseup', handleClickOutside);
-        }
-
         document.addEventListener('mouseup', handleClickOutside)
       }
     }, 10);
@@ -76,12 +70,6 @@ function useHandleDisplay<T extends HTMLElement>(ref: RefObject<T>, clickOut = t
         // eslint-disable-next-line react-hooks/exhaustive-deps
         ref.current.parentElement.onmouseup = null;
       } else {
-        const iframeEle = document.getElementsByTagName('iframe');
-
-        for (const iframe of iframeEle) {
-          iframe.contentWindow.document.removeEventListener('mouseup', handleClickOutside);
-        }
-
         document.removeEventListener('mouseup', handleClickOutside)
       }
     };

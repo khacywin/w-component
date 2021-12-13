@@ -15,7 +15,7 @@ if (document) {
   root.style.setProperty("--border", "#d9d9d9");
   root.style.setProperty("--borderLight", "#ECECEC");
   root.style.setProperty("--borderInput", "#D4D4D4");
-  root.style.setProperty("--boxShadow", "#rgba(0, 0, 0, 0.16)");
+  root.style.setProperty("--boxShadow", "rgba(0, 0, 0, 0.16)");
 }
 
 // Button

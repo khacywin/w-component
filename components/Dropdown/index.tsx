@@ -9,13 +9,13 @@
  * @prop {string} className
  */
 
+import { Dialog, TRefDialog } from "components";
 import React, { useCallback, useEffect, useRef } from "react";
 import { borderRadius, boxShadow, fontSize, space } from "css/base";
+import styled, { CSSObject } from "styled-components";
 
 import { TPosition } from "util/type";
-import styled from "styled-components";
 import useHandleDisplay from "hooks/useHandleDisplay";
-import usePositionDropdown from "hooks/usePositionDropdown";
 
 interface IProps {
   dropdown?: JSX.Element | string;
@@ -25,6 +25,7 @@ interface IProps {
   clickOut?: boolean; // Hide dropdown menu when click
   position?: TPosition;
   className?: string;
+  styleDropdown?: CSSObject;
 }
 export default React.memo(
   ({
@@ -35,8 +36,10 @@ export default React.memo(
     position,
     children,
     className,
+    styleDropdown
   }: IProps) => {
     const refDropdownMenu = useRef();
+    const refDialog = useRef<TRefDialog>();
 
     const { isDisplay, onToggleDisplay } = useHandleDisplay(
       refDropdownMenu,
@@ -47,28 +50,34 @@ export default React.memo(
       onToggleDisplay();
     }, [onToggleDisplay]);
 
-    const { handlePosition } = usePositionDropdown(refDropdownMenu, {
-      position,
-    });
-
     useEffect(() => {
-      isDisplay && handlePosition();
-    }, [handlePosition, isDisplay]);
+      if (!refDialog.current) return;
+      
+      if (isDisplay) {
+        refDialog.current.show();
+      } else {
+        refDialog.current.hide();
+      }
+    }, [isDisplay]);
 
     return (
       <WrapDropdownMenu className={className}>
-        <Dropdown onClick={onToggle}>{dropdown || children}</Dropdown>
+        <Dropdown ref={refDropdownMenu} onClick={onToggle}>
+          {dropdown || children}
+        </Dropdown>
         {isDisplay && (
-          <DropdownMenu
-            className={
-              "dropdown-menu " + (className ? className + "-menu" : "")
-            }
-            full={full}
-            position={position || "left"}
-            ref={refDropdownMenu}
-          >
-            {dropdown_menu}
-          </DropdownMenu>
+          <Dialog refParent={refDropdownMenu} ref={refDialog}>
+            <DropdownMenu
+              className={
+                "dropdown-menu " + (className ? className + "-menu" : "")
+              }
+              style={styleDropdown}
+              full={full}
+              position={position || "left"}
+            >
+              {dropdown_menu}
+            </DropdownMenu>
+          </Dialog>
         )}
       </WrapDropdownMenu>
     );
@@ -84,11 +93,9 @@ interface PropsDropdownMenu {
   position: TPosition;
 }
 const DropdownMenu = styled.div<PropsDropdownMenu>`
-  position: absolute;
   min-width: 200px;
   background-color: var(--backgroundContent);
   z-index: 999;
-  contain: layout;
   padding: 3px;
 
   ${boxShadow.menu};

@@ -9,6 +9,7 @@
  * @prop {string} className
  */
 import React from "react";
+import { CSSObject } from "styled-components";
 import { TPosition } from "util/type";
 interface IProps {
     dropdown?: JSX.Element | string;
@@ -18,6 +19,7 @@ interface IProps {
     clickOut?: boolean;
     position?: TPosition;
     className?: string;
+    styleDropdown?: CSSObject;
 }
-declare const _default: React.MemoExoticComponent<({ dropdown, dropdown_menu, full, clickOut, position, children, className, }: IProps) => JSX.Element>;
+declare const _default: React.MemoExoticComponent<({ dropdown, dropdown_menu, full, clickOut, position, children, className, styleDropdown }: IProps) => JSX.Element>;
 export default _default;
