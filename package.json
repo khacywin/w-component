@@ -38,19 +38,13 @@
     "@rollup/plugin-image": "^2.0.6",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
-    "@storybook/addon-actions": "^6.1.14",
-    "@storybook/addon-controls": "^6.1.14",
-    "@storybook/addon-essentials": "^6.1.20",
-    "@storybook/addon-links": "^6.1.14",
-    "@storybook/preset-typescript": "^3.0.0",
-    "@storybook/react": "^6.3.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@types/jest": "^27.0.2",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.15",
-    "@types/styled-components": "^5.1.15",
+    "@types/styled-components": "^5.1.17",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
     "babel-loader": "^8.2.2",
@@ -75,12 +69,14 @@
     "rollup-plugin-url": "^3.0.1",
     "styled-components": "^5.3.3",
     "ts-jest": "^27.0.5",
+    "ts-loader": "^9.2.6",
     "typescript": "^3.9.7",
     "w-color-selector": "^1.2.24",
     "w-date": "^2.0.0"
   },
   "resolutions": {
     "dayjs": "^1.10.7",
-    "w-color-selector": "^1.2.24"
+    "w-color-selector": "^1.2.24",
+    "styled-components": "^5.3.3"
   }
 }
