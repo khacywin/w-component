@@ -70,34 +70,32 @@ function DialogWrap({
 
       // Set timeout waiting handle position, to show dialog
       setTimeout(() => {
-        refContent.current.style.opacity = "1";
+        if (refContent.current?.style) refContent.current.style.opacity = "1";
       }, 10);
     }
   }, [handlePosition, isDisplay]);
 
   useEffect(() => {
-    setIsShow?.(isDisplay);
-  }, [isDisplay, setIsShow]);
-
-  useEffect(() => {
-    refIsShowed.current && setIsShowed?.(isDisplay);
-  }, [isDisplay, setIsShowed]);
+    if (refIsShowed.current) {
+      setIsShowed?.(isDisplay);
+      setIsShow?.(!!isDisplay);
+    }
+  }, [isDisplay, setIsShow, setIsShowed]);
 
   useEffect(() => {
     show();
     refIsShowed.current = true;
   }, [show]);
 
-
   // Check id container to add
   useEffect(() => {
     const ele = document.getElementById("modal-root");
 
-    if (!ele){
+    if (!ele) {
       const modalRootEle = document.createElement("div");
       modalRootEle.id = "modal-root";
-      
-      document.querySelector('body').appendChild(modalRootEle);
+
+      document.querySelector("body").appendChild(modalRootEle);
     }
   }, []);
 
@@ -129,9 +127,10 @@ export default React.forwardRef((props: IProps, ref: any) => {
 });
 
 const Wrap = styled.div`
-  position: relative;
+  position: fixed;
   width: 100vw;
   height: 100vh;
+  z-index: 999;
 `;
 
 const WrapContent = styled.div`

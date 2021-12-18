@@ -168,6 +168,7 @@ export default React.memo((props: IProps) => {
   return (
     <Dropdown
       full
+      isBaseParent
       clickOut={!props.isMultiple}
       className="w-select-wrap"
       dropdown_menu={

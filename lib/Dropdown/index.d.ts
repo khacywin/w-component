@@ -20,6 +20,7 @@ interface IProps {
     position?: TPosition;
     className?: string;
     styleDropdown?: CSSObject;
+    isBaseParent?: boolean;
 }
-declare const _default: React.MemoExoticComponent<({ dropdown, dropdown_menu, full, clickOut, position, children, className, styleDropdown }: IProps) => JSX.Element>;
+declare const _default: React.MemoExoticComponent<({ dropdown, dropdown_menu, full, clickOut, position, children, className, styleDropdown, isBaseParent, }: IProps) => JSX.Element>;
 export default _default;

@@ -74,14 +74,18 @@ export default function Form({
   // Constructor for form
   useEffect(() => {
     children.forEach((ele) => {
+      if (!ele) return;
+      
       formRef.ref.current[ele.props.name] = { value: ele.props.defaultValue };
     });
   }, [children, formRef]);
 
   return (
     <form {...props} onChange={handleChangeForm()} onSubmit={handleSubmit}>
-      {children.map((ele, idx) =>
-        React.cloneElement(
+      {children.map((ele, idx) => {
+        if (!ele) return;
+
+        return React.cloneElement(
           ele,
           !["textarea", "text", "password", "email", "number"].includes(
             ele.props.type
@@ -96,8 +100,8 @@ export default function Form({
             : {
                 key: idx,
               }
-        )
-      )}
+        );
+      })}
     </form>
   );
 }

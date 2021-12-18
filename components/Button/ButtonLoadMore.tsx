@@ -1,12 +1,13 @@
-import ButtonNoStyle from 'css/elements/ButtonNoStyle';
-import React from 'react';
-import styled from 'styled-components';
+import ButtonNoStyle from "css/elements/ButtonNoStyle";
+import React from "react";
+import styled from "styled-components";
 
 interface IProps {
   onClick: (e: React.SyntheticEvent<HTMLButtonElement>) => void;
+  children?: JSX.Element | string;
 }
-export default React.memo(({ onClick }: IProps) => {
-  return <Button onClick={onClick}>Load more ...</Button>;
+export default React.memo(({ onClick, children }: IProps) => {
+  return <Button onClick={onClick}>{children || `Load more`}...</Button>;
 });
 
 const Button = styled.button`

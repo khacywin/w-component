@@ -10,12 +10,11 @@
  */
 
 import { Dialog, TRefDialog } from "components";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { borderRadius, boxShadow, fontSize, space } from "css/base";
 import styled, { CSSObject } from "styled-components";
 
 import { TPosition } from "util/type";
-import useHandleDisplay from "hooks/useHandleDisplay";
 
 interface IProps {
   dropdown?: JSX.Element | string;
@@ -26,6 +25,7 @@ interface IProps {
   position?: TPosition;
   className?: string;
   styleDropdown?: CSSObject;
+  isBaseParent?: boolean;
 }
 export default React.memo(
   ({
@@ -36,49 +36,45 @@ export default React.memo(
     position,
     children,
     className,
-    styleDropdown
+    styleDropdown,
+    isBaseParent,
   }: IProps) => {
-    const refDropdownMenu = useRef();
+    const refDropdownMenu = useRef<HTMLDivElement>();
     const refDialog = useRef<TRefDialog>();
-
-    const { isDisplay, onToggleDisplay } = useHandleDisplay(
-      refDropdownMenu,
-      clickOut
-    );
+    const [widthElement, setWidthElement] = useState(0);
+    const [isShow, setIsShow] = useState(false);
 
     const onToggle = useCallback(() => {
-      onToggleDisplay();
-    }, [onToggleDisplay]);
+      setIsShow((isShow) => !isShow);
+    }, []);
 
     useEffect(() => {
-      if (!refDialog.current) return;
-      
-      if (isDisplay) {
+      if (isShow) {
         refDialog.current.show();
+        isBaseParent && setWidthElement(refDropdownMenu.current.clientWidth);
       } else {
         refDialog.current.hide();
       }
-    }, [isDisplay]);
+    }, [isBaseParent, isShow]);
 
     return (
       <WrapDropdownMenu className={className}>
         <Dropdown ref={refDropdownMenu} onClick={onToggle}>
           {dropdown || children}
         </Dropdown>
-        {isDisplay && (
-          <Dialog refParent={refDropdownMenu} ref={refDialog}>
-            <DropdownMenu
-              className={
-                "dropdown-menu " + (className ? className + "-menu" : "")
-              }
-              style={styleDropdown}
-              full={full}
-              position={position || "left"}
-            >
-              {dropdown_menu}
-            </DropdownMenu>
-          </Dialog>
-        )}
+        <Dialog refParent={refDropdownMenu} ref={refDialog} clickOut={clickOut} setIsShow={setIsShow}>
+          <DropdownMenu
+            width={widthElement}
+            className={
+              "dropdown-menu " + (className ? className + "-menu" : "")
+            }
+            style={styleDropdown}
+            full={full}
+            position={position || "left"}
+          >
+            {dropdown_menu}
+          </DropdownMenu>
+        </Dialog>
       </WrapDropdownMenu>
     );
   }
@@ -91,20 +87,22 @@ const WrapDropdownMenu = styled.div`
 interface PropsDropdownMenu {
   full: boolean;
   position: TPosition;
+  width: number;
 }
 const DropdownMenu = styled.div<PropsDropdownMenu>`
-  min-width: 200px;
+  min-width: 100px;
   background-color: var(--backgroundContent);
   z-index: 999;
   padding: 3px;
 
   ${boxShadow.menu};
   ${borderRadius.normal};
-  ${(props) => props.full && "width: max-content"};
-  ${(props) =>
-    props.position === "right"
+  ${({ full }) => (full ? "width: max-content" : "")};
+  ${({ width }) => (width ? `width: ${width}px;` : "")}
+  ${({ position }) =>
+    position === "right"
       ? "right: 2px;"
-      : props.position === "left"
+      : position === "left"
       ? "left: 2px;"
       : "bottom: calc(100% + 10px);"};
 

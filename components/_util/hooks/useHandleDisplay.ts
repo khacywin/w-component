@@ -51,13 +51,15 @@ function useHandleDisplay<T extends HTMLElement>(ref: RefObject<T>, clickOut = t
         const path = e.path || (e.composedPath && e.composedPath()) || [];
 
         // Hide path when click outside
-        !path.some((item: any) => current.contains(item.parentNode)) && hide();
+        if (!path.some((item: any) => current.contains(item.parentNode))) {
+          hide();
+        }
       }
     }
 
     // Bind the event listener
     setTimeout(() => {
-      if (ref.current?.parentElement.classList.contains('dialog-mark')) {
+      if (ref.current?.parentElement?.classList.contains('dialog-mark')) {
         ref.current.parentElement.onmouseup = handleClickOutside;
       } else {
         document.addEventListener('mouseup', handleClickOutside)
@@ -66,7 +68,7 @@ function useHandleDisplay<T extends HTMLElement>(ref: RefObject<T>, clickOut = t
 
     return () => {
       // Unbind the event listener on clean up
-      if (ref?.current?.parentElement.classList.contains('dialog-mark')) {
+      if (ref?.current?.parentElement?.classList.contains('dialog-mark')) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         ref.current.parentElement.onmouseup = null;
       } else {
