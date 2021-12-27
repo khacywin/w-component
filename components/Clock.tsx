@@ -151,6 +151,7 @@ export default React.memo(({ selected, fnSelected }: Props) => {
     <ClockWrap>
       <input type="hidden" />
       <ClockAnalog minutes={minute} hours={hour % 12}>
+        <img src={clock_face} alt="w-mtime"/>
         <div></div>
         <div></div>
         <div></div>
@@ -181,12 +182,17 @@ interface Time {
   minutes: number;
 }
 const ClockAnalog = styled.div<Time>`
-  background-image: url(${clock_face});
   background-size: cover;
   border-radius: 50%;
   height: 200px;
   position: relative;
   width: 200px;
+  
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 
   div:first-of-type {
     background-color: var(--dark);

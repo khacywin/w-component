@@ -332,5 +332,9 @@ const Top = styled.div`
 `;
 
 const Container = styled.div<{ active: boolean }>`
-  display: ${({ active }) => (active ? "block" : "none")};
+  display: ${({ active }) => (active ? "flex" : "none")};
+  justify-content: center;
+  align-items: center;
+  width: 225px;
+  height: 285px;
 `;
