@@ -14,6 +14,7 @@ import FormGroup from "components/Form/_FormGroup";
 import { IDatePickerProps } from ".";
 import Icon from "components/Icon";
 import InputStyle from "css/elements/InputStyle";
+import { TPosition } from "util/type";
 import dayjs from "dayjs";
 import generatedId from "util/generatedId";
 import styled from "styled-components";
@@ -36,6 +37,7 @@ export default React.memo(
     isRemove = true,
     defaultValue,
     disableItem,
+    position
   }: IProps) => {
     const id = generatedId("date-picker");
     const refDropdown = useRef();
@@ -216,7 +218,7 @@ export default React.memo(
               <Icon small icon="i-close" />
             </ButtonClose>
           )}
-          <DropdownMenu ref={refMenuDropdown} show={isDisplay}>
+          <DropdownMenu position={position} ref={refMenuDropdown} show={isDisplay}>
             <InputDataSelector>
               <WrapContainer>
                 <Top>
@@ -294,6 +296,7 @@ const InputControl = styled.input`
 
 type DropdownMenuType = {
   show: boolean;
+  position: TPosition;
 };
 const DropdownMenu = styled.div<DropdownMenuType>`
   background-color: var(--backgroundContent);
@@ -301,6 +304,17 @@ const DropdownMenu = styled.div<DropdownMenuType>`
   padding: 15px;
   position: absolute;
   z-index: -1;
+
+  ${({ position }) =>
+    position === "right"
+      ? "right: 2px;"
+      : position === "left"
+      ? "left: 2px;"
+      : position === "top"
+      ? "bottom: calc(100% + 10px);"
+      : position === "bottom"
+      ? "top: calc(100% + 10px);"
+      : ""};
 
   ${({ show }) =>
     show &&

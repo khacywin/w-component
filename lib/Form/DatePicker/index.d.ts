@@ -1,5 +1,5 @@
+import { TPosition, WDate } from 'util/type';
 import React from 'react';
-import { WDate } from 'util/type';
 import wdate from 'w-date';
 export interface IDatePickerProps {
     fnChange?: (val: string) => void;
@@ -13,5 +13,6 @@ export interface IDatePickerProps {
     isRemove?: boolean;
     defaultValue?: any;
     disableItem?: (date: any) => boolean;
+    position?: TPosition;
 }
 export default function (props: IDatePickerProps): JSX.Element;

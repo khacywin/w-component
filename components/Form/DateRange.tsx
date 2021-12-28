@@ -103,6 +103,7 @@ export default function DateRange({
         fnChange={onChangeFrom}
         format={format}
         isRemove={false}
+        position="left"
         disableItem={disableNext}
       />
       <span>
@@ -115,6 +116,7 @@ export default function DateRange({
         fnChange={onChangeTo}
         format={format}
         isRemove={false}
+        position="right"
         disableItem={disablePrevious}
       />
     </Wrap>

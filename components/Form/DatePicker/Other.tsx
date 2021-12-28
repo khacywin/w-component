@@ -4,51 +4,49 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from 'react';
-import { boxShadow, space } from 'css/base';
+} from "react";
+import { boxShadow, space } from "css/base";
 
-import Calendar from 'components/Calendar';
-import Clock from 'components/Clock';
-import FormGroup from 'components/Form/_FormGroup';
-import { IDatePickerProps } from '.';
-import Icon from 'components/Icon';
-import InputStyle from 'css/elements/InputStyle';
-import Month from 'components/Calendar/Month';
-import Year from 'components/Calendar/Year';
-import dayjs from 'dayjs';
-import generatedId from 'util/generatedId';
-import styled from 'styled-components';
-import transition from 'css/transition';
-import useHandleDisplay from 'hooks/useHandleDisplay';
-import usePositionDropdown from 'hooks/usePositionDropdown';
-import wdate from 'w-date';
+import Calendar from "components/Calendar";
+import Clock from "components/Clock";
+import FormGroup from "components/Form/_FormGroup";
+import { IDatePickerProps } from ".";
+import Icon from "components/Icon";
+import InputStyle from "css/elements/InputStyle";
+import Month from "components/Calendar/Month";
+import { TPosition } from "util/type";
+import Year from "components/Calendar/Year";
+import dayjs from "dayjs";
+import generatedId from "util/generatedId";
+import styled from "styled-components";
+import transition from "css/transition";
+import useHandleDisplay from "hooks/useHandleDisplay";
+import usePositionDropdown from "hooks/usePositionDropdown";
+import wdate from "w-date";
 
 export default function Other({
   fnChange,
-  format = 'DD MMMM,YYYY',
+  format = "DD MMMM,YYYY",
   label,
   name,
-  picker = 'date-time',
+  picker = "date-time",
   style,
-  value = '',
+  value = "",
   isRemove = true,
   defaultValue,
   disableItem,
+  position,
 }: IDatePickerProps) {
-  const id = generatedId('date-picker');
+  const id = generatedId("date-picker");
   const refDropdown = useRef();
   const refMenuDropdown = useRef();
   const ref = useRef<HTMLInputElement>();
 
-  const [container, setContainer] = useState<string>('date');
-  const [val, setVal] = useState<any>('');
-  const [time, setTime] = useState('');
+  const [val, setVal] = useState<any>("");
+  const [time, setTime] = useState("");
   const [date, setDate] = useState(null);
 
-  const widthInputDate = useMemo(
-    () => ref?.current?.clientWidth,
-    []
-  );
+  const widthInputDate = useMemo(() => ref?.current?.clientWidth, []);
 
   const { isDisplay, show, hide } = useHandleDisplay(refDropdown, true);
   const { handlePosition } = usePositionDropdown(refMenuDropdown, {
@@ -58,23 +56,18 @@ export default function Other({
   });
 
   // Handle show dropdown menu
-  const onShow = useCallback(
-    (container: string) => () => {
-      handlePosition(container === 'time' ? { left: widthInputDate } : {});
-      show();
-      setContainer(container);
-    },
-    [show, handlePosition, widthInputDate]
-  );
+  const onShow = useCallback(() => {
+    show();
+  }, [show]);
 
   // Change value
   const onChange = useCallback(
     (field: string) => (val: any) => {
       switch (field) {
-        case 'date': {
+        case "date": {
           setDate(
             new Date(
-              wdate.format(val, 'YYYY-MM-DD') + (time ? ' ' + time : '')
+              wdate.format(val, "YYYY-MM-DD") + (time ? " " + time : "")
             ).toString()
           );
 
@@ -84,10 +77,10 @@ export default function Other({
           break;
         }
 
-        case 'month': {
+        case "month": {
           setDate(
             new Date(
-              wdate.format(val, 'YYYY-MM-DD') + (time ? ' ' + time : '')
+              wdate.format(val, "YYYY-MM-DD") + (time ? " " + time : "")
             ).toString()
           );
 
@@ -97,7 +90,7 @@ export default function Other({
           break;
         }
 
-        case 'year': {
+        case "year": {
           const _year = new Date(val).getFullYear();
 
           setVal(_year.toString());
@@ -105,12 +98,13 @@ export default function Other({
           break;
         }
 
-        case 'date-time': {
+        case "date-time": {
           const min = val.getMinutes();
           const hour = val.getHours();
           // Format for time, adn format is HH:MM
-          const _value = `${hour < 10 ? '0' + hour : hour}:${min < 10 ? '0' + min : min
-            }`
+          const _value = `${hour < 10 ? "0" + hour : hour}:${
+            min < 10 ? "0" + min : min
+          }`;
           setTime(_value);
 
           setVal(wdate.format(val, format));
@@ -129,10 +123,10 @@ export default function Other({
 
   // Set empty data
   const onRemove = useCallback(() => {
-    fnChange && fnChange('');
+    fnChange && fnChange("");
     setVal(null);
     setDate(null);
-    setTime('');
+    setTime("");
     hide();
   }, [fnChange, hide]);
 
@@ -140,56 +134,60 @@ export default function Other({
    * Handle date when enter from keyboard
    */
   // Date
-  const onBlurDate = useCallback((e) => {
-    const val = e.target.value;
+  const onBlurDate = useCallback(
+    (e) => {
+      const val = e.target.value;
 
-    if (dayjs(val, 'DD/MM/YYYY').isValid()) {
-      onChange(picker)(new Date(val));
-    } else {
-      e.target.value = '';
-    }
-  }, [onChange, picker]);
+      if (dayjs(val, "DD/MM/YYYY").isValid()) {
+        onChange(picker)(new Date(val));
+      } else {
+        e.target.value = "";
+      }
+    },
+    [onChange, picker]
+  );
 
-  const containers = useMemo(() => new Map()
-    .set(
-      'date',
-      <InputDateSelectorContainer show>
-        <Calendar
-          selected={val}
-          disableItem={disableItem}
-          fnSelected={onChange('date')}
-        />
-      </InputDateSelectorContainer>
-    )
-    .set(
-      'time',
-      <InputDateSelectorContainer show>
-        <Clock
-          selected={time}
-          fnSelected={onChange('time')}
-        />
-      </InputDateSelectorContainer>
-    )
-    .set(
-      'year',
-      <InputDateSelectorContainer show>
-        <Year
-          selected={val}
-          disableItem={disableItem}
-          fnSelected={onChange('year')}
-        />
-      </InputDateSelectorContainer>
-    )
-    .set(
-      'month',
-      <InputDateSelectorContainer show>
-        <Month
-          selected={new Date(date)}
-          disableItem={disableItem}
-          fnSelected={onChange('month')}
-        />
-      </InputDateSelectorContainer>
-    ), [val, disableItem, onChange, time, date]);
+  const containers = useMemo(
+    () =>
+      new Map()
+        .set(
+          "date",
+          <InputDateSelectorContainer show>
+            <Calendar
+              selected={val}
+              disableItem={disableItem}
+              fnSelected={onChange("date")}
+            />
+          </InputDateSelectorContainer>
+        )
+        .set(
+          "time",
+          <InputDateSelectorContainer show>
+            <Clock selected={time} fnSelected={onChange("time")} />
+          </InputDateSelectorContainer>
+        )
+        .set(
+          "year",
+          <InputDateSelectorContainer show>
+            <Year
+              selected={val}
+              disableItem={disableItem}
+              fnSelected={onChange("year")}
+            />
+          </InputDateSelectorContainer>
+        )
+        .set(
+          "month",
+          <InputDateSelectorContainer show>
+            <Month
+              selected={new Date(date)}
+              disableItem={disableItem}
+              fnSelected={onChange("month")}
+            />
+          </InputDateSelectorContainer>
+        ),
+    [val, disableItem, onChange, time, date]
+  );
 
   // Handle value and format data
   // Set state of component with value
@@ -197,16 +195,14 @@ export default function Other({
     if (!value && !defaultValue) return;
     const _val = value || defaultValue;
 
-    if (picker === 'date-time' || picker === 'date') {
+    if (picker === "date-time" || picker === "date") {
       const _date = new Date(_val);
       setDate(_date);
-      setTime(wdate.format(_date, 'hh:mm'));
+      setTime(wdate.format(_date, "hh:mm"));
       setVal(wdate.format(_date, format));
-    } else if (picker === 'year') {
-      setVal(
-        new Date(_val.toString()).getFullYear()
-      );
-    } else if (picker === 'month') {
+    } else if (picker === "year") {
+      setVal(new Date(_val.toString()).getFullYear());
+    } else if (picker === "month") {
       setVal(wdate.format(_val, format));
       setDate(new Date(_val));
     } else {
@@ -217,7 +213,7 @@ export default function Other({
       setDate(null);
       setTime(null);
       setVal(null);
-    }
+    };
   }, [value, format, picker, defaultValue]);
 
   // Update input control
@@ -227,31 +223,43 @@ export default function Other({
     ref.current.value = val;
   }, [val]);
 
+  useEffect(() => {
+    if (isDisplay) {
+      setTimeout(
+        () => handlePosition(picker === "time" ? { left: widthInputDate } : {}),
+        10
+      );
+    }
+  }, [handlePosition, isDisplay, picker, widthInputDate]);
+
   return (
     <Wrap ref={refDropdown}>
       <FormGroup style={style || {}} isFocus label={label} id={id}>
         <InputSection>
-          {(
-            picker === 'date' ||
-            picker === 'month') && (
-              <input type='hidden' name={name} defaultValue={date} />
-            )}
+          {(picker === "date" || picker === "month") && (
+            <input type="hidden" name={name} defaultValue={date} />
+          )}
           <InputControl
-            autoComplete='off'
-            id={id + '-calendar'}
-            name={picker !== 'month' ? name : ''}
+            autoComplete="off"
+            id={id + "-calendar"}
+            name={picker !== "month" ? name : ""}
             placeholder={format}
-            onClick={onShow(picker)}
+            onClick={onShow}
             onBlur={onBlurDate}
             ref={ref}
           />
         </InputSection>
-        {isRemove && <ButtonClose onClick={onRemove} type='button'>
-          <Icon small icon='i-close' />
-        </ButtonClose>
-        }
-        <DropdownMenu ref={refMenuDropdown} show={isDisplay}>
-          <InputDataSelector>{containers.get(container)}</InputDataSelector>
+        {isRemove && (
+          <ButtonClose onClick={onRemove} type="button">
+            <Icon small icon="i-close" />
+          </ButtonClose>
+        )}
+        <DropdownMenu
+          position={position}
+          ref={refMenuDropdown}
+          show={isDisplay}
+        >
+          <InputDataSelector>{containers.get(picker)}</InputDataSelector>
         </DropdownMenu>
       </FormGroup>
     </Wrap>
@@ -288,6 +296,7 @@ const InputControl = styled.input`
 
 type DropdownMenuType = {
   show: boolean;
+  position: TPosition;
 };
 const DropdownMenu = styled.div<DropdownMenuType>`
   background-color: var(--backgroundContent);
@@ -295,6 +304,17 @@ const DropdownMenu = styled.div<DropdownMenuType>`
   padding: 15px;
   position: absolute;
   z-index: -1;
+
+  ${({ position }) =>
+    position === "right"
+      ? "right: 2px;"
+      : position === "left"
+      ? "left: 2px;"
+      : position === "top"
+      ? "bottom: calc(100% + 10px);"
+      : position === "bottom"
+      ? "top: calc(100% + 10px);"
+      : ""};
 
   ${({ show }) =>
     show &&
