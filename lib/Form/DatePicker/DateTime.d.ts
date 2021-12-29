@@ -3,5 +3,5 @@ import { IDatePickerProps } from ".";
 interface IProps extends IDatePickerProps {
     tabDefault?: "date" | "time";
 }
-declare const _default: React.MemoExoticComponent<({ fnChange, format, label, name, style, value, isRemove, defaultValue, disableItem, position }: IProps) => JSX.Element>;
+declare const _default: React.MemoExoticComponent<({ fnChange, format, label, name, style, value, isRemove, defaultValue, disableItem, position, }: IProps) => JSX.Element>;
 export default _default;

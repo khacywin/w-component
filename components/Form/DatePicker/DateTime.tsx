@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { boxShadow, space } from "css/base";
 
 import ButtonAction from "components/Button/ButtonAction";
@@ -20,6 +14,7 @@ import generatedId from "util/generatedId";
 import styled from "styled-components";
 import transition from "css/transition";
 import useHandleDisplay from "hooks/useHandleDisplay";
+import useMutationObservable from "hooks/useIntersectionObserver";
 import usePositionDropdown from "hooks/usePositionDropdown";
 import wdate from "w-date";
 
@@ -37,35 +32,43 @@ export default React.memo(
     isRemove = true,
     defaultValue,
     disableItem,
-    position
+    position,
   }: IProps) => {
     const id = generatedId("date-picker");
     const refDropdown = useRef();
     const refMenuDropdown = useRef();
     const ref = useRef<HTMLInputElement>();
     const refTime = useRef<HTMLInputElement>();
+    const refShow = useRef(false); // To check handling position
 
     const [tab, setTab] = useState<string>("date");
     const [time, setTime] = useState(""); // This is string, HH:MM
     const [date, setDate] = useState<Date>(null); // Object Date to save
 
-    const widthInputDate = useMemo(() => ref?.current?.clientWidth, []);
-
     const { isDisplay, show, hide } = useHandleDisplay(refDropdown, false);
-    const { handlePosition } = usePositionDropdown(refMenuDropdown, {
-      add: {
-        height: ref?.current?.clientHeight,
+    const { handlePosition } = usePositionDropdown(refMenuDropdown);
+
+    const handleDropdownChange = useCallback(
+      (list) => {
+        if (list[0].boundingClientRect.height && !refShow.current) {
+          refShow.current = true;
+          handlePosition();
+        } else if (list[0].boundingClientRect.height === 0) {
+          refShow.current = false;
+        }
       },
-    });
+      [handlePosition]
+    );
+
+    useMutationObservable(refMenuDropdown.current, handleDropdownChange);
 
     // Handle show dropdown menu
     const onShow = useCallback(
       (container: string) => () => {
-        handlePosition(container === "time" ? { left: widthInputDate } : {});
-        show();
         setTab(container);
+        show();
       },
-      [show, handlePosition, widthInputDate]
+      [show]
     );
 
     // Change value
@@ -218,7 +221,11 @@ export default React.memo(
               <Icon small icon="i-close" />
             </ButtonClose>
           )}
-          <DropdownMenu position={position} ref={refMenuDropdown} show={isDisplay}>
+          <DropdownMenu
+            position={position}
+            ref={refMenuDropdown}
+            show={isDisplay}
+          >
             <InputDataSelector>
               <WrapContainer>
                 <Top>

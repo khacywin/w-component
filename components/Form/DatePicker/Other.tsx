@@ -21,6 +21,7 @@ import generatedId from "util/generatedId";
 import styled from "styled-components";
 import transition from "css/transition";
 import useHandleDisplay from "hooks/useHandleDisplay";
+import useMutationObservable from "hooks/useIntersectionObserver";
 import usePositionDropdown from "hooks/usePositionDropdown";
 import wdate from "w-date";
 
@@ -46,14 +47,19 @@ export default function Other({
   const [time, setTime] = useState("");
   const [date, setDate] = useState(null);
 
-  const widthInputDate = useMemo(() => ref?.current?.clientWidth, []);
-
   const { isDisplay, show, hide } = useHandleDisplay(refDropdown, true);
-  const { handlePosition } = usePositionDropdown(refMenuDropdown, {
-    add: {
-      height: ref?.current?.clientHeight,
+  const { handlePosition } = usePositionDropdown(refMenuDropdown);
+
+  const handleDropdownChange = useCallback(
+    (list) => {
+      if (list[0].boundingClientRect.height) {
+        handlePosition();
+      }
     },
-  });
+    [handlePosition]
+  );
+
+  useMutationObservable(refMenuDropdown.current, handleDropdownChange);
 
   // Handle show dropdown menu
   const onShow = useCallback(() => {
@@ -222,15 +228,6 @@ export default function Other({
 
     ref.current.value = val;
   }, [val]);
-
-  useEffect(() => {
-    if (isDisplay) {
-      setTimeout(
-        () => handlePosition(picker === "time" ? { left: widthInputDate } : {}),
-        10
-      );
-    }
-  }, [handlePosition, isDisplay, picker, widthInputDate]);
 
   return (
     <Wrap ref={refDropdown}>
