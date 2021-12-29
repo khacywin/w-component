@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import ButtonAction from '../Button/ButtonAction';
-import Icon from '../Icon';
-import styled from 'styled-components';
+import ButtonAction from "../Button/ButtonAction";
+import Icon from "../Icon";
+import styled from "styled-components";
 
 export interface IMonthPickerProps {
   selected?: Date;
@@ -10,58 +10,62 @@ export interface IMonthPickerProps {
   disableItem?: (date: any) => boolean;
 }
 
-export default function ({ selected, fnSelected, disableItem }: IMonthPickerProps) {
+export default function ({
+  selected,
+  fnSelected,
+  disableItem,
+}: IMonthPickerProps) {
   const [year, setYear] = useState(new Date().getFullYear());
 
   const list = useMemo(
     () => [
       {
         value: 0,
-        label: 'Jan',
+        label: "Jan",
       },
       {
         value: 1,
-        label: 'Feb',
+        label: "Feb",
       },
       {
         value: 2,
-        label: 'Mar',
+        label: "Mar",
       },
       {
         value: 3,
-        label: 'Apr',
+        label: "Apr",
       },
       {
         value: 4,
-        label: 'May',
+        label: "May",
       },
       {
         value: 5,
-        label: 'Jun',
+        label: "Jun",
       },
       {
         value: 6,
-        label: 'Jul',
+        label: "Jul",
       },
       {
         value: 7,
-        label: 'Aug',
+        label: "Aug",
       },
       {
         value: 8,
-        label: 'Sep',
+        label: "Sep",
       },
       {
         value: 9,
-        label: 'Oct',
+        label: "Oct",
       },
       {
         value: 10,
-        label: 'Nov',
+        label: "Nov",
       },
       {
         value: 11,
-        label: 'Dec',
+        label: "Dec",
       },
     ],
     []
@@ -92,10 +96,10 @@ export default function ({ selected, fnSelected, disableItem }: IMonthPickerProp
         <div>{year}</div>
         <ButtonSection>
           <ButtonAction action={_previousYear}>
-            <Icon icon='i-arrow-left' />
+            <Icon icon="i-arrow-left" />
           </ButtonAction>
           <ButtonAction action={_nextYear}>
-            <Icon icon='i-arrow-right' />
+            <Icon icon="i-arrow-right" />
           </ButtonAction>
         </ButtonSection>
       </WrapHead>
@@ -151,7 +155,7 @@ const Item = styled.li<IPropsItem>`
   padding: 5px;
   text-align: center;
   width: 33.33333%;
-  
+
   ${({ active }) =>
     active &&
     `

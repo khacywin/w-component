@@ -1,9 +1,8 @@
 import { TPosition, WDate } from 'util/type';
 import React from 'react';
-import wdate from 'w-date';
 export interface IDatePickerProps {
     fnChange?: (val: string) => void;
-    format?: wdate.formatDate;
+    format?: string;
     label?: string;
     name?: string;
     picker?: 'year' | 'month' | 'week' | 'date' | 'time' | 'date-time';

@@ -4,4 +4,4 @@ export interface IMonthPickerProps {
     fnSelected?: (year: Date) => void;
     disableItem?: (date: any) => boolean;
 }
-export default function ({ selected, fnSelected, disableItem }: IMonthPickerProps): JSX.Element;
+export default function ({ selected, fnSelected, disableItem, }: IMonthPickerProps): JSX.Element;

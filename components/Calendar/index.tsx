@@ -3,23 +3,26 @@ import {
   CalendarHead,
   CalendarTop,
   CalendarWrap,
-} from './_style';
+} from "./_style";
 import React, {
   SyntheticEvent,
   useCallback,
   useEffect,
   useMemo,
   useState,
-} from 'react';
+} from "react";
 
-import ButtonAction from 'components/Button/ButtonAction';
-import Icon from 'components/Icon';
-import wdate from 'w-date';
+import ButtonAction from "components/Button/ButtonAction";
+import Icon from "components/Icon";
+import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+
+dayjs.extend(weekOfYear);
 
 export interface IDateProps {
   noSelect?: boolean;
   selected?: any;
-  period?: 'all' | 'year' | 'month' | 'week' | 'date';
+  period?: "all" | "year" | "month" | "week" | "date";
   fnSelected?: (date: Date) => void;
   disableItem?: (date: any) => boolean;
 }
@@ -33,9 +36,9 @@ export default React.memo(
   ({
     selected,
     fnSelected,
-    period = 'date',
+    period = "date",
     noSelect = false,
-    disableItem
+    disableItem,
   }: IDateProps) => {
     const now: any = useMemo(() => new Date(), []);
     const [month, setMonth] = useState(now.getMonth()); // Use format 0-11
@@ -43,7 +46,7 @@ export default React.memo(
 
     // Date selected
     const [dateSelected, setDateSelected] = useState(
-      selected ? wdate.identifyDate(selected) : new Date()
+      selected ? new Date(selected) : new Date()
     );
 
     /**
@@ -53,9 +56,9 @@ export default React.memo(
       (e: SyntheticEvent<HTMLTableCellElement>) => {
         if (!noSelect) {
           let date_selected: any = e.currentTarget
-            ? e.currentTarget.getAttribute('data-date')
+            ? e.currentTarget.getAttribute("data-date")
             : e; // Format : MM-DD-YYYY;
-          date_selected = wdate.identifyDate(date_selected);
+          date_selected = new Date(date_selected);
 
           if (fnSelected) {
             fnSelected(date_selected);
@@ -76,13 +79,13 @@ export default React.memo(
         let checked = false;
         const _dateSelected = dateSelected;
         switch (period) {
-          case 'week':
+          case "week":
             checked =
-              wdate.getWeek(_dateSelected) ===
-              wdate.getWeek(`${month + 1}-${index}-${year}`);
+              dayjs(_dateSelected).week() ===
+              dayjs(`${year}/${month + 1}/${index}`).week();
             break;
 
-          case 'month':
+          case "month":
             checked = _dateSelected.getMonth() === month;
             break;
 
@@ -107,13 +110,16 @@ export default React.memo(
       select.setMonth(month);
       select.setFullYear(year);
 
-      const numberOfDates: number = wdate.amountDateInMonth(month + 1, year),
-        firstDay: number = wdate.firstWeekdayInMonth(select),
+      const numberOfDates: number = dayjs(`${year}/${month + 1}`).daysInMonth(),
+        firstDay: number = dayjs(select).startOf("month").get("d"),
         html: any[] = [];
 
       let index = 1,
         indexNext = 1,
-        indexPrev: number = wdate.numberOfDays(wdate.previousMonth(select)) - firstDay + 1;
+        indexPrev: number =
+          dayjs(dayjs(select).subtract(1, "month")).daysInMonth() -
+          firstDay +
+          1;
       for (let row = 0; row < 7; row++) {
         for (let col = 0; col < 6; col++) {
           /**
@@ -121,7 +127,9 @@ export default React.memo(
            * Check where first date in month and print dates in last month
            */
           if (row === 0 && col < firstDay) {
-            const _dateString = `${month === 0 ? 12 : month}-${indexPrev}-${month === 0 ? year - 1 : year}`;
+            const _dateString = `${month === 0 ? 12 : month}-${indexPrev}-${
+              month === 0 ? year - 1 : year
+            }`;
 
             html.push(
               <CalendarDate
@@ -131,8 +139,8 @@ export default React.memo(
                     month === 0 ? 11 : month - 1,
                     month === 0 ? year - 1 : year
                   )
-                    ? 'selected'
-                    : ''
+                    ? "selected"
+                    : ""
                 }
                 onClick={selectDate}
                 data-date={_dateString}
@@ -143,13 +151,14 @@ export default React.memo(
                 <li>{indexPrev++}</li>
               </CalendarDate>
             );
-          }
-          /**
-           * TODO Print dates in next month
-           * Check where index is bigger number of date
-           */
-          else if (row > 0 && index > numberOfDates) {
-            const _dateStr = `${month === 11 ? 1 : month + 2}-${indexNext}-${month === 11 ? year + 1 : year}`;
+          } else if (row > 0 && index > numberOfDates) {
+            /**
+             * TODO Print dates in next month
+             * Check where index is bigger number of date
+             */
+            const _dateStr = `${month === 11 ? 1 : month + 2}-${indexNext}-${
+              month === 11 ? year + 1 : year
+            }`;
             html.push(
               <CalendarDate
                 className={
@@ -158,8 +167,8 @@ export default React.memo(
                     month === 11 ? 0 : month + 1,
                     month === 11 ? year + 1 : year
                   )
-                    ? 'selected'
-                    : ''
+                    ? "selected"
+                    : ""
                 }
                 onClick={selectDate}
                 data-date={_dateStr}
@@ -170,18 +179,17 @@ export default React.memo(
                 <li>{indexNext++}</li>
               </CalendarDate>
             );
-          }
-          /**
-           * TODO Print date was selected
-           */
-          else {
-            const _dateStr = `${month + 1}-${index}-${year}`
+          } else {
+            /**
+             * TODO Print date was selected
+             */
+            const _dateStr = `${month + 1}-${index}-${year}`;
             html.push(
               <CalendarDate
                 className={
                   checkedSelectedDateFollowPeriod(index, month, year)
-                    ? 'selected'
-                    : ''
+                    ? "selected"
+                    : ""
                 }
                 now={
                   index === now.getDate() &&
@@ -200,7 +208,14 @@ export default React.memo(
         }
       }
       return html;
-    }, [month, year, checkedSelectedDateFollowPeriod, selectDate, now, disableItem]);
+    }, [
+      month,
+      year,
+      checkedSelectedDateFollowPeriod,
+      selectDate,
+      now,
+      disableItem,
+    ]);
 
     /**
      * Divide list html date to two-dimensional array
@@ -237,7 +252,7 @@ export default React.memo(
 
     useEffect(() => {
       // Set date when selected change
-      const _date = selected ? wdate.identifyDate(selected) : new Date();
+      const _date = selected ? new Date(selected) : new Date();
       setDateSelected(_date);
     }, [selected]);
 
@@ -246,29 +261,29 @@ export default React.memo(
         <CalendarTop>
           <tr>
             <th colSpan={5}>
-              {wdate.getMonthFull(month)},{year}
+              {dayjs(`${year}/${month + 1}`).format("MMMM")},{year}
             </th>
             <th>
-              <ButtonAction label='Previous' action={previousMonth}>
-                <Icon icon='i-arrow-left' />
+              <ButtonAction label="Previous" action={previousMonth}>
+                <Icon icon="i-arrow-left" />
               </ButtonAction>
             </th>
             <th>
-              <ButtonAction label='Next' action={nextMonth}>
-                <Icon icon='i-arrow-right' />
+              <ButtonAction label="Next" action={nextMonth}>
+                <Icon icon="i-arrow-right" />
               </ButtonAction>
             </th>
           </tr>
         </CalendarTop>
         <tbody>
           <CalendarHead>
-            <td>{wdate.getWeekdayShort(7)}</td>
-            <td>{wdate.getWeekdayShort(1)}</td>
-            <td>{wdate.getWeekdayShort(2)}</td>
-            <td>{wdate.getWeekdayShort(3)}</td>
-            <td>{wdate.getWeekdayShort(4)}</td>
-            <td>{wdate.getWeekdayShort(5)}</td>
-            <td>{wdate.getWeekdayShort(6)}</td>
+            <td>Sun</td>
+            <td>Mon</td>
+            <td>Tue</td>
+            <td>Wed</td>
+            <td>Thu</td>
+            <td>Fri</td>
+            <td>Sat</td>
           </CalendarHead>
           {divideArrayToCalendar(pushIntoArray())}
         </tbody>

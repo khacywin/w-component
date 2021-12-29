@@ -11,7 +11,6 @@ import clock_face from "./_util/assets/images/clock-face.svg";
 import generatedId from "util/generatedId";
 import styled from "styled-components";
 import transition from "css/transition";
-import wdate from "w-date";
 
 interface Props {
   selected?: string | Date; // 'HH:MM || date'
@@ -141,7 +140,7 @@ export default React.memo(({ selected, fnSelected }: Props) => {
       setMinute(+_time[1] || 0);
       setHour(+_time[0] || 0);
     } else {
-      const _time: Date = selected ? wdate.identifyDate(selected) : wdate.now();
+      const _time: Date = selected ? new Date(selected) : new Date();
       setMinute(_time.getMinutes());
       setHour(_time.getHours());
     }

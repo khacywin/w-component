@@ -71,8 +71,7 @@
     "ts-jest": "^27.0.5",
     "ts-loader": "^9.2.6",
     "typescript": "^3.9.7",
-    "w-color-selector": "^1.2.24",
-    "w-date": "^2.0.0"
+    "w-color-selector": "^1.2.24"
   },
   "resolutions": {
     "dayjs": "^1.10.7",

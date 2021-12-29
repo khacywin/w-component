@@ -23,7 +23,6 @@ import transition from "css/transition";
 import useHandleDisplay from "hooks/useHandleDisplay";
 import useMutationObservable from "hooks/useIntersectionObserver";
 import usePositionDropdown from "hooks/usePositionDropdown";
-import wdate from "w-date";
 
 export default function Other({
   fnChange,
@@ -73,25 +72,21 @@ export default function Other({
         case "date": {
           setDate(
             new Date(
-              wdate.format(val, "YYYY-MM-DD") + (time ? " " + time : "")
+              dayjs(val).format("YYYY/MM/DD") + (time ? " " + time : "")
             ).toString()
           );
 
-          setVal(wdate.format(val, format));
-          fnChange?.(wdate.format(val, format));
+          setVal(dayjs(val).format(format));
+          fnChange?.(dayjs(val).format(format));
 
           break;
         }
 
         case "month": {
-          setDate(
-            new Date(
-              wdate.format(val, "YYYY-MM-DD") + (time ? " " + time : "")
-            ).toString()
-          );
+          setDate(new Date(dayjs(val).format("YYYY/MM/DD")));
 
-          setVal(wdate.format(val, format));
-          fnChange?.(wdate.format(val, format));
+          setVal(dayjs(val).format(format));
+          fnChange?.(dayjs(val).format(format));
 
           break;
         }
@@ -113,8 +108,8 @@ export default function Other({
           }`;
           setTime(_value);
 
-          setVal(wdate.format(val, format));
-          fnChange?.(wdate.format(val, format));
+          setVal(dayjs(val).format(format));
+          fnChange?.(dayjs(val).format(format));
           break;
         }
 
@@ -186,7 +181,7 @@ export default function Other({
           "month",
           <InputDateSelectorContainer show>
             <Month
-              selected={new Date(date)}
+              selected={date}
               disableItem={disableItem}
               fnSelected={onChange("month")}
             />
@@ -204,12 +199,12 @@ export default function Other({
     if (picker === "date-time" || picker === "date") {
       const _date = new Date(_val);
       setDate(_date);
-      setTime(wdate.format(_date, "hh:mm"));
-      setVal(wdate.format(_date, format));
+      setTime(dayjs(_date).format("hh:mm"));
+      setVal(dayjs(_date).format(format));
     } else if (picker === "year") {
       setVal(new Date(_val.toString()).getFullYear());
     } else if (picker === "month") {
-      setVal(wdate.format(_val, format));
+      setVal(dayjs(_val).format(format));
       setDate(new Date(_val));
     } else {
       setDate(new Date(_val));
