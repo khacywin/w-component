@@ -42,11 +42,14 @@ export default React.memo((props: IProps) => {
    */
   const renderLabel = useCallback(
     (val: string | string[]) => {
+      const defVal: string =
+        originList[0]?.group?.options[0]?.label || originList[0]?.label;
+
       if ((!val || val.length === 0) && !props.isMultiple) {
         // Return default value
         // If variable 'isMultiple' is true, it will be '--Select'
         // Else it is first of item in List
-        return originList[0]?.label;
+        return defVal;
       } else if (props.isMultiple && Array.isArray(val)) {
         // Return list item
         return val.map(
@@ -77,10 +80,20 @@ export default React.memo((props: IProps) => {
             )
         );
       } else if (typeof val === "string") {
-        return (
-          originList.find((option: TSelectOption) => option.value === val)
-            ?.label || originList[0]?.label
-        );
+        let labelSelected: string;
+        originList.forEach((option: TSelectOption) => {
+          if (option.group) {
+            const itemSelected = option.group.options.find(
+              (item) => item.value === val
+            );
+
+            if (itemSelected) labelSelected = itemSelected.label;
+          } else if (option.value === val) {
+            labelSelected = option.label;
+          }
+        });
+
+        return labelSelected || defVal;
       }
 
       // If val is JSX.Element is it return itself

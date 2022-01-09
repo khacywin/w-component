@@ -34,28 +34,39 @@ export default React.memo((props: Props) => {
   const [valState, setValState] = useState<any>();
 
   // Convert list options from children
-  const convertOptionsFromChildren = useCallback((children: JSX.Element[]) => {
-    const arrOptions: TSelectOption[] = [];
-    children?.forEach((item: any) => {
-      if (item.length !== 0) {
-        if (item.type === "option") {
-          arrOptions.push({
-            value: item.props.value,
-            label: item.props.children,
-          });
-        } else if (item.type === "optgroup") {
-          arrOptions.push({
-            group: {
-              label: item.props.label,
-              options: convertOptionsFromChildren(item.props.children),
-            },
-          });
-        }
-      }
-    });
+  const convertOptionsFromChildren = useCallback(
+    (children: JSX.Element[] | JSX.Element) => {
+      const arrOptions: TSelectOption[] = [];
 
-    return arrOptions;
-  }, []);
+      if (Array.isArray(children)) {
+        children?.forEach((item: any) => {
+          if (item.length !== 0) {
+            if (item.type === "option") {
+              arrOptions.push({
+                value: item.props.value,
+                label: item.props.children,
+              });
+            } else if (item.type === "optgroup") {
+              arrOptions.push({
+                group: {
+                  label: item.props.label,
+                  options: convertOptionsFromChildren(item.props.children),
+                },
+              });
+            }
+          }
+        });
+      } else if (children.type === "option") {
+        arrOptions.push({
+          value: children.props.value,
+          label: children.props.children,
+        });
+      }
+
+      return arrOptions;
+    },
+    []
+  );
 
   /**
    * @param {string} _val
