@@ -35,6 +35,8 @@ function DialogWrap({
 }: IProps & { setIsShowed: (...arg: any) => void }) {
   const refContent = useRef<HTMLDivElement>(null);
   const refIsShowed = useRef(false);
+  const refIsDisplay = useRef(false);
+
   const { isDisplay, show, hide } = useHandleDisplay<HTMLDivElement>(
     refContent,
     clickOut
@@ -65,7 +67,8 @@ function DialogWrap({
   }, [isDisplay, hide]);
 
   useEffect(() => {
-    if (isDisplay) {
+    if (isDisplay && !refIsDisplay.current) {
+      refIsDisplay.current = true;
       handlePosition();
 
       // Set timeout waiting handle position, to show dialog

@@ -13,7 +13,7 @@ function useMutationObservable(targetEl: Element, cb: (...arg: any) => any, opti
   }, [cb, options, setObserver]);
 
   useEffect(() => {
-    if (!observer) return;
+    if (!observer || !targetEl) return;
 
     const { config } = options;
 

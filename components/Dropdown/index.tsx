@@ -15,6 +15,7 @@ import { borderRadius, boxShadow, fontSize, space } from "css/base";
 import styled, { CSSObject } from "styled-components";
 
 import { TPosition } from "util/type";
+import useMutationObservable from "hooks/useIntersectionObserver";
 
 interface IProps {
   dropdown?: JSX.Element | string;
@@ -41,6 +42,8 @@ export default React.memo(
   }: IProps) => {
     const refDropdownMenu = useRef<HTMLDivElement>();
     const refDialog = useRef<TRefDialog>();
+    const refShow = useRef(false);
+
     const [widthElement, setWidthElement] = useState(0);
     const [isShow, setIsShow] = useState(false);
 
@@ -51,18 +54,36 @@ export default React.memo(
     useEffect(() => {
       if (isShow) {
         refDialog.current.show();
-        isBaseParent && setWidthElement(refDropdownMenu.current.clientWidth);
       } else {
         refDialog.current.hide();
       }
     }, [isBaseParent, isShow]);
+
+    const handleDropdownChange = useCallback(
+      (list) => {
+        if (list[0].boundingClientRect.height && !refShow.current) {
+          refShow.current = true;
+          isBaseParent && setWidthElement(refDropdownMenu.current.clientWidth);
+        } else if (list[0].boundingClientRect.height === 0) {
+          refShow.current = false;
+        }
+      },
+      [isBaseParent]
+    );
+
+    useMutationObservable(refDropdownMenu.current, handleDropdownChange);
 
     return (
       <WrapDropdownMenu className={className}>
         <Dropdown ref={refDropdownMenu} onClick={onToggle}>
           {dropdown || children}
         </Dropdown>
-        <Dialog refParent={refDropdownMenu} ref={refDialog} clickOut={clickOut} setIsShow={setIsShow}>
+        <Dialog
+          refParent={refDropdownMenu}
+          ref={refDialog}
+          clickOut={clickOut}
+          setIsShow={setIsShow}
+        >
           <DropdownMenu
             width={widthElement}
             className={

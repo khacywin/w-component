@@ -18,7 +18,7 @@ export default React.memo(({ url, children }: Props) => {
       {url ? (
         <img src={url} alt='wmtime' />
       ) : children ? (
-        <WordOfName>{children[0]}</WordOfName>
+        <WordOfName>{children}</WordOfName>
       ) : null}
     </AvatarWrap>
   );
