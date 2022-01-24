@@ -2,7 +2,7 @@
  * @prop {(val: string) => void} fnSearch
  */
 import React from "react";
-interface Props {
+export interface SearchProps {
     fnSearch: (val: string) => void;
     defaultValue?: string;
     placeholder?: string;
@@ -10,5 +10,5 @@ interface Props {
     value?: string;
     onChange?: (...arg: any) => void;
 }
-declare const _default: React.MemoExoticComponent<(props: Props) => JSX.Element>;
+declare const _default: React.MemoExoticComponent<(props: SearchProps) => JSX.Element>;
 export default _default;

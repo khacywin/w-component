@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
+import cleaner from 'rollup-plugin-cleaner';
 import commonjs from "@rollup/plugin-commonjs";
 import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
@@ -24,6 +25,9 @@ export default {
     // },
   ],
   plugins: [
+    cleaner({
+      targets: ['./lib']
+    }),
     multiInput({
       transformOutputPath: (output, input) => {
         let entry = "index.js";
@@ -50,5 +54,5 @@ export default {
       exclude: "node_modules/**",
     }),
   ],
-  external: ["fast-glob", "path", "styled-components"],
+  external: ["fast-glob", "path", "styled-components", "react", "react-dom"],
 };

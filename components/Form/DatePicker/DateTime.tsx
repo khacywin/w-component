@@ -16,7 +16,6 @@ import transition from "css/transition";
 import useHandleDisplay from "hooks/useHandleDisplay";
 import useMutationObservable from "hooks/useIntersectionObserver";
 import usePositionDropdown from "hooks/usePositionDropdown";
-import wdate from "w-date";
 
 interface IProps extends IDatePickerProps {
   tabDefault?: "date" | "time";
@@ -117,7 +116,7 @@ export default React.memo(
             val.setHours(hour);
             val.setMinutes(min);
 
-            ref.current.value = wdate.format(val, format);
+            ref.current.value = dayjs(val).format(format);
             setDate(val);
             fnChange?.(val.toString());
             break;
@@ -180,9 +179,9 @@ export default React.memo(
       const _date = new Date(_val);
 
       setDate(_date);
-      setTime(wdate.format(_date, "hh:mm"));
-      ref.current.value = wdate.format(_date, format);
-      refTime.current.value = wdate.format(_date, "hh:mm");
+      setTime(dayjs(_date).format("hh:mm"));
+      ref.current.value = dayjs(_date).format(format);
+      refTime.current.value = dayjs(_date).format("hh:mm");
 
       return () => {
         setDate(null);

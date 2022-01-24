@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { borderRadius, lineOverflow, space } from "css/base";
+import { borderRadius, space } from "css/base";
 
 import ButtonAction from "components/Button/ButtonAction";
 import Dropdown from "components/Dropdown";
@@ -183,7 +183,7 @@ export default React.memo((props: IProps) => {
       full
       isBaseParent
       clickOut={!props.isMultiple}
-      className="w-select-wrap"
+      className={`w-select-wrap ${props.isMultiple ? "w-select-multiple" : ""}`}
       dropdown_menu={
         <SelectLists className="select-options">
           {props.isSearch && (
@@ -205,8 +205,10 @@ export default React.memo((props: IProps) => {
       }
     >
       <SelectListValue
-        minHeight={props.isMultiple && 39}
-        className="w-select-value"
+        minHeight={props.isMultiple && 36.09}
+        className={`w-select-value ${
+          props.isMultiple ? "w-select-value-multiple" : ""
+        }`}
       >
         {props.value && props.value.length > 0 ? (
           renderLabel(props.value)
@@ -224,9 +226,16 @@ const SelectListSearch = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--border);
+
   input {
     ${InputStyle};
   }
+`;
+
+const PlaceHolder = styled.div`
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.6;
 `;
 
 const SelectListValue = styled.div<{ minHeight: number }>`
@@ -234,9 +243,18 @@ const SelectListValue = styled.div<{ minHeight: number }>`
   user-select: none;
   line-height: 20px;
   position: relative;
+  white-space: pre-wrap;
+
   ${({ minHeight }) => minHeight && `min-height: ${minHeight}px;`};
   ${space.P2.a};
-  ${lineOverflow.one};
+
+  &.w-select-value-multiple {
+    ${PlaceHolder} {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
 
   & > i {
     position: absolute;
@@ -249,6 +267,7 @@ const SelectLists = styled.div`
   background-color: var(--backgroundContent);
   width: 100%;
   overflow-y: hidden;
+
   ul {
     overflow-x: hidden;
     overflow-y: auto;
@@ -289,7 +308,7 @@ const Item = styled.li`
   background-color: var(--backgroundOpacity);
   border-radius: 5px;
   margin-right: 5px;
-  padding: 5px 10px;
+  padding: 2px 10px;
   align-items: center;
 
   button {
@@ -304,10 +323,4 @@ const Item = styled.li`
     margin-left: 2px;
     padding: 3px;
   }
-`;
-
-const PlaceHolder = styled.div`
-  display: inline-flex;
-  align-items: center;
-  opacity: 0.6;
 `;

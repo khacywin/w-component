@@ -45,6 +45,8 @@ export { default as Checkbox } from "./Form/Checkbox";
 export * from "./Form/Checkbox";
 export { default as DateRange } from "./Form/DateRange";
 export * from "./Form/DateRange";
+export { default as Slider } from "./Form/Slider";
+export * from "./Form/Slider";
 export { default as Search } from "./Form/Search";
 export * from "./Form/Search";
 export { default as Switch } from "./Form/Switch";

@@ -4,6 +4,47 @@ import { borderRadius, fontSize, fontWeight } from "css/base";
 import generatedId from "util/generatedId";
 import styled from "styled-components";
 
+export interface SwitchProps {
+  label?: string | JSX.Element;
+  labelSub?: string;
+  defaultValue?: boolean;
+  value?: boolean;
+  fnChange?: (val: boolean) => void;
+}
+export default React.memo((props: SwitchProps) => {
+  const id = generatedId();
+
+  const [value, setValue] = useState(
+    props.value || props.defaultValue || false
+  );
+
+  const _onChange = useCallback(() => {
+    if (props.fnChange) {
+      props.fnChange(!value);
+    }
+
+    setValue(!value);
+  }, [props, value]);
+
+  useEffect(() => {
+    props.value && setValue(props.value);
+  }, [props.value]);
+
+  return (
+    <SwitchWrap>
+      <div>
+        <h5>{props.label}</h5>
+        {props.labelSub ? <h6>{props.labelSub}</h6> : ""}
+      </div>
+      <input id={id} type="checkbox" checked={value} onChange={_onChange} />
+      <SwitchBox active={value} htmlFor={id}>
+        <SwitchButton htmlFor={id} />
+      </SwitchBox>
+    </SwitchWrap>
+  );
+});
+
+
 const SwitchWrap = styled.div`
   display: flex;
   justify-content: space-between;
@@ -64,43 +105,3 @@ const SwitchBox = styled.label<PropsSwitch>`
       transform: translate(0,0);
     }`}
 `;
-
-interface Props {
-  label?: string | JSX.Element;
-  labelSub?: string;
-  defaultValue?: boolean;
-  value?: boolean;
-  fnChange?: (val: boolean) => void;
-}
-export default React.memo((props: Props) => {
-  const id = generatedId();
-
-  const [value, setValue] = useState(
-    props.value || props.defaultValue || false
-  );
-
-  const _onChange = useCallback(() => {
-    if (props.fnChange) {
-      props.fnChange(!value);
-    }
-
-    setValue(!value);
-  }, [props, value]);
-
-  useEffect(() => {
-    props.value && setValue(props.value);
-  }, [props.value]);
-
-  return (
-    <SwitchWrap>
-      <div>
-        <h5>{props.label}</h5>
-        {props.labelSub ? <h6>{props.labelSub}</h6> : ""}
-      </div>
-      <input id={id} type="checkbox" checked={value} onChange={_onChange} />
-      <SwitchBox active={value} htmlFor={id}>
-        <SwitchButton htmlFor={id} />
-      </SwitchBox>
-    </SwitchWrap>
-  );
-});

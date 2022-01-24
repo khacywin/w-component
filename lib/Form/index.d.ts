@@ -3,9 +3,18 @@ import { IObject } from "util/type";
 /**
  * HOOK FORM
  */
-export interface IUserForm {
+export interface IForm {
     ref: React.MutableRefObject<IObject>;
     getValues?: () => IObject;
+}
+export interface IFormControl {
+    children: React.ComponentElement<any, any>;
+    name?: string;
+    defaultValue?: any;
+}
+export interface IUserForm {
+    form: IForm;
+    FormControl: (props: IFormControl) => JSX.Element;
 }
 export declare function useForm(): IUserForm;
 /**
@@ -13,11 +22,7 @@ export declare function useForm(): IUserForm;
  */
 export interface IFormRefProps extends HTMLAttributes<HTMLFormElement> {
     children: JSX.Element[];
-    form: IUserForm;
+    form: IForm;
     onFinish?: (data: IObject) => void;
 }
 export default function Form({ children, form: formRef, onChange, onFinish, ...props }: IFormRefProps): JSX.Element;
-/**
- * COMPONENT FORM CONTROL
- */
-export declare function FormControl(): JSX.Element;

@@ -10,7 +10,7 @@ import Icon from "components/Icon";
 import styled from "styled-components";
 import transition from "css/transition";
 
-interface Props {
+export interface SearchProps {
   fnSearch: (val: string) => void;
   defaultValue?: string;
   placeholder?: string;
@@ -18,7 +18,7 @@ interface Props {
   value?: string;
   onChange?: (...arg: any) => void;
 }
-export default React.memo((props: Props) => {
+export default React.memo((props: SearchProps) => {
   const [isFocus, setIsFocus] = useState(false);
   const [value, setValue] = useState("");
 

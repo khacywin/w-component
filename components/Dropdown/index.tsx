@@ -115,7 +115,7 @@ const DropdownMenu = styled.div<PropsDropdownMenu>`
     display: block !important;
   }
 
-  li {
+  & > li {
     ${fontSize.normal};
     ${borderRadius.normal};
     ${space.P3.a};

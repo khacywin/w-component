@@ -14,9 +14,11 @@ export default function Tooltip({
   position = "bottom",
 }: ITooltipProps) {
   return (
-    <Wrap>
-      <WrapChildren>{children}</WrapChildren>
-      <WrapTooltip position={position}>{title}</WrapTooltip>
+    <Wrap className="w-tooltip">
+      <WrapChildren className="w-tooltip-control">{children}</WrapChildren>
+      <WrapTooltip className="w-tooltip-content" position={position}>
+        {title}
+      </WrapTooltip>
     </Wrap>
   );
 }

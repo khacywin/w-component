@@ -5,22 +5,24 @@
 
 import React, {
   ChangeEvent,
+  HTMLAttributes,
   SyntheticEvent,
   useCallback,
   useEffect,
   useState,
-} from 'react';
+} from "react";
 
-import FormGroup from 'components/Form/_FormGroup';
-import InputStyle from 'css/elements/InputStyle';
-import { TInput } from 'util/type';
-import WColor from 'w-color-selector';
-import generatedId from 'util/generatedId';
-import { space } from 'css/base';
-import styled from 'styled-components';
+import FormGroup from "components/Form/_FormGroup";
+import InputStyle from "css/elements/InputStyle";
+import { TInput } from "util/type";
+import WColor from "w-color-selector";
+import generatedId from "util/generatedId";
+import { space } from "css/base";
+import styled from "styled-components";
 
 /** Interface */
-export interface Props {
+export interface InputProps
+  extends HTMLAttributes<HTMLTextAreaElement | HTMLInputElement> {
   defaultValue?: string | number;
   disabled?: boolean;
   fnChange?: (val: any) => void;
@@ -42,31 +44,28 @@ export default React.memo(
     name,
     placeholder,
     style,
-    type = 'text',
-    value = '',
+    type = "text",
+    value = "",
     ...props
-  }: Props) => {
-    const id = generatedId('input');
+  }: InputProps) => {
+    const id = generatedId("input");
     const [error, setError] = useState<any>();
-    const [color, setColor] = useState('');
-    const [valState, setValState] = useState('');
+    const [color, setColor] = useState("");
+    const [valState, setValState] = useState("");
 
-    const handleInvalid = useCallback(
-      (e: SyntheticEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        e.persist();
+    const handleInvalid = useCallback((e: SyntheticEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      e.persist();
 
-        setError({
-          type: 'manual',
-          message: e.currentTarget.required ? 'Field is required !!' : '',
-        });
-      },
-      []
-    );
+      setError({
+        type: "manual",
+        message: e.currentTarget.required ? "Field is required !!" : "",
+      });
+    }, []);
 
     const onChange = useCallback(
       (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const value = type === 'number' ? +e.target.value : e.target.value;
+        const value = type === "number" ? +e.target.value : e.target.value;
         setValState(e.target.value);
         fnChange?.(value || color);
       },
@@ -87,9 +86,9 @@ export default React.memo(
 
     const inputs = new Map()
       .set(
-        'textarea',
+        "textarea",
         <TextareaControl
-          className='w-textarea'
+          className="w-textarea"
           name={name}
           placeholder={placeholder}
           id={id}
@@ -101,11 +100,11 @@ export default React.memo(
         />
       )
       .set(
-        'text',
+        "text",
         <InputControl
           name={name}
-          className='w-input'
-          type='text'
+          className="w-input"
+          type="text"
           placeholder={placeholder}
           id={id}
           onInvalid={handleInvalid}
@@ -117,11 +116,11 @@ export default React.memo(
         />
       )
       .set(
-        'password',
+        "password",
         <InputControl
           name={name}
-          className='w-input'
-          type='password'
+          className="w-input"
+          type="password"
           placeholder={placeholder}
           id={id}
           onInvalid={handleInvalid}
@@ -133,11 +132,11 @@ export default React.memo(
         />
       )
       .set(
-        'email',
+        "email",
         <InputControl
           name={name}
-          className='w-input'
-          type='email'
+          className="w-input"
+          type="email"
           placeholder={placeholder}
           id={id}
           onInvalid={handleInvalid}
@@ -149,11 +148,11 @@ export default React.memo(
         />
       )
       .set(
-        'number',
+        "number",
         <InputControl
           name={name}
-          className='w-input'
-          type='number'
+          className="w-input"
+          type="number"
           placeholder={placeholder}
           id={id}
           onInvalid={handleInvalid}
@@ -165,18 +164,18 @@ export default React.memo(
         />
       )
       .set(
-        'color',
+        "color",
         <div>
           <WColor
             width={20}
             height={20}
             onChange={fnChange ? onChangeColor : setColor}
-            defaultValue={value || color || '#54478c'}
+            defaultValue={value || color || "#54478c"}
           />
           <input
-            type='hidden'
+            type="hidden"
             name={name}
-            value={color || value || '#54478c'}
+            value={color || value || "#54478c"}
           />
         </div>
       );
@@ -188,7 +187,7 @@ export default React.memo(
         label={label}
         isFocus={value || placeholder}
         id={id}
-        inline={type === 'color'}
+        inline={type === "color"}
         error={error}
       >
         {inputs.get(type)}

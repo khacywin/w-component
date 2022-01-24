@@ -225,7 +225,7 @@ export default function Other({
   }, [val]);
 
   return (
-    <Wrap ref={refDropdown}>
+    <Wrap ref={refDropdown} className="w-form-item">
       <FormGroup style={style || {}} isFocus label={label} id={id}>
         <InputSection>
           {(picker === "date" || picker === "month") && (

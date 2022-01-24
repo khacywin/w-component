@@ -1,1 +1,1 @@
-export default function _default(hex: any): string;
+export default function (hex: any): string;

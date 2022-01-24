@@ -4,9 +4,12 @@
  * TODO
  * Convert color hex to css filter
  */
-
 class Color {
-  constructor(r, g, b) {
+  private r = 0;
+  private g = 0;
+  private b = 0;
+
+  constructor(r: any, g: any, b: any) {
     this.set(r, g, b);
   }
 
@@ -14,7 +17,7 @@ class Color {
     return `rgb(${Math.round(this.r)}, ${Math.round(this.g)}, ${Math.round(this.b)})`;
   }
 
-  set(r, g, b) {
+  set(r: any, g: any, b: any) {
     this.r = this.clamp(r);
     this.g = this.clamp(g);
     this.b = this.clamp(b);
@@ -80,7 +83,7 @@ class Color {
     ]);
   }
 
-  multiply(matrix) {
+  multiply(matrix: any) {
     const newR = this.clamp(this.r * matrix[0] + this.g * matrix[1] + this.b * matrix[2]);
     const newG = this.clamp(this.r * matrix[3] + this.g * matrix[4] + this.b * matrix[5]);
     const newB = this.clamp(this.r * matrix[6] + this.g * matrix[7] + this.b * matrix[8]);
@@ -115,7 +118,8 @@ class Color {
     const b = this.b / 255;
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
-    let h, s, l = (max + min) / 2;
+    let h: number, s: number;
+    const l = (max + min) / 2;
 
     if (max === min) {
       h = s = 0;
@@ -156,7 +160,11 @@ class Color {
 }
 
 class Solver {
-  constructor(target, baseColor) {
+  target: any;
+  targetHSL: any;
+  reusedColor: any;
+
+  constructor(target: any) {
     this.target = target;
     this.targetHSL = target.hsl();
     this.reusedColor = new Color(0, 0, 0);

@@ -5,14 +5,36 @@ import { IObject } from "util/type";
 /**
  * HOOK FORM
  */
-export interface IUserForm {
+export interface IForm {
   ref: React.MutableRefObject<IObject>;
-  // setValues?: (value: IObject) => void,
-  // setValue?: (key: string, value: any) => void,
   getValues?: () => IObject;
+}
+export interface IFormControl {
+  children: React.ComponentElement<any, any>;
+  name?: string;
+  defaultValue?: any;
+}
+export interface IUserForm {
+  form: IForm;
+  FormControl: (props: IFormControl) => JSX.Element;
 }
 export function useForm(): IUserForm {
   const ref = useRef<IObject>({});
+
+  // Handle change
+  const handleChangeForm = (name?: string) => (e: any) => {
+    const _name = name || e.target?.name;
+
+    if (typeof e === "object" && !Array.isArray(e)) {
+      if (!Object.keys(ref.current).includes(_name)) return;
+
+      ref.current.onChange?.(e);
+
+      ref.current[_name].value = e.currentTarget[_name].value;
+    } else {
+      ref.current[_name].value = e;
+    }
+  };
 
   const getValues = useCallback(() => {
     const value: IObject = {};
@@ -23,11 +45,36 @@ export function useForm(): IUserForm {
     return value;
   }, []);
 
+  const FormControl = ({ children, name, defaultValue }: IFormControl) => {
+    ref.current[children.props.name || name] = {
+      value: children.props.defaultValue || defaultValue,
+    };
+
+    return React.cloneElement(
+      children,
+      !["textarea", "text", "password", "email", "number"].includes(
+        children.props.type
+      )
+        ? {
+            value:
+              ref.current?.[children.props.name]?.value ||
+              children.props.defaultValue ||
+              defaultValue,
+            fnChange: handleChangeForm(children.props.name),
+          }
+        : {
+            defaultValue: children.props.defaultValue || defaultValue,
+            name: children.props.name || name,
+          }
+    );
+  };
+
   return {
-    ref,
-    // setValues,
-    // setValue,
-    getValues,
+    form: {
+      ref,
+      getValues,
+    },
+    FormControl,
   };
 }
 
@@ -36,7 +83,7 @@ export function useForm(): IUserForm {
  */
 export interface IFormRefProps extends HTMLAttributes<HTMLFormElement> {
   children: JSX.Element[];
-  form: IUserForm;
+  form: IForm;
   onFinish?: (data: IObject) => void;
 }
 export default function Form({
@@ -47,11 +94,14 @@ export default function Form({
   ...props
 }: IFormRefProps) {
   // Change form
-  const handleChangeForm = (name?: string) => (e: any) => {
-    const _name = name || e.target.name;
+  const handleChangeForm = (e: any) => {
+    const _name = e.target?.name;
+
     if (typeof e === "object" && !Array.isArray(e)) {
       if (!Object.keys(formRef.ref.current).includes(_name)) return;
+
       onChange?.(e);
+
       formRef.ref.current[_name].value = e.currentTarget[_name].value;
     } else {
       formRef.ref.current[_name].value = e;
@@ -64,6 +114,7 @@ export default function Form({
     props.onSubmit?.(e);
 
     const value: IObject = {};
+
     Object.keys(formRef.ref.current).map((key) => {
       value[key] = formRef.ref.current[key].value;
     });
@@ -75,40 +126,14 @@ export default function Form({
   useEffect(() => {
     children.forEach((ele) => {
       if (!ele) return;
-      
+
       formRef.ref.current[ele.props.name] = { value: ele.props.defaultValue };
     });
   }, [children, formRef]);
 
   return (
-    <form {...props} onChange={handleChangeForm()} onSubmit={handleSubmit}>
-      {children.map((ele, idx) => {
-        if (!ele) return;
-
-        return React.cloneElement(
-          ele,
-          !["textarea", "text", "password", "email", "number"].includes(
-            ele.props.type
-          )
-            ? {
-                key: idx,
-                value:
-                  formRef.ref.current?.[ele.props.name]?.value ||
-                  ele.props.defaultValue,
-                fnChange: handleChangeForm(ele.props.name),
-              }
-            : {
-                key: idx,
-              }
-        );
-      })}
+    <form {...props} onChange={handleChangeForm} onSubmit={handleSubmit}>
+      {children}
     </form>
   );
-}
-
-/**
- * COMPONENT FORM CONTROL
- */
-export function FormControl() {
-  return <div></div>;
 }

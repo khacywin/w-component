@@ -23,6 +23,7 @@
   },
   "include": [
     "components/**/*",
+    "components/**/**/*",
     "components/*.d.ts"
   ],
   "exclude": [
