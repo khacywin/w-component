@@ -15,7 +15,7 @@ import { borderRadius, boxShadow, fontSize, space } from "css/base";
 import styled, { CSSObject } from "styled-components";
 
 import { TPosition } from "util/type";
-import useMutationObservable from "hooks/useIntersectionObserver";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
 
 interface IProps {
   dropdown?: JSX.Element | string;
@@ -60,18 +60,19 @@ export default React.memo(
     }, [isBaseParent, isShow]);
 
     const handleDropdownChange = useCallback(
-      (list) => {
-        if (list[0].boundingClientRect.height && !refShow.current) {
-          refShow.current = true;
-          isBaseParent && setWidthElement(refDropdownMenu.current.clientWidth);
-        } else if (list[0].boundingClientRect.height === 0) {
-          refShow.current = false;
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !refShow.current) {
+            refShow.current = true;
+            isBaseParent &&
+              setWidthElement(refDropdownMenu.current.clientWidth);
+          }
+        });
       },
       [isBaseParent]
     );
 
-    useMutationObservable(refDropdownMenu.current, handleDropdownChange);
+    useIntersectionObserver(refDropdownMenu.current, handleDropdownChange);
 
     return (
       <WrapDropdownMenu className={className}>

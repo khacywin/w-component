@@ -8,6 +8,7 @@ import { IObject } from "util/type";
 export interface IForm {
   ref: React.MutableRefObject<IObject>;
   getValues?: () => IObject;
+  getValue?: (key: string) => any;
 }
 export interface IFormControl {
   children: React.ComponentElement<any, any>;
@@ -45,6 +46,10 @@ export function useForm(): IUserForm {
     return value;
   }, []);
 
+  const getValue = useCallback((key: string) => {
+    return ref.current[key] ? ref.current[key].value : undefined;
+  }, []);
+
   const FormControl = ({ children, name, defaultValue }: IFormControl) => {
     ref.current[children.props.name || name] = {
       value: children.props.defaultValue || defaultValue,
@@ -73,6 +78,7 @@ export function useForm(): IUserForm {
     form: {
       ref,
       getValues,
+      getValue
     },
     FormControl,
   };

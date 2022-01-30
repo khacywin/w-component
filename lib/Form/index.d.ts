@@ -6,6 +6,7 @@ import { IObject } from "util/type";
 export interface IForm {
     ref: React.MutableRefObject<IObject>;
     getValues?: () => IObject;
+    getValue?: (key: string) => any;
 }
 export interface IFormControl {
     children: React.ComponentElement<any, any>;

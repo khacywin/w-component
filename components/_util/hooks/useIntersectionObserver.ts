@@ -4,7 +4,7 @@ const DEFAULT_OPTIONS = {
   config: { attributes: true, childList: true, subtree: true },
 };
 
-function useMutationObservable(targetEl: Element, cb: (...arg: any) => any, options = DEFAULT_OPTIONS) {
+function useIntersectionObserver(targetEl: Element, cb: (...arg: any) => any, options = DEFAULT_OPTIONS) {
   const [observer, setObserver] = useState(null);
 
   useEffect(() => {
@@ -27,4 +27,4 @@ function useMutationObservable(targetEl: Element, cb: (...arg: any) => any, opti
   }, [observer, targetEl, options]);
 }
 
-export default useMutationObservable;
+export default useIntersectionObserver;

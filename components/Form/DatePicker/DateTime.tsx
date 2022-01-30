@@ -14,7 +14,7 @@ import generatedId from "util/generatedId";
 import styled from "styled-components";
 import transition from "css/transition";
 import useHandleDisplay from "hooks/useHandleDisplay";
-import useMutationObservable from "hooks/useIntersectionObserver";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
 import usePositionDropdown from "hooks/usePositionDropdown";
 
 interface IProps extends IDatePickerProps {
@@ -48,18 +48,18 @@ export default React.memo(
     const { handlePosition } = usePositionDropdown(refMenuDropdown);
 
     const handleDropdownChange = useCallback(
-      (list) => {
-        if (list[0].boundingClientRect.height && !refShow.current) {
-          refShow.current = true;
-          handlePosition();
-        } else if (list[0].boundingClientRect.height === 0) {
-          refShow.current = false;
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !refShow.current) {
+            refShow.current = true;
+            handlePosition();
+          }
+        });
       },
       [handlePosition]
     );
 
-    useMutationObservable(refMenuDropdown.current, handleDropdownChange);
+    useIntersectionObserver(refMenuDropdown.current, handleDropdownChange);
 
     // Handle show dropdown menu
     const onShow = useCallback(
