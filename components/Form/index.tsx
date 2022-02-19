@@ -1,118 +1,79 @@
-import React, { HTMLAttributes, useCallback, useEffect, useRef } from "react";
+import { FormContext, IForm } from "./context";
+import React, {
+  HTMLAttributes,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 
 import { IObject } from "util/type";
 
 /**
- * HOOK FORM
+ * USE FORM
  */
-export interface IForm {
-  ref: React.MutableRefObject<IObject>;
-  getValues?: () => IObject;
-  getValue?: (key: string) => any;
+interface IParamUseForm {
+  defaultValue?: IObject;
 }
-export interface IFormControl {
-  children: React.ComponentElement<any, any>;
-  name?: string;
-  defaultValue?: any;
-}
-export interface IUserForm {
-  form: IForm;
-  FormControl: (props: IFormControl) => JSX.Element;
-}
-export function useForm(): IUserForm {
-  const ref = useRef<IObject>({});
+export const useForm = function ({ defaultValue }: IParamUseForm = {}): IForm {
+  const formRef = React.useRef<IObject>({});
 
-  // Handle change
-  const handleChangeForm = (name?: string) => (e: any) => {
-    const _name = name || e.target?.name;
-
-    if (typeof e === "object" && !Array.isArray(e)) {
-      if (!Object.keys(ref.current).includes(_name)) return;
-
-      ref.current.onChange?.(e);
-
-      ref.current[_name].value = e.currentTarget[_name].value;
-    } else {
-      ref.current[_name].value = e;
-    }
-  };
-
+  // Get values
   const getValues = useCallback(() => {
+    if (!formRef.current) return;
+
     const value: IObject = {};
-    Object.keys(ref.current).map((key) => {
-      value[key] = ref.current[key].value;
+    Object.keys(formRef.current).map((key) => {
+      value[key] = formRef.current[key].value;
     });
 
     return value;
   }, []);
 
   const getValue = useCallback((key: string) => {
-    return ref.current[key] ? ref.current[key].value : undefined;
+    return formRef.current[key] ? formRef.current[key].value : undefined;
   }, []);
 
-  const FormControl = ({ children, name, defaultValue }: IFormControl) => {
-    ref.current[children.props.name || name] = {
-      value: children.props.defaultValue || defaultValue,
-    };
+  const setValue = useCallback((key: string, value: any) => {
+    if (!formRef.current[key]) return;
 
-    return React.cloneElement(
-      children,
-      !["textarea", "text", "password", "email", "number"].includes(
-        children.props.type
-      )
-        ? {
-            value:
-              ref.current?.[children.props.name]?.value ||
-              children.props.defaultValue ||
-              defaultValue,
-            fnChange: handleChangeForm(children.props.name),
-          }
-        : {
-            defaultValue: children.props.defaultValue || defaultValue,
-            name: children.props.name || name,
-          }
-    );
-  };
+    formRef.current[key].value = value;
+  }, []);
+
+  const setValues = useCallback((data: IObject) => {
+    Object.keys(data).forEach((item) => {
+      if (!formRef.current[item]) formRef.current[item].value = data[item];
+    });
+  }, []);
+
+  useEffect(() => {
+    defaultValue && setValues(defaultValue);
+  }, [defaultValue, setValues]);
 
   return {
-    form: {
-      ref,
-      getValues,
-      getValue
-    },
-    FormControl,
+    getValues,
+    form: formRef,
+    getValue,
+    setValue,
+    setValues,
   };
-}
+};
 
 /**
- * COMPONENT FORM
+ * FORM
  */
 export interface IFormRefProps extends HTMLAttributes<HTMLFormElement> {
   children: JSX.Element[];
-  form: IForm;
+  form: React.MutableRefObject<IObject>;
   onFinish?: (data: IObject) => void;
 }
 export default function Form({
   children,
   form: formRef,
-  onChange,
   onFinish,
   ...props
 }: IFormRefProps) {
-  // Change form
-  const handleChangeForm = (e: any) => {
-    const _name = e.target?.name;
-
-    if (typeof e === "object" && !Array.isArray(e)) {
-      if (!Object.keys(formRef.ref.current).includes(_name)) return;
-
-      onChange?.(e);
-
-      formRef.ref.current[_name].value = e.currentTarget[_name].value;
-    } else {
-      formRef.ref.current[_name].value = e;
-    }
-  };
+  const ref = useRef<IObject>({});
 
   // Handle submit
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -121,25 +82,122 @@ export default function Form({
 
     const value: IObject = {};
 
-    Object.keys(formRef.ref.current).map((key) => {
-      value[key] = formRef.ref.current[key].value;
+    Object.keys(ref.current).map((key) => {
+      value[key] = ref.current[key].value;
     });
 
     onFinish?.(value);
   };
 
-  // Constructor for form
+  // Map ref to formRef
   useEffect(() => {
-    children.forEach((ele) => {
-      if (!ele) return;
+    if (!formRef.current) return;
 
-      formRef.ref.current[ele.props.name] = { value: ele.props.defaultValue };
-    });
-  }, [children, formRef]);
+    ref.current = {
+      ...(formRef.current || {}),
+      ...ref.current,
+    };
+
+    formRef.current = ref.current;
+  }, [formRef]);
 
   return (
-    <form {...props} onChange={handleChangeForm} onSubmit={handleSubmit}>
-      {children}
-    </form>
+    <FormContext.Provider
+      value={{
+        form: ref,
+      }}
+    >
+      <form {...props} onSubmit={handleSubmit}>
+        {children}
+      </form>
+    </FormContext.Provider>
   );
 }
+
+/**
+ * FORM CONTROL
+ */
+export interface IFormControl {
+  children: React.ComponentElement<any, any>;
+  name?: string;
+  defaultValue?: any;
+  value?: any;
+  onChange?: (e: any) => void;
+}
+
+export const FormControl = ({
+  children,
+  name,
+  defaultValue,
+  value,
+  onChange,
+}: IFormControl) => {
+  const { form: ref } = useContext(FormContext);
+
+  // Initialize for ref
+  useEffect(() => {
+    if (!children.props.name && !name) return;
+
+    const _name = children.props.name || name;
+
+    if (ref.current[_name]) return;
+
+    const _value = children.props.defaultValue || defaultValue;
+
+    ref.current[_name] = {
+      value: _value,
+    };
+  }, [children, defaultValue, name, ref]);
+
+  // Set value for ref
+  const handleChangeForm = (_name: string) => (e: any) => {
+    if (!_name) return;
+
+    if (typeof e === "object" && !Array.isArray(e)) {
+      if (!Object.keys(ref.current).includes(_name)) return;
+
+      onChange?.(e);
+
+      ref.current[_name].value =
+        e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    } else {
+      ref.current[_name].value = e;
+    }
+  };
+
+  return React.cloneElement(
+    children,
+    !["textarea", "text", "password", "email", "number"].includes(
+      children.props.type
+    )
+      ? {
+          ...children.props,
+          value:
+            ref.current?.[children.props.name]?.value ||
+            children.props.defaultValue ||
+            defaultValue,
+          fnChange: (e: any) => {
+            handleChangeForm(children.props.name || name)(e);
+            children.props?.fnChange?.(e);
+          },
+        }
+      : {
+          ...children.props,
+          defaultValue: children.props.defaultValue || defaultValue,
+          name: children.props.name || name,
+          onChange: (e: any) => {
+            onChange?.(e);
+            handleChangeForm(children.props.name || name)(e);
+          },
+          ...(onChange && value !== undefined
+            ? {
+                onChange: (e: any) => {
+                  onChange?.(e);
+                  handleChangeForm(children.props.name || name)(e);
+                },
+                value,
+              }
+            : {}),
+        }
+  );
+};

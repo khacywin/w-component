@@ -179,9 +179,9 @@ export default React.memo(
       const _date = new Date(_val);
 
       setDate(_date);
-      setTime(dayjs(_date).format("hh:mm"));
+      setTime(dayjs(_date).format("HH:mm"));
       ref.current.value = dayjs(_date).format(format);
-      refTime.current.value = dayjs(_date).format("hh:mm");
+      refTime.current.value = dayjs(_date).format("HH:mm");
 
       return () => {
         setDate(null);
@@ -210,7 +210,7 @@ export default React.memo(
               autoComplete="off"
               id={id + "time"}
               onClick={onShow("time")}
-              placeholder="hh:mm"
+              placeholder="HH:mm"
               onBlur={onBlurTime}
               ref={refTime}
             />

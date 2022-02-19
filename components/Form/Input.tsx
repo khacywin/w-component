@@ -31,7 +31,7 @@ export interface InputProps
   name?: string;
   placeholder?: string;
   style?: React.CSSProperties;
-  type: TInput;
+  type?: TInput;
   value?: any;
 }
 

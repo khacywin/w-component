@@ -1,49 +1,71 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  InputHTMLAttributes,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { borderRadius, fontSize, fontWeight } from "css/base";
 
 import generatedId from "util/generatedId";
 import styled from "styled-components";
 
-export interface SwitchProps {
+export interface ISwitchProps
+  extends Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    "defaultValue" | "name" | "value" | "onChange"
+  > {
   label?: string | JSX.Element;
   labelSub?: string;
   defaultValue?: boolean;
   value?: boolean;
   fnChange?: (val: boolean) => void;
+  name?: string;
 }
-export default React.memo((props: SwitchProps) => {
-  const id = generatedId();
+export default React.memo(
+  ({
+    label,
+    labelSub,
+    defaultValue,
+    value,
+    fnChange,
+    name,
+    ...props
+  }: ISwitchProps) => {
+    const id = generatedId();
 
-  const [value, setValue] = useState(
-    props.value || props.defaultValue || false
-  );
+    const [val, setValue] = useState(defaultValue || false);
 
-  const _onChange = useCallback(() => {
-    if (props.fnChange) {
-      props.fnChange(!value);
-    }
+    const _onChange = useCallback(() => {
+      fnChange?.(!val);
 
-    setValue(!value);
-  }, [props, value]);
+      setValue(!val);
+    }, [fnChange, val]);
 
-  useEffect(() => {
-    props.value && setValue(props.value);
-  }, [props.value]);
+    useEffect(() => {
+      value !== undefined && setValue(value);
+    }, [value]);
 
-  return (
-    <SwitchWrap>
-      <div>
-        <h5>{props.label}</h5>
-        {props.labelSub ? <h6>{props.labelSub}</h6> : ""}
-      </div>
-      <input id={id} type="checkbox" checked={value} onChange={_onChange} />
-      <SwitchBox active={value} htmlFor={id}>
-        <SwitchButton htmlFor={id} />
-      </SwitchBox>
-    </SwitchWrap>
-  );
-});
-
+    return (
+      <SwitchWrap>
+        <div>
+          <h5>{label}</h5>
+          {labelSub ? <h6>{labelSub}</h6> : ""}
+        </div>
+        <input
+          id={id}
+          name={name}
+          type="checkbox"
+          checked={val}
+          onChange={_onChange}
+          {...props}
+        />
+        <SwitchBox active={val} htmlFor={id}>
+          <SwitchButton htmlFor={id} />
+        </SwitchBox>
+      </SwitchWrap>
+    );
+  }
+);
 
 const SwitchWrap = styled.div`
   display: flex;
