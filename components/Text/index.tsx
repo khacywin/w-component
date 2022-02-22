@@ -1,6 +1,7 @@
+import { fontSize, fontWeight } from 'components/styles/base';
+
 import React from 'react';
 import styled from 'styled-components';
-import { fontWeight, fontSize } from 'css/base';
 
 interface Props {
   children: string;

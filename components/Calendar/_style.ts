@@ -1,4 +1,4 @@
-import { fontSize, fontWeight } from 'css/base';
+import { fontSize, fontWeight } from 'components/styles/base';
 
 import styled from 'styled-components';
 

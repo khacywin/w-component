@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { borderRadius, fontSize, fontWeight } from "css/base";
+import { borderRadius, fontSize, fontWeight } from "components/styles/base";
 
 import generatedId from "util/generatedId";
 import styled from "styled-components";

@@ -60,10 +60,6 @@ export * from "./Icon";
 export { default as List } from "./List";
 export * from "./List";
 
-// Logo
-export { default as Logo } from "./Logo";
-export * from "./Logo";
-
 // Modal
 export { default as Modal } from "./Modal";
 export * from "./Modal";
@@ -94,29 +90,29 @@ export * from "./Tooltip";
 export { default as Form } from "./Form";
 export * from "./Form";
 
-export { default as Input } from "./Form/Input";
-export * from "./Form/Input";
+export { default as Input } from "./Input";
+export * from "./Input";
 
-export { default as Checkbox } from "./Form/Checkbox";
-export * from "./Form/Checkbox";
+export { default as Checkbox } from "./Checkbox";
+export * from "./Checkbox";
 
-export { default as DateRange } from "./Form/DateRange";
-export * from "./Form/DateRange";
+export { default as DateRange } from "./DateRange";
+export * from "./DateRange";
 
-export { default as Slider } from "./Form/Slider";
-export * from "./Form/Slider";
+export { default as Slider } from "./Slider";
+export * from "./Slider";
 
-export { default as Search } from "./Form/Search";
-export * from "./Form/Search";
+export { default as Search } from "./Input/Search";
+export * from "./Input/Search";
 
-export { default as Switch } from "./Form/Switch";
-export * from "./Form/Switch";
+export { default as Switch } from "./Switch";
+export * from "./Switch";
 
-export { default as Select } from "./Form/Select";
-export * from "./Form/Select";
+export { default as Select } from "./Select";
+export * from "./Select";
 
-export { default as DatePicker } from "./Form/DatePicker";
-export * from "./Form/DatePicker";
+export { default as DatePicker } from "./DatePicker";
+export * from "./DatePicker";
 
 /**
  * Util
@@ -127,4 +123,4 @@ export * as Loading from "./Loading";
 export * as notification from "./Notification";
 
 // CSS
-export * as css from "./css";
+export * as styles from "./styles";

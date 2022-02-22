@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { borderRadius, space } from "css/base";
+import { borderRadius, space } from "components/styles/base";
 
 import ButtonAction from "components/Button/ButtonAction";
 import Dropdown from "components/Dropdown";
 import Icon from "components/Icon";
-import InputStyle from "css/elements/InputStyle";
+import InputStyle from "components/styles/elements/InputStyle";
 import { TSelectOption } from "util/type";
 import generatedId from "util/generatedId";
 import styled from "styled-components";

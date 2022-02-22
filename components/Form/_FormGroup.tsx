@@ -1,8 +1,8 @@
-import { fontSize, fontWeight, opacity } from "css/base";
+import { fontSize, fontWeight, opacity } from "components/styles/base";
 import styled, { css } from "styled-components";
 
 import React from "react";
-import transition from "css/transition";
+import transition from "components/styles/transition";
 
 interface PropsStyled {
   labelFocus: boolean;

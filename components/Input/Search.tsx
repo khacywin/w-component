@@ -3,12 +3,12 @@
  */
 
 import React, { useState } from "react";
-import { fontSize, opacity, space } from "css/base";
+import { fontSize, opacity, space } from "components/styles/base";
 
-import ButtonNoStyle from "css/elements/ButtonNoStyle";
+import ButtonNoStyle from "components/styles/elements/ButtonNoStyle";
 import Icon from "components/Icon";
 import styled from "styled-components";
-import transition from "css/transition";
+import transition from "components/styles/transition";
 
 export interface SearchProps {
   fnSearch: (val: string) => void;

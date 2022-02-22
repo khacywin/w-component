@@ -12,7 +12,7 @@ import styled, { keyframes } from 'styled-components';
 import colorSVG from 'util/colorSVG';
 import generatedId from 'util/generatedId';
 import { rgba } from 'polished';
-import { zIndex } from 'css/base';
+import { zIndex } from 'components/styles/base';
 
 interface Props {
   color?: string;

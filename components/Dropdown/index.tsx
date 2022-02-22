@@ -11,7 +11,7 @@
 
 import { Dialog, TRefDialog } from "components";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { borderRadius, boxShadow, fontSize, space } from "css/base";
+import { borderRadius, boxShadow, fontSize, space } from "components/styles/base";
 import styled, { CSSObject } from "styled-components";
 
 import { TPosition } from "util/type";

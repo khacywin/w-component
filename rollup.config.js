@@ -1,13 +1,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import cleaner from 'rollup-plugin-cleaner';
+import cleaner from "rollup-plugin-cleaner";
 import commonjs from "@rollup/plugin-commonjs";
 import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
 import multiInput from "rollup-plugin-multi-input";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
+import { terser } from "rollup-plugin-terser";
 import typescript from "rollup-plugin-typescript2";
 
 export default {
@@ -16,17 +17,16 @@ export default {
     {
       dir: "lib",
       format: "cjs",
-      sourcemap: false,
+      sourcemap: "inline",
     },
-    // {
-    //   dir: "es",
-    //   format: "esm",
-    //   sourcemap: true,
-    // },
   ],
+  exclude: ["__test__/*"],
+  watch: {
+    exclude: ["node_modules/"],
+  },
   plugins: [
     cleaner({
-      targets: ['./lib']
+      targets: ["./lib"],
     }),
     multiInput({
       transformOutputPath: (output, input) => {
@@ -48,6 +48,7 @@ export default {
     commonjs(),
     json(),
     typescript({ useTsconfigDeclarationDir: true }),
+    terser(),
     image({
       output: `lib/assets/images`, // default the root
       extensions: /\.(png|jpg|jpeg|gif|svg)$/, // support png|jpg|jpeg|gif|svg, and it's alse the default value

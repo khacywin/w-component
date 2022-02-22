@@ -63,7 +63,7 @@ export const useForm = function ({ defaultValue }: IParamUseForm = {}): IForm {
  * FORM
  */
 export interface IFormRefProps extends HTMLAttributes<HTMLFormElement> {
-  children: JSX.Element[];
+  children: JSX.Element[] | JSX.Element;
   form: React.MutableRefObject<IObject>;
   onFinish?: (data: IObject) => void;
 }

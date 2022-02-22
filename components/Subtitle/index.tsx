@@ -6,7 +6,7 @@
  * @prop {Direction} direction: row | column | row-reserve | column-reserve
  */
 
-import { fontSize, fontWeight, lineOverflow, space } from 'css/base';
+import { fontSize, fontWeight, lineOverflow, space } from 'components/styles/base';
 
 import Icon from 'components/Icon';
 import React from 'react';

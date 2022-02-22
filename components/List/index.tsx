@@ -1,5 +1,5 @@
 import React from "react";
-import { borderRadius } from "css/base";
+import { borderRadius } from "components/styles/base";
 import styled from "styled-components";
 
 interface Props {

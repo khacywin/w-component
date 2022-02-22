@@ -9,15 +9,16 @@ import React, {
   SyntheticEvent,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
 import FormGroup from "components/Form/_FormGroup";
-import InputStyle from "css/elements/InputStyle";
+import InputStyle from "components/styles/elements/InputStyle";
 import { TInput } from "util/type";
 import WColor from "w-color-selector";
 import generatedId from "util/generatedId";
-import { space } from "css/base";
+import { space } from "components/styles/base";
 import styled from "styled-components";
 
 /** Interface */
@@ -48,7 +49,7 @@ export default React.memo(
     value = "",
     ...props
   }: InputProps) => {
-    const id = generatedId("input");
+    const id = useMemo(() => generatedId("input"), []);
     const [error, setError] = useState<any>();
     const [color, setColor] = useState("");
     const [valState, setValState] = useState("");

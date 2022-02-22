@@ -6,10 +6,10 @@
  */
 
 import React, { ReactElement, useRef } from "react";
-import { borderRadius, boxShadow, fontSize, opacity, space } from "css/base";
+import { borderRadius, boxShadow, fontSize, opacity, space } from "components/styles/base";
 
 import styled from "styled-components";
-import transition from "css/transition";
+import transition from "components/styles/transition";
 import useHandleDisplay from "hooks/useHandleDisplay";
 import usePositionDialog from "hooks/usePositionDialog";
 

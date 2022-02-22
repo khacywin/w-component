@@ -1,6 +1,6 @@
 import React from "react";
 import { TPosition } from "util/type";
-import { borderRadius } from "css/base";
+import { borderRadius } from "components/styles/base";
 import styled from "styled-components";
 
 export interface ITooltipProps {
@@ -27,6 +27,7 @@ const WrapTooltip = styled.div<{ position: TPosition }>`
   position: absolute;
   display: none;
   background-color: var(--backgroundContent);
+  z-index: 100;
   color: var(--text);
   padding: 8px 12px;
   box-shadow: 0 2px 2px var(--boxShadow);

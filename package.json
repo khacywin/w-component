@@ -1,16 +1,16 @@
 {
   "name": "w-ui-components",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "React component",
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
+    "watch": "rollup -c -w",
     "tsc": "tsc",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "prepare": "rollup -c"
+    "lint": "eslint --fix --ext .ts,.tsx ./components",
+    "prepare": "rollup -c",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,8 @@
   },
   "keywords": [
     "w-components",
-    "wmtime",
-    "library-ui",
+    "ui-library",
+    "component-ui",
     "react",
     "khacy"
   ],
@@ -40,7 +40,8 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.0.2",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -68,6 +69,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-scss": "^2.6.1",
     "rollup-plugin-svg": "^2.0.0",
+    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.27.3",
     "rollup-plugin-url": "^3.0.1",
     "styled-components": "^5.3.3",

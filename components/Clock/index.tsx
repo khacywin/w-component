@@ -4,13 +4,19 @@
  */
 
 import React, { useCallback, useEffect, useState } from "react";
-import { borderRadius, boxShadow, fontSize, space, zIndex } from "css/base";
+import {
+  borderRadius,
+  boxShadow,
+  fontSize,
+  space,
+  zIndex,
+} from "components/styles/base";
 
+import ClockFace from "./ClockFace";
 import Icon from "components/Icon";
-import clock_face from "./_util/assets/images/clock-face.svg";
 import generatedId from "util/generatedId";
 import styled from "styled-components";
-import transition from "css/transition";
+import transition from "components/styles/transition";
 
 interface Props {
   selected?: string | Date; // 'HH:MM || date'
@@ -150,7 +156,7 @@ export default React.memo(({ selected, fnSelected }: Props) => {
     <ClockWrap>
       <input type="hidden" />
       <ClockAnalog minutes={minute} hours={hour % 12}>
-        <img src={clock_face} alt="w-mtime"/>
+        <ClockFace />
         <div></div>
         <div></div>
         <div></div>
@@ -186,7 +192,6 @@ const ClockAnalog = styled.div<Time>`
   height: 200px;
   position: relative;
   width: 200px;
-  
 
   img {
     width: 100%;

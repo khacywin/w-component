@@ -6,7 +6,7 @@
  */
 
 import React, { useEffect, useImperativeHandle, useState } from "react";
-import { borderRadius, boxShadow, fontSize, fontWeight, space } from "css/base";
+import { borderRadius, boxShadow, fontSize, fontWeight, space } from "components/styles/base";
 import styled, { css, keyframes } from "styled-components";
 
 import Button from "components/Button";

@@ -1,4 +1,4 @@
-import { borderRadius, opacity } from "css/base";
+import { borderRadius, opacity } from "components/styles/base";
 import styled, { css } from "styled-components";
 
 import React from "react";

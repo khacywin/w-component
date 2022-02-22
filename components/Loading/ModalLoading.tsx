@@ -1,5 +1,5 @@
 import React from 'react';
-import WrapDialog from 'css/elements/WrapDialog';
+import WrapDialog from 'components/styles/elements/WrapDialog';
 import styled from 'styled-components';
 
 interface IProps {
