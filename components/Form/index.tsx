@@ -174,6 +174,7 @@ export const FormControl = ({
           ...children.props,
           value:
             ref.current?.[children.props.name]?.value ||
+            children.props.value ||
             children.props.defaultValue ||
             defaultValue,
           fnChange: (e: any) => {

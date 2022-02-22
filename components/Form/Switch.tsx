@@ -45,6 +45,10 @@ export default React.memo(
       value !== undefined && setValue(value);
     }, [value]);
 
+    useEffect(() => {
+      setValue(!!defaultValue);
+    }, [defaultValue]);
+
     return (
       <SwitchWrap>
         <div>
